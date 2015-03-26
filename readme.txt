@@ -3,3 +3,5 @@ Generate new project:
 mvn archetype:generate
 
 #1 Web changes
+
+#2 My local changes
