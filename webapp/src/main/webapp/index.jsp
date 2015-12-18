@@ -7,16 +7,34 @@
 <title>Login form</title>
 </head>
 <body>
-<h2> Enter Login and User password: </h2>
+
 <form method = "post" action = "processedLoginPas.jsp">
-Login: <input type = "text" name = "login">
-<br>
-<br>
-Password: <input type = "password" name = "password"> 
-<input type = "submit" value = "submit">
-<br>
-<br>
-<br>
+
+<center>
+<table cellpadding="10" border=10 align="center">
+
+<th bgcolor = "#CCCCFF">
+<font size=5>
+User authorization form
+</font> 
+</th>
+
+<tr bgcolor="#CCCCFF">
+<th align="left">Login: <input type = "text" name = "login" size=23></th>
+</tr>
+
+<tr bgcolor="#CCCCFF">
+<th align="left">Password: <input type = "password" name = "password"></th>
+
+<tr bgcolor="#CCCCFF">
+<th align="center"><input type = "submit" value = "submit"></th>
+
+</tr>
+
+</table>
+</center>
+
 </form>
+
 </body>
 </html>
