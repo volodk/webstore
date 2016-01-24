@@ -25,12 +25,12 @@
 	<%	
 	if (login.equals("") & password.equals("")){ 
 	%>
-		<jsp:forward page="error.jsp"/>
+		<jsp:forward page="AuthError.jsp"/>
 	<%
 	}
 	else{
 	%>  
-		<jsp:forward page="catalog.jsp"/>
+		<jsp:forward page="Catalog.jsp"/>
 	<%
 	}
 	%>	

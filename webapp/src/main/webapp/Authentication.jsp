@@ -9,7 +9,7 @@
 	
 	<style>
 		body {
-			background-image: url(BackLogin.jpg);
+			background-image: url(backgrounds/Background.jpg);
 			background-attachment: fixed;
 			background-position: center;	
 		}
@@ -24,7 +24,7 @@
 	
 	<font size=4>
 		<b>
-			<a href="index.jsp"> Back to home page </a>
+			<a href="Index.jsp"> Back to home page </a>
 		</b>	
 	</font>
 	
@@ -42,7 +42,7 @@
 					</b>	
 				</font>			
 			</Caption>		
-			<form method="post" action="processedLoginPas.jsp">
+			<form method="post" action="ProcessingLoginPas.jsp">
 				<tr bgcolor="#CCCCFF">
 					<th align="left">
 						Login: <input id="login" type="text" name="login"	size=23>

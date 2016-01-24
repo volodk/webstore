@@ -5,7 +5,7 @@
 <head>
 	<style>
 		body {
-			background-image: url(error.jpg);
+			background-image: url(backgrounds/BackError.jpg);
 			background-attachment: fixed;
 				background-position: center;	
 		}
@@ -21,11 +21,11 @@
 	<table align="center" >
 		<th>
 			<font size="4" color="black" >
-				Login and password can't be empty!
+				Login and password fields are empty!
 		</font>
 		</th>
 	</table>
 
-	<a href = "login.jsp" > Back </a>	
+	<a href = "Authentication.jsp" > Back </a>	
 </body>
 </html>
