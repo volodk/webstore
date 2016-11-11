@@ -6,73 +6,69 @@
 <html>
 
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <title>Webstore</title>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 <style>
-search {
-	/* устанавливаем необходимую ширину формы в зависимости от дизайна форма без проблем растягивается 
-	width: 100%;
-	/* кнопку отправки будем позиционировать абсолютно, поэтому необходимо это свойство */
-	position: relative;
+
+.container-1{
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
 }
 
-.search input {
-	/* отключаем бордюры у инпутов */
-	border: none;
+.container-1 input#search{
+  width: 230px;
+  height: 35px;
+  background: #cccccc;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #63717f;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
 }
 
-/* стили для поля ввода */
-.search .input {
-	/* растягиваем поле ввода на всю ширину формы */
-	width: 100%;
-	/* за счет верхнего (8px) и нижнего (9px) внутренних отступов регулируем высоту формы внутренний отступ справа (37px) делаем больше левого,т.к. там будет размещена кнопка отправки	*/
-	padding: 8px 37px 9px 15px;
-	/* чтобы ширина поля ввода (100%) включала в себя внутренние отступы */
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	/* добавляем внутренние тени */
-	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1), inset 0 1px 2px
-		rgba(0, 0, 0, 0.3);
-	/* закругляем углы */
-	border-radius: 20px;
-	background: #EEE;
-	font: 13px Tahoma, Arial, sans-serif;
-	color: #555;
-	outline: none;
+.container-1 input#search::-webkit-input-placeholder {
+   color: #65737e;
 }
 
-/* меняем оформление поля ввода при фокусе */
-.search .input:focus {
-	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2), inset 0 1px 2px
-		rgba(0, 0, 0, 0.4);
-	background: #E8E8E8;
-	color: #333;
+.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;  
 }
 
-/* оформляем кнопку отправки 
-.search .submit {
-	/* позиционируем кнопку абсолютно от правого края формы */
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 37px;
-	/* растягиваем кнопку на всю высоту формы */
-	height: 100%;
-	cursor: pointer;
-	background: url("Images/search_tr.png") 50% no-repeat;
-	/* добавляем прозрачность кнопке отправки */
-	opacity: 0.5;
+.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;  
 }
 
-/* при наведении курсора меняем прозрачность кнопки отправки */
-.search .submit:hover {
-	opacity: 0.8;
+.container-1 input#search:-ms-input-placeholder {  
+   color: #65737e;  
 }
 
-/* данное свойство необходимо для того, чтобы в браузерах Chrome и Safari можно было стилизовать инпуты */
-input[type="search"] {
-	-webkit-appearance: none;
+
+
+.container-1 .icon{
+  position: absolute;
+  top: 50%;
+  margin-left: 17px;
+  margin-top: 10px;
+  z-index: 1;
+  color: #4f5b66;
 }
+
+
+
+
+
+
 
 
 #external{
@@ -129,14 +125,14 @@ input[type="search"] {
 
 <body link="orange" alink="orange" vlink="orange">
 
-	<div id="external">  </div>
+	
 	<div id="header">
-		<table align="center" border="0" width=100%	background="backgrounds/fon2.jpg">
+		<table align="center" border="1" width=100%	background="backgrounds/fon2.jpg">
 	
 			<!--First row-->
 	
 			<tr>
-				<td width="200"></td>
+				<td width="150" ></td>
 	
 				<td align="left" width="80"><a href="About.jsp"
 					style="text-decoration: underline;"> About us </a></td>
@@ -150,23 +146,28 @@ input[type="search"] {
 				<td width="15"></td>
 				<td align="right" width="60"><a href="Basket.jsp"
 					style="text-decoration: underline;"> Registration </a></td>
-				<td width="200"></td>
+				<td width="150"></td>
 			</tr>
 		</table>
-		<table align="center" border="0" width=100% background="backgrounds/fon2.jpg">
+		
+		<table align="center" border="1" width=100% background="backgrounds/fon2.jpg">
 			<!-- Second row-->
 			<tr>
-				<td width="200"></td>
+				<td width="150"></td>
 				<td align="left" width="131" height="135"><a href="Index.jsp"
 					style="text-decoration: none;"> <img alt=""
 						src="Logo/logo_trans.png" border="0">
 				</a></td>
 				<td width="20"></td>
-				<td width="300">&nbsp
+				<td width="300">
 					<form action="" method="post" class="search">
-						<input type="search" name="" placeholder="search" class="input" />
-						<input type="submit" name="" value="" class="submit" />
-					</form> &nbsp
+						<div class="box">
+							<div class="container-1">
+							<span class="icon"><i class="fa fa-search"></i></span>
+							<input type="search" id="search" placeholder="Search..." />
+							</div>
+						</div>
+					</form> 
 				</td>
 				<td></td>
 				<td align="left" width="100"><a href="Basket.jsp"
@@ -174,24 +175,39 @@ input[type="search"] {
 						src="Images/basket_35.png" border="0"> Basket
 				</a></td>
 	
-				<td width="200"></td>
+				<td width="150"></td>
 			</tr>
 		</table> 
 	</div>
-	<div id="content"> </div>
-	<div id="left">  </div>
+	
 	<div id="center"> 
-		<div class="menu1">
-		  <br id="tab2"/><br id="tab3"/>
-		  <a href="#tab1">CSS</a><a href="#tab2">HTML</a><a href="#tab3">add</a>
-		  <div>page 1</div>
-		  <div>page 2</div>
-		  <div>page 3</div>
-
-		  </div>
+		<table align="center" border="1" width=100% background="backgrounds/fon1.jpg">
+			<!-- Third row-->
+			
+			<tr>
+				<td width="150" ></td>
+				
+				<td>
+			
+				<div class="menu1">
+				  <br id="tab2"/><br id="tab3"/>
+				  <a href="#tab1">For cats</a><a href="#tab2">For dogs</a><a href="#tab3">For rodents</a><a href="#tab4">For fishes</a>
+				  
+				  <div>page 1</div>
+				  <div>page 2</div>
+				  <div>page 3</div>
+				  <div>page 4</div>
+		
+				 </div>
+				 
+				 </td>
+				 
+				 <td width="150" ></td>
+				 
+			</tr>	 
+		</table>	
 	</div>
 	<div id="right">  </div>
-		  	 
 	<div class="clear"></div>
 	<div id="footer"></div> 
 		  
