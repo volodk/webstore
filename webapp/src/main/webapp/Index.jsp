@@ -98,7 +98,8 @@
 .tabs {
   padding: 0px;
   margin: 0 auto;
-  width:auto; 
+  width:auto;
+   
 }
 /* стили секций с содержанием */
 section {
@@ -106,7 +107,7 @@ section {
   width:auto;
   display: none;
   padding: 15px;
-  background: #fff;
+  background: url(backgrounds/orange.jpg);
   border: 1px solid #ddd;
 }
 .tabs input {
@@ -125,7 +126,7 @@ section {
   text-align: center;
   color: #aaa;
   border: 1px solid #ddd;
-  background: #f1f1f1;
+  background: #efc562;
   border-radius: 3px 3px 0 0;
   
 }
@@ -158,7 +159,7 @@ section {
   border: 1px solid #ddd;
   border-top: 1px solid #009933;
   border-bottom: 1px solid #fff;
-  background: #fff;
+  background: #e89417;
 }
 /* активация секций с помощью переключателя :checked */
 #tab1:checked ~ #content1,
@@ -193,7 +194,7 @@ section {
 
 	
 	<div id="header">
-		<table align="center" border="1" bordercolor="white" width=100%	background="backgrounds/fon2.jpg">
+		<table align="center" border="0"  width=100%	background="backgrounds/fon2.jpg">
 	
 			<!--First row-->
 	
@@ -217,16 +218,16 @@ section {
 			
 		</table>
 		
-		<table align="center" border="1" bordercolor="white" width=100% background="backgrounds/fon2.jpg">
+		<table align="center" border="0"  width=100% background="backgrounds/fon2.jpg">
 			<!-- Second row-->
 			<tr>
-				<td width="150" bordercolor="white"></td>
+				<td width="150" ></td>
 				<td align="left" width="131" height="135"><a href="Index.jsp"
 					style="text-decoration: none;"> <img alt=""
 						src="Logo/logo_trans.png" border="0">
 				</a></td>
-				<!-- <td width="20" bordercolor="white"></td> -->
-				<td bordercolor="white" align="center">
+				<!-- <td width="20" ></td> -->
+				<td align="center">
 					<form action="" method="post" class="search">
 						<div class="box" >
 							<div class="container-1">
@@ -237,8 +238,8 @@ section {
 					</form> 
 				</td>
 				<td></td>
-				<td align="left" width="100" bordercolor="white"><a href="Basket.jsp"
-					style="text-decoration: none; color:#9dee84"> <img alt=""
+				<td align="left" width="100" ><a href="Basket.jsp"
+					style="text-decoration: none; color:#6bc413"> <img alt=""
 						src="Images/basket_35.png" border="0"> Basket
 				</a></td>
 	
@@ -249,11 +250,11 @@ section {
 	</div>
 	
 	<div>
-	<table align="center" border="1" bordercolor="white" width=100%>
+	<table align="center" border="0" width=100% >
 			<!-- Second row-->
 			<tr>
-				<td width="150" bordercolor="white"></td>
-				<td bordercolor="white" align="left">
+				<td width="150"></td>
+				<td align="left" background="backgrounds/fon2.jpg">
 				
 					<div class="tabs">
 					    <input id="tab1" type="radio" name="tabs" checked>
@@ -292,7 +293,7 @@ section {
 					
 				
 				 </td>
-				 <td width="150" bordercolor="white"></td> 
+				 <td width="150"></td> 
 	</div>								  
 </body>
 
