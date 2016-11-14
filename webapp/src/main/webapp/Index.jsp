@@ -16,7 +16,7 @@
 <style>
 
 .container-1{
-  width: 300px;
+  width: 300px; 
   vertical-align: middle;
   white-space: nowrap;
   position: relative;
@@ -66,11 +66,6 @@
 
 
 
-
-
-
-
-
 #external{
  top: 0px;
  bottom: 0px;
@@ -94,29 +89,100 @@
   clear: both; 
 }
 
+
+
+
+
 /*Стиль вкладкок*/
-#tab2, #tab3 {position: fixed; }
-
-.menu1 > a,
-.menu1 #tab2:target ~ a:nth-of-type(1),
-.menu1 #tab3:target ~ a:nth-of-type(1),
-.menu1 > div { padding: 5px; border: 1px solid #aaa; }
-
-.menu1 > a { line-height: 28px; background: #fff; text-decoration: none; }
-
-#tab2,
-#tab3,
-.menu1 > div,
-.menu1 #tab2:target ~ div:nth-of-type(1),
-.menu1 #tab3:target ~ div:nth-of-type(1) {display: none; }
-
-.menu1 > div:nth-of-type(1),
-.menu1 #tab2:target ~ div:nth-of-type(2),
-.menu1 #tab3:target ~ div:nth-of-type(3) { display: block; }
-
-.menu1 > a:nth-of-type(1),
-.menu1 #tab2:target ~ a:nth-of-type(2),
-.menu1 #tab3:target ~ a:nth-of-type(3) { border-bottom: 2px solid #fff; }
+/* Базовый контейнер табов */
+.tabs {
+  padding: 0px;
+  margin: 0 auto;
+  width:auto; 
+}
+/* стили секций с содержанием */
+section {
+  min-width: 32px;
+  width:auto;
+  display: none;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.tabs input {
+  display: none;
+  width:auto;
+    
+}
+/* стили вкладок (табов) */
+.tabs label {
+  height:15px;
+  display: inline-block;
+  width:auto;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #aaa;
+  border: 1px solid #ddd;
+  background: #f1f1f1;
+  border-radius: 3px 3px 0 0;
+  
+}
+/* шрифт-иконки от Font Awesome в формате Unicode */
+.tabs label:before {
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+.tabs label[for*="1"]:before {
+  content: url(Images/cat26.png);
+}
+.tabs label[for*="2"]:before {
+  content: url(Images/dog26.png);
+}
+.tabs label[for*="3"]:before {
+  content: url(Images/rabbit26.png);
+}
+.tabs label[for*="4"]:before {
+  content: url(Images/fish26.png);
+}
+/* изменения стиля заголовков вкладок при наведении */
+.tabs label:hover {
+  color: #888;
+  cursor: pointer;
+}
+/* стили для активной вкладки */
+.tabs input:checked + label {
+  color: #555;
+  border: 1px solid #ddd;
+  border-top: 1px solid #009933;
+  border-bottom: 1px solid #fff;
+  background: #fff;
+}
+/* активация секций с помощью переключателя :checked */
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+/* медиа запросы для различных типов носителей */  
+@media screen and (max-width: 680px) {
+  .tabs label {
+    font-size: 0;
+  }
+ 
+  .tabs label:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .tabs label {
+    padding: 15px;
+  }
+}
 
 
 </style>
@@ -127,14 +193,14 @@
 
 	
 	<div id="header">
-		<table align="center" border="1" width=100%	background="backgrounds/fon2.jpg">
+		<table align="center" border="1" bordercolor="white" width=100%	background="backgrounds/fon2.jpg">
 	
 			<!--First row-->
 	
 			<tr>
 				<td width="150" ></td>
 	
-				<td align="left" width="80"><a href="About.jsp"
+				<td align="left" width="80" ><a href="About.jsp"
 					style="text-decoration: underline;"> About us </a></td>
 				<td align="left" width="70"><a href="Delivery.jsp"
 					style="text-decoration: underline;"> Delivery </a></td>
@@ -148,20 +214,21 @@
 					style="text-decoration: underline;"> Registration </a></td>
 				<td width="150"></td>
 			</tr>
+			
 		</table>
 		
-		<table align="center" border="1" width=100% background="backgrounds/fon2.jpg">
+		<table align="center" border="1" bordercolor="white" width=100% background="backgrounds/fon2.jpg">
 			<!-- Second row-->
 			<tr>
-				<td width="150"></td>
+				<td width="150" bordercolor="white"></td>
 				<td align="left" width="131" height="135"><a href="Index.jsp"
 					style="text-decoration: none;"> <img alt=""
 						src="Logo/logo_trans.png" border="0">
 				</a></td>
-				<td width="20"></td>
-				<td width="300">
+				<!-- <td width="20" bordercolor="white"></td> -->
+				<td bordercolor="white" align="center">
 					<form action="" method="post" class="search">
-						<div class="box">
+						<div class="box" >
 							<div class="container-1">
 							<span class="icon"><i class="fa fa-search"></i></span>
 							<input type="search" id="search" placeholder="Search..." />
@@ -170,47 +237,63 @@
 					</form> 
 				</td>
 				<td></td>
-				<td align="left" width="100"><a href="Basket.jsp"
+				<td align="left" width="100" bordercolor="white"><a href="Basket.jsp"
 					style="text-decoration: none; color:#9dee84"> <img alt=""
 						src="Images/basket_35.png" border="0"> Basket
 				</a></td>
 	
 				<td width="150"></td>
 			</tr>
-		</table> 
+		</table>
+				 
 	</div>
 	
-	<div id="center"> 
-		<table align="center" border="1" width=100% background="backgrounds/fon1.jpg">
-			<!-- Third row-->
-			
+	<div>
+	<table align="center" border="1" bordercolor="white" width=100%>
+			<!-- Second row-->
 			<tr>
-				<td width="150" ></td>
+				<td width="150" bordercolor="white"></td>
+				<td bordercolor="white" align="left">
 				
-				<td>
-			
-				<div class="menu1">
-				  <br id="tab2"/><br id="tab3"/>
-				  <a href="#tab1">For cats</a><a href="#tab2">For dogs</a><a href="#tab3">For rodents</a><a href="#tab4">For fishes</a>
-				  
-				  <div>page 1</div>
-				  <div>page 2</div>
-				  <div>page 3</div>
-				  <div>page 4</div>
-		
-				 </div>
-				 
+					<div class="tabs">
+					    <input id="tab1" type="radio" name="tabs" checked>
+					    <label for="tab1" title="Вкладка 1">Cats</label>
+					 
+					    <input id="tab2" type="radio" name="tabs">
+					    <label for="tab2" title="Вкладка 2">Dogs</label>
+					 
+					    <input id="tab3" type="radio" name="tabs">
+					    <label for="tab3" title="Вкладка 3">Rodents</label>
+					 
+					    <input id="tab4" type="radio" name="tabs">
+					    <label for="tab4" title="Вкладка 4">Fishes</label>
+					 
+					    <section id="content1">
+					        <p>
+							tab 1....
+					        </p>
+					    </section>  
+					    <section id="content2">
+					        <p>
+					          tab 2....
+					        </p>
+					    </section> 
+					    <section id="content3">
+					        <p>
+					          tab 3....
+							</p>
+					    </section> 
+					    <section id="content4">
+					        <p>
+					          Tab 4....
+					        </p>
+					    </section>    
+					</div>
+					
+				
 				 </td>
-				 
-				 <td width="150" ></td>
-				 
-			</tr>	 
-		</table>	
-	</div>
-	<div id="right">  </div>
-	<div class="clear"></div>
-	<div id="footer"></div> 
-		  
+				 <td width="150" bordercolor="white"></td> 
+	</div>								  
 </body>
 
 </html>
