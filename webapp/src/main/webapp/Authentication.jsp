@@ -9,9 +9,10 @@
 	
 	<style>
 		body {
-			background-image: url(backgrounds/Background.jpg);
+			background-image: url(backgrounds/texture3.jpg);
 			background-attachment: fixed;
-			background-position: center;	
+			background-position: center;
+				
 		}
 		
 		a{text-decoration: none
@@ -22,42 +23,42 @@
 
 <body link="yellow" alink="yellow" vlink="yellow">
 	
-	<font size=4>
-		<b>
-			<a href="Index.jsp"> Back to home page </a>
-		</b>	
-	</font>
-	
-	
 	<center>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 		
-		<table cellpadding="10" border=10 align="center" cellspacing=0>
+		<table width="300" cellpadding="15" border=6 align="center" cellspacing=0>
 			<br>
 			<br>
 			
-			<Caption>
-				<font color="lightBlue" size=5.5>
+			<!-- <Caption>
+				<font size=5.5"  color=#d8d4d4 >
 					<b>				
 						User authorization
 					</b>	
 				</font>			
-			</Caption>		
+			</Caption>	 -->	
 			<form method="post" action="ProcessingLoginPas.jsp">
-				<tr bgcolor="#CCCCFF">
+				<tr bgcolor=#dff7cd>
 					<th align="left">
-						Login: <input id="login" type="text" name="login"	size=23>
+						Login: <input id="login" type="text" name="login" size=23>
 					</th>
 				</tr>
 	
-				<tr bgcolor="#CCCCFF">
+				<tr bgcolor=#dff7cd>
 					<th align="left">
 						Password: <input type="password" name="password">
 					</th>
 				</tr>
 					
-				<tr bgcolor="#CCCCFF">
+				<tr bgcolor=#dff7cd>
 					<td align="center">
 						<input type="submit" value="submit">
+						<input type="button" value="cancel ">
 					</td>
 				</tr> 
 			</form>

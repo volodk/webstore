@@ -23,11 +23,12 @@
 }
 
 .container-1 input#search{
-  width: 230px;
+  width: 300px;
   height: 35px;
   background: #cccccc;
   border: none;
   font-size: 10pt;
+  
   float: left;
   color: #63717f;
   padding-left: 45px;
@@ -99,6 +100,7 @@
   padding: 0px;
   margin: 0 auto;
   width:auto;
+  
    
 }
 /* стили секций с содержанием */
@@ -109,6 +111,8 @@ section {
   padding: 15px;
   background: url(backgrounds/orange.jpg);
   border: 1px solid #ddd;
+  height: 100vh;
+  
 }
 .tabs input {
   display: none;
@@ -194,7 +198,7 @@ section {
 
 	
 	<div id="header">
-		<table align="center" border="0"  width=100%	background="backgrounds/fon2.jpg">
+		<table align="center" border="0"  width=100%	background="backgrounds/texture7.jpg">
 	
 			<!--First row-->
 	
@@ -208,8 +212,12 @@ section {
 				<td align="left" width="70"><a href="Contacts.jsp"
 					style="text-decoration: underline;"> Contacts </a></td>
 				<td></td>
-				<td align="right" width="60"><a href="Authentication.jsp"
+				<td align="right" width="60"><a href="Auth"
 					style="text-decoration: underline;"> Log in </a></td>
+				<td width="15"></td>
+				
+										
+				
 				<td width="15"></td>
 				<td align="right" width="60"><a href="Basket.jsp"
 					style="text-decoration: underline;"> Registration </a></td>
@@ -218,7 +226,7 @@ section {
 			
 		</table>
 		
-		<table align="center" border="0"  width=100% background="backgrounds/fon2.jpg">
+		<table align="center" border="0"  width=100% background="backgrounds/texture7.jpg">
 			<!-- Second row-->
 			<tr>
 				<td width="150" ></td>
@@ -250,11 +258,11 @@ section {
 	</div>
 	
 	<div>
-	<table align="center" border="0" width=100% >
+	<table align="center" border="0" width=100% background="backgrounds/texture3.jpg">
 			<!-- Second row-->
 			<tr>
-				<td width="150"></td>
-				<td align="left" background="backgrounds/fon2.jpg">
+				<td width="150" ></td>
+				<td align="left">
 				
 					<div class="tabs">
 					    <input id="tab1" type="radio" name="tabs" checked>
