@@ -11,10 +11,19 @@ public class Auth extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	            throws ServletException, IOException {
+		
+				this.doPost(req, resp);
+					
+   }
+ 
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
 		 	
-	        req.getRequestDispatcher("Authentication.jsp").forward(req, resp);
+			req.getRequestDispatcher("Authentication.jsp").forward(req, resp);
     }
  
 }

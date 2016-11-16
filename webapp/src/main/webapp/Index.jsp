@@ -2,6 +2,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
+<%String login = request.getParameter("login");
+  String card = request.getParameter("card");
+  if (login == null) {
+		login = "";
+	}
+	if (card == null) {
+		card = "";
+	}
+	
+	session.setAttribute("login", login);
+	session.setAttribute("card", card); %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -198,8 +210,8 @@ section {
 
 	
 	<div id="header">
-		<table align="center" border="0"  width=100%	background="backgrounds/texture7.jpg">
-	
+		<table align="center" border="0" width=100% background="backgrounds/texture7.jpg">
+			
 			<!--First row-->
 	
 			<tr>
@@ -212,21 +224,42 @@ section {
 				<td align="left" width="70"><a href="Contacts.jsp"
 					style="text-decoration: underline;"> Contacts </a></td>
 				<td></td>
+				
+				<%
+				if (login.equals("")) {
+				%>
 				<td align="right" width="60"><a href="Auth"
-					style="text-decoration: underline;"> Log in </a></td>
+					style="text-decoration: underline;"> Entry </a></td>
 				<td width="15"></td>
 				
-										
-				
-				<td width="15"></td>
 				<td align="right" width="60"><a href="Basket.jsp"
 					style="text-decoration: underline;"> Registration </a></td>
 				<td width="150"></td>
+				<%
+				} else {
+				%>
+				<td align="right" width="200">
+					<font color="white" > 
+						<strong>${name} </strong>
+					</font>	  
+					<font color="gray" >
+						(club card: ${card}) 
+					</font>
+				</td>
+								
+				<td align="right" width="60"><a href="Main"
+					style="text-decoration: underline;"> Exit </a></td>
+				<td width="150"></td>						
+                <%
+				}
+				%>		
+									
+				
 			</tr>
 			
 		</table>
 		
-		<table align="center" border="0"  width=100% background="backgrounds/texture7.jpg">
+		<table height="170" align="center" border="0"  width=100% background="backgrounds/texture7.jpg">
 			<!-- Second row-->
 			<tr>
 				<td width="150" ></td>
@@ -302,6 +335,8 @@ section {
 				
 				 </td>
 				 <td width="150"></td> 
+			</tr>
+		</table>	
 	</div>								  
 </body>
 

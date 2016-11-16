@@ -17,11 +17,13 @@
         <servlet-name>Main</servlet-name>
         <servlet-class>webapp.Main</servlet-class>
     </servlet> 
+   
     <servlet>    
         <servlet-name>Auth</servlet-name>
         <servlet-class>webapp.Auth</servlet-class>
     </servlet>
-  
+   
+   
     
     
     
@@ -29,9 +31,11 @@
         <servlet-name>Main</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>Auth</servlet-name>
         <url-pattern>/Auth</url-pattern>
     </servlet-mapping>
+   
     
 </web-app>

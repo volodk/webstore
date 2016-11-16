@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="webapp.AuthService" %>   
+<%-- <%@ page import="webapp.AuthService" %> --%>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -23,19 +23,19 @@
 <body link="yellow" alink="yellow" vlink="yellow">	
 	
 	
-	<%@include file = "AllowLoginPas.jsp"%>
+<%-- 	<%@include file = "AllowLoginPas.jsp"%> --%>
 	
-	<%
-	if (!authOk) {	
-	%>
-		<%@include file = "AuthVisible.jsp"%>
-	<%	
-	}
-	else{
-	%>	
-		<%@include file = "LogOffVisible.jsp"%>
-	<%	
-	}%>	
+<%-- 	<% --%>
+// 	if (!authOk) {	
+<%-- 	%> --%>
+<%-- 		<%@include file = "AuthVisible.jsp"%> --%>
+<%-- 	<%	 --%>
+// 	}
+// 	else{
+<%-- 	%>	 --%>
+<%-- 		<%@include file = "LogOffVisible.jsp"%> --%>
+<%-- 	<%	 --%>
+<%-- 	}%>	 --%>
 	<font color="white"> 		
 		<table border="1">
 		
