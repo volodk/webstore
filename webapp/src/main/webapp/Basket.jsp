@@ -17,9 +17,9 @@
 <title>Basket</title>
 </head>
 <body link="yellow" alink="yellow" vlink="yellow">
-	<%@include file = "AllowLoginPas.jsp"%>
+	<%-- <%@include file = "AllowLoginPas.jsp"%> --%>
 	
-	<%
+	<%-- <%
 	if (!authOk) {	
 	%>
 		<%@include file = "AuthVisible.jsp"%>
@@ -29,7 +29,7 @@
 	%>	
 		<%@include file = "LogOffVisible.jsp"%>
 	<%	
-	}%>	
+	}%>	 --%>
 	<font color="white"> 		
 		Selected Items
 		<table border="1">

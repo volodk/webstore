@@ -4,7 +4,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
+
 import java.io.IOException;
+import java.sql.Connection;
+
+import webapp.PostgreSQLJDBC;
 
 public class Main extends HttpServlet {
 			 
@@ -32,6 +37,17 @@ public class Main extends HttpServlet {
 				String login = req.getParameter("login");
 				String password = req.getParameter("password");
 				String authForm = req.getParameter("authForm");
+				
+				Connection con = PostgreSQLJDBC.getConnectionPG();
+				
+				if (con!=null){
+					
+				} 
+								
+				
+				if (authForm != null){
+					
+				}
 				
 				allowed = allowLogin(login, password);
 				
@@ -68,4 +84,4 @@ public class Main extends HttpServlet {
 	
 		}
 	
-}
+	}
