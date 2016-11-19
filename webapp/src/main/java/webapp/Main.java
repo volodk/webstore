@@ -4,22 +4,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
-
+/*import javax.websocket.Session;*/
 import java.io.IOException;
 import java.sql.Connection;
 
-import webapp.PostgreSQLJDBC;
+import webapp.PostgreJDBC;
 
 public class Main extends HttpServlet {
 			 
 	private static final long serialVersionUID = 1L;
 
-	public String realLogin = "admin"; 
-	public String realPass = "admin";
-	public String cardNumber = "00777";
+	/*public String userName = ""; 
+	public String cardNumber = "";*/
+	public String[] userInfo = new String[3];
 	public boolean allowed = false;
-
+	private Connection conDB;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -38,50 +37,48 @@ public class Main extends HttpServlet {
 				String password = req.getParameter("password");
 				String authForm = req.getParameter("authForm");
 				
-				Connection con = PostgreSQLJDBC.getConnectionPG();
-				
-				if (con!=null){
-					
-				} 
+				String userName = req.getParameter("userName");
+				String cardNumber = req.getParameter("cardNumber");
 								
-				
-				if (authForm != null){
+				/*подключимся к БД*/
+				conDB = PostgreJDBC.getConnectionPG();
+								
+				/*получим инфо пользователя если нет*/
+				if (conDB!=null && login!=null && password!=null){
+					userInfo = PostgreJDBC.GetUserInfo(login, password, conDB);
+					userName = userInfo[1];
+					userName = userName.concat(" ");
+					userName = userName.concat(userInfo[2]);
+					cardNumber = userInfo[3];
 					
-				}
+					if(userName!=""){				
+						allowed = true;
+					}
+				}	
 				
-				allowed = allowLogin(login, password);
-				
-				if (allowed){
-					req.setAttribute("name", login);
-					req.setAttribute("card", cardNumber);
-					req.getRequestDispatcher("Index.jsp").forward(req, resp);
+								
+				if (authForm != null){
+					if (allowed){
+						req.setAttribute("name", userName);
+						req.setAttribute("card", cardNumber);
+						req.getRequestDispatcher("Index.jsp").forward(req, resp);
+					}
+					else{
+						req.getRequestDispatcher("Auth").forward(req, resp);
+						}
 				}
 				else if (authForm == null){
 					req.getRequestDispatcher("Index.jsp").forward(req, resp);
 				}
-				else{
-					req.getRequestDispatcher("Auth").forward(req, resp);
-				}
+				
 					
+		try{
+			conDB.close();
+		} catch ( Exception e ) {
+			System.err.println( e.getClass().getName()+": "+ e.getMessage() );    
+		}
    }
 	
-	public boolean allowLogin(String login, String password){
-		
-		if(login==null){
-		login="";
-		}
-		
-		if(password==null){
-		password="";
-		}
-		
-		if (!login.equals(realLogin) | !password.equals(realPass)){
-			return false;
-		}
-		else{
-			return true;
-		}
-	
-		}
-	
-	}
+
+}
+

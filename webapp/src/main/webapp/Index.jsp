@@ -2,16 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%String login = request.getParameter("login");
+<%String name = request.getParameter("name");
   String card = request.getParameter("card");
-  if (login == null) {
-		login = "";
+  if (name == null) {
+		name = "";
 	}
 	if (card == null) {
 		card = "";
 	}
 	
-	session.setAttribute("login", login);
+	session.setAttribute("name", name);
 	session.setAttribute("card", card); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -226,7 +226,7 @@ section {
 				<td></td>
 				
 				<%
-				if (login.equals("")) {
+				if (name.equals("")) {
 				%>
 				<td align="right" width="60"><a href="Auth"
 					style="text-decoration: underline;"> Entry </a></td>
