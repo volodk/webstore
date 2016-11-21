@@ -2,10 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%String authForm = request.getParameter("authForm");
-   if (authForm == null) {
+   
+	if (authForm == null) {
 		authForm = "";
 }
-	session.setAttribute("authForm", authForm);
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,7 +42,6 @@
 		
 		<%
 		if (authForm.equals("1")){
-		session.setAttribute("authForm", null);
 		%>
 		
 		<table width="300" cellpadding="15" align="center">
@@ -60,6 +59,8 @@
 						Wrong login or password.
 					</th>
 				</tr>
+				
+				<input type="hidden" name="authForm" value=null>
 				
 				<tr  bgcolor=#dff7cd>								
 					<th align="ctnter">

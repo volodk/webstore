@@ -2,17 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%String name = request.getParameter("name");
-  String card = request.getParameter("card");
-  if (name == null) {
-		name = "";
-	}
-	if (card == null) {
-		card = "";
-	}
+<%
+String userName = "";
+String cardNumber = "";
+userName = (String)session.getAttribute("name");
+cardNumber = (String)session.getAttribute("card");
+
+if (userName == null) {
+	userName = "";
+}
+if (cardNumber == null) {
+	cardNumber = "";
+}
 	
-	session.setAttribute("name", name);
-	session.setAttribute("card", card); %>
+ %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -37,7 +40,7 @@
 .container-1 input#search{
   width: 300px;
   height: 35px;
-  background: #cccccc;
+  background: #fff;
   border: none;
   font-size: 10pt;
   
@@ -46,9 +49,10 @@
   padding-left: 45px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 20px;
 
 }
+
 
 .container-1 input#search::-webkit-input-placeholder {
    color: #65737e;
@@ -108,12 +112,11 @@
 
 /*Стиль вкладкок*/
 /* Базовый контейнер табов */
+
 .tabs {
   padding: 0px;
   margin: 0 auto;
   width:auto;
-  
-   
 }
 /* стили секций с содержанием */
 section {
@@ -124,6 +127,7 @@ section {
   background: url(backgrounds/orange.jpg);
   border: 1px solid #ddd;
   height: 100vh;
+ /*  border-radius: 15px; */
   
 }
 .tabs input {
@@ -131,6 +135,8 @@ section {
   width:auto;
     
 }
+
+
 /* стили вкладок (табов) */
 .tabs label {
   height:15px;
@@ -143,8 +149,9 @@ section {
   color: #aaa;
   border: 1px solid #ddd;
   background: #efc562;
-  border-radius: 3px 3px 0 0;
+  border-radius: 15px 15px 0 0;
   
+    
 }
 /* шрифт-иконки от Font Awesome в формате Unicode */
 .tabs label:before {
@@ -164,6 +171,14 @@ section {
 .tabs label[for*="4"]:before {
   content: url(Images/fish26.png);
 }
+
+.tabs {
+	width: 640px;
+	height: 450px;
+	position: relative;
+}
+
+
 /* изменения стиля заголовков вкладок при наведении */
 .tabs label:hover {
   color: #888;
@@ -184,21 +199,7 @@ section {
 #tab4:checked ~ #content4 {
   display: block;
 }
-/* медиа запросы для различных типов носителей */  
-@media screen and (max-width: 680px) {
-  .tabs label {
-    font-size: 0;
-  }
- 
-  .tabs label:before {
-    margin: 0;
-    font-size: 18px;
-  }
-}
-@media screen and (max-width: 400px) {
-  .tabs label {
-    padding: 15px;
-  }
+
 }
 
 
@@ -210,7 +211,7 @@ section {
 
 	
 	<div id="header">
-		<table align="center" border="0" width=100% background="backgrounds/texture7.jpg">
+		<table align="center" border="0" width=100% background="backgrounds/texture7.jpg" >
 			
 			<!--First row-->
 	
@@ -226,28 +227,28 @@ section {
 				<td></td>
 				
 				<%
-				if (name.equals("")) {
+				if (userName.equals("")|(userName.equals(null))) {
 				%>
 				<td align="right" width="60"><a href="Auth"
 					style="text-decoration: underline;"> Entry </a></td>
 				<td width="15"></td>
 				
-				<td align="right" width="60"><a href="Basket.jsp"
+				<td align="right" width="60"><a href="Reg"
 					style="text-decoration: underline;"> Registration </a></td>
 				<td width="150"></td>
 				<%
 				} else {
 				%>
-				<td align="right" width="200">
+				<td align="right" width="250">
 					<font color="white" > 
-						<strong>${name} </strong>
+						<strong><%out.print(userName);%> </strong>
 					</font>	  
 					<font color="gray" >
-						(club card: ${card}) 
+						(club card:<%out.print(cardNumber);%>) 
 					</font>
 				</td>
 								
-				<td align="right" width="60"><a href="Main"
+				<td align="right" width="60"><a href="Main?exit=1"
 					style="text-decoration: underline;"> Exit </a></td>
 				<td width="150"></td>						
                 <%

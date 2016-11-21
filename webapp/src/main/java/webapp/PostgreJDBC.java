@@ -61,4 +61,38 @@ public class PostgreJDBC {
        }
        return userInfo;
      }
+	   
+	   
+	   
+	   
+	   public static Boolean CheckLogin(String login, Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 int rowCount;
+		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"UserName\" FROM \"Profiles\" Where \"UserLogin\" = '";
+         quer = quer.concat(login);
+         quer = quer.concat("';");
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         rs.last();
+         rowCount = rs.getRow();
+         rs.close();
+         stmt.close();
+                  
+	       } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	         return null;
+	       }
+	       if (rowCount > 0){
+	    	   return false;
+	       }
+	       else {return true;	   
+	       }
+	     }
+	   
 }

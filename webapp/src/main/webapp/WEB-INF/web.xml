@@ -23,18 +23,26 @@
         <servlet-class>webapp.Auth</servlet-class>
     </servlet>
    
-   
+   <servlet>    
+        <servlet-name>Reg</servlet-name>
+        <servlet-class>webapp.Reg</servlet-class>
+    </servlet>
     
     
     
     <servlet-mapping>
         <servlet-name>Main</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/Main</url-pattern>
     </servlet-mapping>
    
     <servlet-mapping>
         <servlet-name>Auth</servlet-name>
         <url-pattern>/Auth</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Reg</servlet-name>
+        <url-pattern>/Reg</url-pattern>
     </servlet-mapping>
    
     
