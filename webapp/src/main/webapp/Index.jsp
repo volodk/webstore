@@ -173,7 +173,7 @@ section {
 }
 
 .tabs {
-	width: 640px;
+	width: auto;
 	height: 450px;
 	position: relative;
 }

@@ -68,9 +68,9 @@ public class PostgreJDBC {
 	   public static Boolean CheckLogin(String login, Connection connection)
 	   {
 		 Statement stmt = null;
+		 int rowCount = 0;
 		 String quer="";
-		 int rowCount;
-		 		
+		 		 		
 		 try {
          stmt = connection.createStatement();
          
@@ -79,10 +79,11 @@ public class PostgreJDBC {
          quer = quer.concat("';");
          
          ResultSet rs = stmt.executeQuery(quer);
-         rs.last();
-         rowCount = rs.getRow();
-         rs.close();
-         stmt.close();
+         while (rs.next() ) {
+             rowCount++;
+          }
+          rs.close();
+          stmt.close();
                   
 	       } catch ( Exception e ) {
 	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );

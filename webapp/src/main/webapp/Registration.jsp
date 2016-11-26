@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
-<%String regForm = request.getParameter("regForm");
-  String ffExeption = request.getParameter("ffExeption"); 
-  String loginIsFree = request.getParameter("loginIsFree");
+<%String regForm = (String)request.getAttribute("regForm");
+  String fieldsFilligExeption = (String)request.getAttribute("fieldsFilligExeption"); 
+  String loginIsFree = (String)request.getAttribute("loginIsFree");
   
 	if (regForm == null) {
 		regForm = "";
 	}	
 	
-	if (ffExeption == null) {
-			ffExeption = "";				
+	if (fieldsFilligExeption == null) {
+		fieldsFilligExeption = "";				
 	}
 	
 	if (loginIsFree == null) {
@@ -51,12 +51,12 @@
 		
 		
 		<%
-		if (regForm.equals("1")){
+ 		if (regForm.equals("1")){
 			
-			if (ffExeption.equals("1")) {		
+			if (fieldsFilligExeption.equals("1")) {		
 		%>
 		
-			<table width="300" cellpadding="15" align="center">
+		 	<table width="300" cellpadding="15" align="center">
 				<br>
 				<br>
 				<br>
@@ -67,24 +67,26 @@
 				<form method="post" action="Reg">
 					
 					<tr bgcolor=#dff7cd>
-						<th align="ctnter">
+						<th align="ctnter"> 
 							All fields marked with (*) must be filled out!
-						</th>
+				 		</th>
 					</tr>
 					
 					<input type="hidden" name="regForm" value=null>
-					
+					<input type="hidden" name="fieldsFilligExeption" value=null>
+					<input type="hidden" name="loginIsFree" value=null>
+										
 					<tr  bgcolor=#dff7cd>								
 						<th align="ctnter">
 							<input type="submit" value="Back to registration form">
 						</th>	
 					</tr>	 
 				</form>
-			</table>
-			<%}else if (! loginIsFree.equals("1")) {		
+			</table> 
+			<%}else if (!loginIsFree.equals("1")) {		
 				%>
 				
-				<table width="300" cellpadding="15" align="center">
+				 <table width="300" cellpadding="15" align="center">
 					<br>
 					<br>
 					<br>
@@ -95,12 +97,14 @@
 					<form method="post" action="Reg">
 						
 						<tr bgcolor=#dff7cd>
-							<th align="ctnter">
+							<th align="ctnter"> 
 								The login already has an account under a different user name!
 							</th>
 						</tr>
 						
 						<input type="hidden" name="regForm" value=null>
+						<input type="hidden" name="fieldsFilligExeption" value=null>
+						<input type="hidden" name="loginIsFree" value=null>
 						
 						<tr  bgcolor=#dff7cd>								
 							<th align="ctnter">
@@ -108,7 +112,7 @@
 							</th>	
 						</tr>	 
 					</form>
-				</table>
+				</table> 
 			 <%} 
 			
 		} else {
@@ -160,6 +164,8 @@
 					</tr>
 											
 					<input type="hidden" name="regForm" value="1">
+					<input type="hidden" name="fieldsFilligExeption" value=null>
+					<input type="hidden" name="loginIsFree" value=null>
 						
 					<tr bgcolor=#dff7cd>
 						<td align="center">
@@ -177,9 +183,9 @@
 			</table>
 			
 		<%
-		}
+ 		}
 		%>			
-	</center>
+ 	</center> 
 
 
 </body>

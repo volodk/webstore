@@ -38,10 +38,10 @@ public class Main extends HttpServlet {
 				String authForm = req.getParameter("authForm");
 				String regForm = req.getParameter("regForm");
 				String exit = req.getParameter("exit");
-				Boolean loginIsFree;
-				String logIsFree = "";
-				String fieldsFilligExeption = "";
-				
+				Boolean logIsFree;
+				String loginIsFree = null;/*req.getParameter("loginIsFree");*/
+				String fieldsFilligExeption = null;/*req.getParameter("fieldsFilligExeption");*/
+								
 				String userName = req.getParameter("userName");
 				String userLastName = req.getParameter("userLastName");
 				String cardNumber = req.getParameter("cardNumber");
@@ -84,33 +84,34 @@ public class Main extends HttpServlet {
 						req.getRequestDispatcher("Index.jsp").forward(req, resp);
 					}
 					else{
+						req.setAttribute("authForm", authForm);
 						req.getRequestDispatcher("Auth").forward(req, resp);
 					}
 				}
 					
 				/*обработаем данные для регистратции нового пользователя*/
 				else if (regForm != null){
-					fieldsFilligExeption = "";
-					
 					/*проверим заполненность полей*/
 					if(userName.equals("") | userLastName.equals("") | login.equals("") | password.equals("")){
 						fieldsFilligExeption = "1";
-						session.setAttribute("ffExeption", fieldsFilligExeption);
+						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
+						req.setAttribute("regForm", regForm);
 						req.getRequestDispatcher("Reg").forward(req, resp);
 					}
 					
-					/*приверим логин*/
+					/*проверим логин*/
 					else if (conDB!=null){
-						loginIsFree = false;
-						loginIsFree = PostgreJDBC.CheckLogin(login, conDB);
+						logIsFree = false;
+						logIsFree = PostgreJDBC.CheckLogin(login, conDB);
 						
-						if (loginIsFree){
-							logIsFree = "1";									
-						}else{
-							logIsFree = "";
+						if (logIsFree==true){
+							loginIsFree = "1";}									
+						else{
+							loginIsFree = null;
 						}
 						
-						session.setAttribute("loginIsFree", logIsFree);							
+						req.setAttribute("loginIsFree", loginIsFree);
+						req.setAttribute("regForm", regForm);
 						req.getRequestDispatcher("Reg").forward(req, resp);
 					}
 				}
