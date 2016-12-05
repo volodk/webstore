@@ -4,6 +4,7 @@
 <%String regForm = (String)request.getAttribute("regForm");
   String fieldsFilligExeption = (String)request.getAttribute("fieldsFilligExeption"); 
   String loginIsFree = (String)request.getAttribute("loginIsFree");
+  String userReg = (String)request.getAttribute("userReg");
   
 	if (regForm == null) {
 		regForm = "";
@@ -15,7 +16,12 @@
 	
 	if (loginIsFree == null) {
 		loginIsFree = "";	
-}
+	}
+	
+	if (userReg == null) {
+		userReg = "";	
+	}
+
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -72,9 +78,10 @@
 				 		</th>
 					</tr>
 					
-					<input type="hidden" name="regForm" value=null>
-					<input type="hidden" name="fieldsFilligExeption" value=null>
-					<input type="hidden" name="loginIsFree" value=null>
+					<input type="hidden" name="regForm" value="">
+					<input type="hidden" name="fieldsFilligExeption" value="">
+					<input type="hidden" name="loginIsFree" value="">
+					<input type="hidden" name="userReg" value="">
 										
 					<tr  bgcolor=#dff7cd>								
 						<th align="ctnter">
@@ -102,9 +109,10 @@
 							</th>
 						</tr>
 						
-						<input type="hidden" name="regForm" value=null>
-						<input type="hidden" name="fieldsFilligExeption" value=null>
-						<input type="hidden" name="loginIsFree" value=null>
+						<input type="hidden" name="regForm" value="">
+						<input type="hidden" name="fieldsFilligExeption" value="">
+						<input type="hidden" name="loginIsFree" value="">
+						<input type="hidden" name="userReg" value="">
 						
 						<tr  bgcolor=#dff7cd>								
 							<th align="ctnter">
@@ -113,8 +121,42 @@
 						</tr>	 
 					</form>
 				</table> 
-			 <%} 
+			  
+		<%}else if (userReg.equals("1")) {	
 			
+		%>
+			
+			 <table width="300" cellpadding="15" align="center">
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					
+					<form method="post" action="Main">
+						
+						<tr bgcolor=#dff7cd>
+							<th align="ctnter"> 
+								You have successfully registered and logged in.
+							</th>
+						</tr>
+						
+						<input type="hidden" name="regForm" value="">
+						<input type="hidden" name="fieldsFilligExeption" value="">
+						<input type="hidden" name="loginIsFree" value="">
+						<input type="hidden" name="userReg" value="">
+												
+						<tr  bgcolor=#dff7cd>								
+							<th align="ctnter">
+								<input type="submit" value="Ok">
+							</th>	
+						</tr>	 
+					</form>
+				</table> 	
+			
+			
+		<%}	
 		} else {
 			%>	
 	
@@ -134,27 +176,32 @@
 					</tr>
 					<tr bgcolor=#dff7cd>
 						<th align="left">
-							First name(*): <input type="text" name="userName" size=31>
+							First name(*): <input type="text" name="userName" style="width: 65%;">
 						</th>
 					</tr>
 					<tr bgcolor=#dff7cd>	
 						<th align="left">
-							Last name(*): <input type="text" name="userLastName" size=31>
+							Last name(*): <input type="text" name="userLastName" style="width: 66%;">
 						</th>
 					</tr>
 					<tr bgcolor=#dff7cd>
 						<th align="left">
-							Login(*): <input type="text" name="login" size=36>
+							Mail(*): <input type="text" name="mail" style="width: 78.5%;">
+						</th>
+					</tr>
+					<tr bgcolor=#dff7cd>
+						<th align="left">
+							Login(*): <input type="text" name="login" style="width: 76%;">
 						</th>
 					</tr>
 					<tr bgcolor=#dff7cd>	
 						<th align="left">
-							Password(*): <input type="password" name="password" size=32>
+							Password(*): <input type="password" name="password" style="width: 68%;">
 						</th>
 					</tr>
 					<tr bgcolor=#dff7cd>	
 						<th align="left">
-							Club card number: <input type="text" name="cardNumber" size=25>
+							Club card number: <input type="text" name="cardNumber" style="width: 55%;">
 						</th>
 					</tr>
 					<tr bgcolor=#dff7cd>
@@ -164,8 +211,9 @@
 					</tr>
 											
 					<input type="hidden" name="regForm" value="1">
-					<input type="hidden" name="fieldsFilligExeption" value=null>
-					<input type="hidden" name="loginIsFree" value=null>
+					<input type="hidden" name="fieldsFilligExeption" value="">
+					<input type="hidden" name="loginIsFree" value="">
+					<input type="hidden" name="userReg" value="">
 						
 					<tr bgcolor=#dff7cd>
 						<td align="center">

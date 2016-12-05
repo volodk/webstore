@@ -33,14 +33,17 @@ public class Main extends HttpServlet {
 	            throws ServletException, IOException {
 		
 				
+				String mail = req.getParameter("mail");
 				String login = req.getParameter("login");
 				String password = req.getParameter("password");
 				String authForm = req.getParameter("authForm");
 				String regForm = req.getParameter("regForm");
+				String userReg = req.getParameter("userReg");
 				String exit = req.getParameter("exit");
 				Boolean logIsFree;
-				String loginIsFree = null;/*req.getParameter("loginIsFree");*/
-				String fieldsFilligExeption = null;/*req.getParameter("fieldsFilligExeption");*/
+				String loginIsFree = "";
+				String fieldsFilligExeption = "";
+				Boolean userIsRegistered;
 								
 				String userName = req.getParameter("userName");
 				String userLastName = req.getParameter("userLastName");
@@ -48,18 +51,18 @@ public class Main extends HttpServlet {
 				
 				HttpSession session = req.getSession();
 				
-				if (exit != null){
+				if (exit != null & exit != ""){
 					session.invalidate();
 				}
 				
 				/*подключимся к БД*/
-				if (authForm!=null | regForm!=null){
+				if ((authForm!=null & authForm!="") | (regForm!=null & regForm!="")){
 				conDB = PostgreJDBC.getConnectionPG();
 				}	
 				
 				
 				/*получим инфо пользователя*/
-				if (conDB!=null & login!=null & password!=null){
+				if (conDB!=null & login!=null & login!="" & password!=null & password!=""){
 					userInfo = PostgreJDBC.GetUserInfo(login, password, conDB);
 					allowed = false;
 					if (userInfo[1].length()>0){
@@ -76,8 +79,13 @@ public class Main extends HttpServlet {
 				}	
 				
 								
+				if ((authForm == null | authForm == "") & (regForm == null | regForm == "")){
+					
+					req.getRequestDispatcher("Index.jsp").forward(req, resp);
+					
+				}	
 				/*обработаем инфо пользователя*/
-				if (authForm != null){
+				else if (authForm != null & authForm != ""){
 					if (allowed){
 						session.setAttribute("name", userName);
 						session.setAttribute("card", cardNumber);
@@ -90,9 +98,10 @@ public class Main extends HttpServlet {
 				}
 					
 				/*обработаем данные для регистратции нового пользователя*/
-				else if (regForm != null){
+				else if (regForm != null & regForm != ""){
+										
 					/*проверим заполненность полей*/
-					if(userName.equals("") | userLastName.equals("") | login.equals("") | password.equals("")){
+					if(userName.equals("") | userLastName.equals("") | mail.equals("") | login.equals("") | password.equals("")){
 						fieldsFilligExeption = "1";
 						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
 						req.setAttribute("regForm", regForm);
@@ -105,26 +114,42 @@ public class Main extends HttpServlet {
 						logIsFree = PostgreJDBC.CheckLogin(login, conDB);
 						
 						if (logIsFree==true){
-							loginIsFree = "1";}									
+							loginIsFree = "1";
+							userIsRegistered = PostgreJDBC.AddNewUser(userName, userLastName, mail, login, password, cardNumber, conDB);
+							if(userIsRegistered == true){
+								userReg = "1";}
+							else{
+								userReg = null;
+							}
+							req.setAttribute("userReg", userReg);
+							
+							userName = userName.concat(" ");
+							userName = userName.concat(userLastName);
+							session.setAttribute("name", userName);
+							session.setAttribute("card", cardNumber);
+						}									
 						else{
 							loginIsFree = null;
-						}
+							}
 						
 						req.setAttribute("loginIsFree", loginIsFree);
 						req.setAttribute("regForm", regForm);
 						req.getRequestDispatcher("Reg").forward(req, resp);
 					}
+					
+					
+					
 				}
-				else {
-					req.getRequestDispatcher("Index.jsp").forward(req, resp);
-				}
+				
+				
+				
 						
 					
 					
 								
 				
 					
-		if (authForm!=null | regForm!=null){
+		if ((authForm!=null & authForm!="") | (regForm!=null & regForm!="")){
 			  try{
 				conDB.close();
 			} catch ( Exception e ) {

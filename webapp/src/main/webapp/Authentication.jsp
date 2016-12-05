@@ -9,7 +9,7 @@
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
- <style type="text/css">s
+<style type="text/css">
    TABLE {
     border: 3px solid black; /* Рамка вокруг таблицы */
    }
@@ -32,12 +32,13 @@
 </head>
 
 
-<body link="yellow" alink="yellow" vlink="yellow">
+<body>
 	
 	<center>
 		<br>
 		<br>
 		<br>
+	
 		
 		
 		<%
@@ -50,17 +51,16 @@
 			<br>
 			<br>
 			<br>
-			<br>
-			
+			<br>			
 			<form method="post" action="Auth">
-				
+						
 				<tr bgcolor=#dff7cd>
 					<th align="ctnter">
 						Wrong login or password.
 					</th>
 				</tr>
 				
-				<input type="hidden" name="authForm" value=null>
+				<input type="hidden" name="authForm" value="">
 				
 				<tr  bgcolor=#dff7cd>								
 					<th align="ctnter">
