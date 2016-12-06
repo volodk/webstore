@@ -50,7 +50,7 @@ public class Admin extends HttpServlet {
 					conDB = PostgreJDBC.getConnectionPG();
 				}
 				
-				
+				allowed = false;				
 				/*получим инфо админа*/
 				if (conDB!=null & login!=null & login!="" & password!=null & password!=""){
 					adminInfo = PostgreJDBC.GetAdminInfo(login, password, conDB);
@@ -67,9 +67,9 @@ public class Admin extends HttpServlet {
 				}	
 										
 				if (allowed){
-					req.setAttribute("adminName", adminName);
-					req.setAttribute("adminLastName", adminLastName);
-					req.setAttribute("superAdmin", superAdmin);
+					session.setAttribute("adminName", adminName);
+					session.setAttribute("adminLastName", adminLastName);
+					session.setAttribute("superAdmin", superAdmin);
 					req.setAttribute("adminForm", "");
 					
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);

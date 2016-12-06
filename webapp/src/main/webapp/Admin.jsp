@@ -2,9 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%String adminForm = (String)request.getAttribute("adminForm");
-String adminName = (String)request.getAttribute("adminName");
-String adminLastName = (String)request.getAttribute("adminLastName");
-String superAdmin = (String)request.getAttribute("superAdmin");
+String adminName = (String)session.getAttribute("adminName");
+String adminLastName = (String)session.getAttribute("adminLastName");
+String superAdmin = (String)session.getAttribute("superAdmin");
    
 	if (adminForm == null) {
 		adminForm = "";
@@ -28,16 +28,53 @@ String superAdmin = (String)request.getAttribute("superAdmin");
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Admin page</title>
 	
-	<style>
-		body {
-			background-image: url(backgrounds/fon2.jpg);
-			background-attachment: fixed;
-			background-position: center;
-				
-		}
-		
-		a{text-decoration: none
-		}
+	<style type="text/css">
+    body {
+    background-image: url(backgrounds/fon2.jpg);
+	background-attachment: fixed;
+	background-position: center;
+    font-family: Arial, Helvetica, sans-serif; /* Рубленый шрифт текста */
+    margin: 0; /* Обнуляем отступы браузера */
+   }
+    #head { /* Верхний блок */
+     padding: 10px; /* Поля вокруг */
+   }
+   #menu { /* Левая колонка */
+    float: left; /* Обтекание справа */
+    width: 190px; /* Ширина колонки */
+    padding: 5px; /* Поля вокруг текста */
+    margin: 10px 10px 20px 5px; /* Значения отступов */
+   }
+   #menu div {
+    padding: 2px; /* Поля вокруг ссылок */
+   }
+   #menu a { 
+    display: block; /* Отображать ссылку как блок */
+    padding: 2px; /* Поля вокруг ссылок */
+    margin: 1px; /* Отступы вокруг */
+    font-size: 0.9em; /* Размер текста */
+    text-decoration: none; /* Убираем подчеркивание текста */
+   }
+   #menu a:hover { 
+    background: #636363; /* Цвет фона */
+    border: 1px dashed #636363; /* Добавление пунктирной рамки */
+    margin: 0; /* Убираем поля */
+   }
+   #content { /* Правая колонка */
+    margin: 10px 5px 20px 225px; /* Значения отступов */
+    padding: 5px; /* Поля вокруг текста */
+    color: #fff; /* Цвет текста */
+    
+   }
+   .line {
+    border-bottom: 1px groove #D6D6D6; /* Линия между ссылками */
+   }
+   #foot { /* Нижний блок */
+    background: #333; /* Цвет фона */
+    padding: 5px; /* Поля вокруг текста */
+    color: #fff; /* Цвет текста */
+    clear: both; /* Отменяем обтекание */
+   }
 	</style>
 </head>
 
@@ -77,28 +114,52 @@ String superAdmin = (String)request.getAttribute("superAdmin");
 		
 		<%
 		} else if (!adminName.equals("") & (!adminName.equals(null))){			
-		%>	
-		<table align="center" border="0" width=100%>
-			<tr>
-							
-				<td align="left" width="250">
-					<font color="white" > 
-						<strong><%out.print(adminName);%> </strong>
-						<strong><%out.print(adminLastName);%> </strong>
-					</font>					
-				</td>
-				
-								
-				<td align="right" width="60"><a href="Main?exit=1"
-					style="text-decoration: underline;"> Exit </a>
-				</td>
-													
-			</tr>
-			
-		</table>
-		
+		%>
+
+		<div id="head">
+			<table width="100%">
+				<td align="left" width="250"><font color="white"> <strong>
+							<%
+								out.print(adminName);
+							%>
+					</strong> <strong>
+							<%
+								out.print(adminLastName);
+							%>
+					</strong>
+				</font></td>
+
+				<td align="right"><a href="Main?exit=1"
+					style="text-decoration: none;"> Exit </a></td>
+			</table>
+
+		</div>
+
+		<div id="menu" align="left">
+			<div>
+				<a href="Admin">Create new administrator</a>
+			</div>
+			<div>
+				<a href="Admin">Modify administrator profile</a>
+			</div>
+			<div class="line"></div>
+			<div>
+				<a href="Admin">Add new good</a>
+			</div>			
+			<div>
+				<a href="Admin">Modify goods</a>
+			</div>
+		</div>
+		<div id="content" >
+		</div>
+		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+
+
+
+
+
 		<%
-		} else {
+			} else {
 		%>	
 
 		<br>

@@ -249,7 +249,7 @@ section {
 				</td>
 								
 				<td align="right" width="60"><a href="Main?exit=1"
-					style="text-decoration: underline;"> Exit </a></td>
+					style="text-decoration: none;"> Exit </a></td>
 								
 				<td align="right" width="80"><a href="Reg"
 					style="text-decoration: underline;"> My profile </a></td>
