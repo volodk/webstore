@@ -80,7 +80,7 @@ public class PostgreJDBC {
 		 try {
          stmt = connection.createStatement();
          
-         quer="SELECT \"AdminName\", \"AdminLastName\", \"SuperAdmin\" FROM \"Admins\" Where \"AdminLogin\" = '";
+         quer="SELECT \"AdminName\", \"AdminLastName\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\" Where \"AdminLogin\" = '";
          quer = quer.concat(login);
          quer = quer.concat("' and \"AdminPassword\" = '");
          quer = quer.concat(password);

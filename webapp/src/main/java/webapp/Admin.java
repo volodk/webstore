@@ -32,18 +32,19 @@ public class Admin extends HttpServlet {
 	            throws ServletException, IOException {
 				
 				String adminForm = req.getParameter("adminForm");
+				String newAdmin = req.getParameter("newAdmin");
 				String login = req.getParameter("login");
 				String password = req.getParameter("password");
 				
 				String adminName = req.getParameter("adminName");
 				String adminLastName = req.getParameter("adminLastName");
-				String superAdmin = req.getParameter("superAdmin");
 				
 				
 				
 				
 				
 				HttpSession session = req.getSession();
+				String superAdmin = (String)session.getAttribute("superAdmin");
 				
 				
 				if (adminForm!=null & adminForm!=""){
@@ -75,6 +76,8 @@ public class Admin extends HttpServlet {
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 						
 				}else{
+					req.setAttribute("newAdmin", newAdmin);
+					
 					req.setAttribute("adminForm", adminForm);
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 				}

@@ -5,6 +5,7 @@
 String adminName = (String)session.getAttribute("adminName");
 String adminLastName = (String)session.getAttribute("adminLastName");
 String superAdmin = (String)session.getAttribute("superAdmin");
+String newAdmin = (String)request.getAttribute("newAdmin");
    
 	if (adminForm == null) {
 		adminForm = "";
@@ -18,8 +19,12 @@ String superAdmin = (String)session.getAttribute("superAdmin");
 }
 	
 	if (superAdmin == null) {
-		superAdmin = "false";
+		superAdmin = "0";
 }
+	
+	if (newAdmin == null) {
+		newAdmin = "";
+}	
 
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -69,11 +74,13 @@ String superAdmin = (String)session.getAttribute("superAdmin");
    .line {
     border-bottom: 1px groove #D6D6D6; /* Линия между ссылками */
    }
+     
    #foot { /* Нижний блок */
     background: #333; /* Цвет фона */
     padding: 5px; /* Поля вокруг текста */
     color: #fff; /* Цвет текста */
     clear: both; /* Отменяем обтекание */
+    margin-top: 50%;
    }
 	</style>
 </head>
@@ -112,6 +119,105 @@ String superAdmin = (String)session.getAttribute("superAdmin");
 			</form>
 		</table>
 		
+		
+		<%
+		} else if (!adminName.equals("") & (!adminName.equals(null)) & (newAdmin.equals("1"))){			
+		%>
+
+		<div id="head">
+			<table width="100%">
+				<td align="left" width="250"><font color="white"> <strong>
+							<%
+								out.print(adminName);
+							%>
+					</strong> <strong>
+							<%
+								out.print(adminLastName);
+							%>
+					</strong>
+				</font></td>
+
+				<td align="right"><a href="Main?exit=1"
+					style="text-decoration: none;"> Exit </a></td>
+			</table>
+
+		</div>
+
+		<div id="menu" align="left">
+			<%if (superAdmin.equals("1")) {%>
+			<div>
+				<a href="Admin?newAdmin=1">Create new administrator</a>
+			</div>
+			<div>
+				<a href="Admin">Modify administrator profile</a>
+			</div>
+			<div class="line"></div>
+			<%}%>
+			<div>
+				<a href="Admin">Add new good</a>
+			</div>			
+			<div>
+				<a href="Admin">Modify goods</a>
+			</div>
+		</div>
+		
+		<div id="content">
+			<table align="left" width="400" cellpadding="10" cellspacing=0>
+				<form method="post" action="Admin">
+					<tr>
+						<th align="center">
+							<font size="4"> Registration form</font>
+						</th>
+					</tr>
+					
+					<tr>
+						<th align="left" >
+							First name(*): <input type="text" name="newAdminName" style="width: 68%; color: white">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Last name(*): <input type="text" name="newAdminLastName" style="width: 68%;">
+						</th>
+					</tr>
+					<tr>
+						<th align="left">
+							Login(*): <input type="text" name="newAdminLogin" style="width: 78%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Password(*): <input type="password" name="newAdminPassword" style="width: 69%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Super admin: <input type="checkbox" name="newSuperAdmin" style="width: 5%;">
+						</th>
+					</tr>
+					<tr>
+						<th align="left">
+							<font size="2" style="font-style: normal;"> * - Fields, that must be filled out </font>
+						</th>
+					</tr>
+											
+					<input type="hidden" name="adminForm" value="1">
+					<input type="hidden" name="fieldsFilligExeption" value="">
+					<input type="hidden" name="loginIsFree" value="">
+					<input type="hidden" name="adminReg" value="">
+						
+					<tr>
+						<td align="right">
+							<input type="submit" value="Register">
+						</td>
+					</tr>
+				 </form>
+				
+			</table>		
+		</div>
+		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		
+		
 		<%
 		} else if (!adminName.equals("") & (!adminName.equals(null))){			
 		%>
@@ -136,13 +242,15 @@ String superAdmin = (String)session.getAttribute("superAdmin");
 		</div>
 
 		<div id="menu" align="left">
+			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin">Create new administrator</a>
+				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
 				<a href="Admin">Modify administrator profile</a>
 			</div>
 			<div class="line"></div>
+			<%}%>
 			<div>
 				<a href="Admin">Add new good</a>
 			</div>			
