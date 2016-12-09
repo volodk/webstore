@@ -142,6 +142,39 @@ public class PostgreJDBC {
 	   
 	   
 	   
+	   public static Boolean CheckLoginAdmin(String login, Connection connection)
+	   {
+		 Statement stmt = null;
+		 int rowCount = 0;
+		 String quer="";
+		 		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"AdminName\" FROM \"Admins\" Where \"AdminLogin\" = '";
+         quer = quer.concat(login);
+         quer = quer.concat("';");
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while (rs.next() ) {
+             rowCount++;
+          }
+          rs.close();
+          stmt.close();
+                  
+	       } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	         return null;
+	       }
+	       if (rowCount > 0){
+	    	   return false;
+	       }
+	       else {return true;	   
+	       }
+	     }
+	   
+	   
+	   
 	   public static Boolean AddNewUser(String userName, String userLastName, String mail, String userLogin, String userPassword, String userBonusCard, Connection connection)
 	   {
 		 Statement stmt = null;
@@ -194,8 +227,63 @@ public class PostgreJDBC {
          return false;
        }
        return true;
-     }
-	    
+	   }
+    
 
 	   
-}
+	   
+	   
+	   public static Boolean AddNewAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 int maxId = 0;
+		 String maxIdStr;
+		 
+		 
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT max(\"id_admin\") FROM \"Admins\";";
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while (rs.next() ) {
+        	 maxId = rs.getInt("max");            
+         }
+         rs.close();
+         
+		 } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	     }
+         
+         
+         maxId++;
+         maxIdStr = Integer.toString(maxId);
+         
+         quer = "INSERT INTO \"Admins\" (\"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", \"SuperAdmin\", \"id_admin\") VALUES ('";
+         quer = quer.concat(adminName);
+         quer = quer.concat("','");
+         quer = quer.concat(adminLastName);
+         quer = quer.concat("','");
+         quer = quer.concat(adminLogin);
+         quer = quer.concat("','");
+         quer = quer.concat(adminPassword);
+         quer = quer.concat("','");
+         quer = quer.concat(superAdmin);
+         quer = quer.concat("','");
+         quer = quer.concat(maxIdStr);
+         quer = quer.concat("');");
+         
+        try {
+         stmt.execute(quer);
+         stmt.close();
+          
+       } catch ( Exception e ) {
+         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+         return false;
+       }
+       return true;
+     }
+	   
+}	   
+	   

@@ -10,7 +10,6 @@
 		regForm = "";
 	}	
 	
-	if (fieldsFilligExeption == null) {
 		fieldsFilligExeption = "";				
 	}
 	
