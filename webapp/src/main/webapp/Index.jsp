@@ -29,6 +29,12 @@ if (cardNumber == null) {
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <style>
+body {
+    background-image: url(backgrounds/texture3.jpg);
+	background-attachment: fixed;
+	background-position: center;
+	margin: 0; 
+     }
 
 .container-1{
   width: 300px; 
@@ -295,8 +301,8 @@ section {
 	</div>
 	
 	<div>
-	<table align="center" border="0" width=100% background="backgrounds/texture3.jpg">
-			<!-- Second row-->
+	<table align="center" border="0" width=100%>
+			<!-- Third row-->
 			<tr>
 				<td width="150" ></td>
 				<td align="left">
