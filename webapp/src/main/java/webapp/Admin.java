@@ -3,10 +3,14 @@ package webapp;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
+
+import org.w3c.dom.ls.LSInput;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import webapp.PostgreJDBC;
 
@@ -53,6 +57,7 @@ public class Admin extends HttpServlet {
 				String fieldsFilligExeption = "";
 				Boolean adminIsRegistered;
 				
+				ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>(); 
 				
 				HttpSession session = req.getSession();
 				String superAdmin = (String)session.getAttribute("superAdmin");
@@ -73,7 +78,7 @@ public class Admin extends HttpServlet {
 				
 				
 				
-				if (adminForm!=null & adminForm!=""){
+				if ((adminForm!=null & adminForm!="") | (modAdmin.equals("1"))){
 					conDB = PostgreJDBC.getConnectionPG();
 				}
 				
@@ -102,10 +107,15 @@ public class Admin extends HttpServlet {
 					
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 				
-				/*Если это выбор меню редактирвоания админов
+				/*Если это выбор меню редактирвоания админов*/
 				}else if (modAdmin.equals("1")){
-					получим талицу с логинами админов
-					adminsTable = PostgreJDBC.GetAdminInfo(login, password, conDB);*/
+					/*получим талицу с логинами админов*/
+					adminsTable = PostgreJDBC.GetAdminsInfo(conDB);
+					
+					req.setAttribute("modAdmin", modAdmin);
+					req.setAttribute("adminForm", adminForm);
+					session.setAttribute("adminsTable", adminsTable);
+					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 					
 								
 				/*Если это регистрация нового админа*/

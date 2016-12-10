@@ -273,7 +273,7 @@ section {
 			<!-- Second row-->
 			<tr>
 				<td width="150" ></td>
-				<td align="left" width="131" height="135"><a href="Index.jsp"
+				<td align="left" width="131" height="135"><a href="Main"
 					style="text-decoration: none;"> <img alt=""
 						src="Logo/logo_trans.png" border="0">
 				</a></td>

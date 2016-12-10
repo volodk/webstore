@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import webapp.AdminsInfo;
 
 import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory;
-
 
 public class PostgreJDBC {
 			
@@ -105,6 +106,45 @@ public class PostgreJDBC {
        }
        return adminInfo;
      } 
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   public static ArrayList<AdminsInfo> GetAdminsInfo(Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>();
+		 AdminsInfo StrAdminInfo = new AdminsInfo();
+		 		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while ( rs.next() ) {
+        	StrAdminInfo.adminName = rs.getString("AdminName");
+        	StrAdminInfo.adminLsatName = rs.getString("AdminLastName");
+        	StrAdminInfo.adminLogin= rs.getString("AdminLogin");
+        	StrAdminInfo.adminPassword = rs.getString("AdminPassword");
+        	StrAdminInfo.superAdmin = rs.getInt("SuperAdmin");
+        	adminsTable.add(StrAdminInfo);
+         }
+         rs.close();
+         stmt.close();
+         
+       } catch ( Exception e ) {
+         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+         return null;
+       }
+       return adminsTable;
+     } 
+	   
+	   
 	   
 	   
 	   

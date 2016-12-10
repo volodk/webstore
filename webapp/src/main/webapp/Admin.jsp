@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
-<%String adminForm = (String)request.getAttribute("adminForm");
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="webapp.AdminsInfo" %>
+	
+	
+<%
+AdminsInfo strAdmins = new AdminsInfo();
+
+String adminForm = (String)request.getAttribute("adminForm");
 String adminName = (String)session.getAttribute("adminName");
 String adminLastName = (String)session.getAttribute("adminLastName");
 String superAdmin = (String)session.getAttribute("superAdmin");
@@ -12,6 +19,7 @@ String modGood = (String)request.getAttribute("modGood");
 String fieldsFilligExeption = (String)request.getAttribute("fieldsFilligExeption"); 
 String loginIsFree = (String)request.getAttribute("loginIsFree");
 String adminReg = (String)request.getAttribute("adminReg");
+ArrayList<AdminsInfo> adminsTable = (ArrayList<AdminsInfo>)session.getAttribute("adminsTable");
    
 	if (adminForm == null) {
 		adminForm = "";
@@ -195,55 +203,23 @@ String adminReg = (String)request.getAttribute("adminReg");
 		</div>
 		
 		<div id="content">
-			<table align="left" width="400" cellpadding="10" cellspacing=0>
-				<form method="post" action="Admin">
+			<table align="left" width="600" cellpadding="10" cellspacing=0 bordercolor="whitw" border="1">
 					<tr>
-						<th align="center">
-							<font size="4"> Registration form</font>
-						</th>
+						<td>Name</td>
+						<td>Last name</td>
+						<td>Login</td>
+						<td>Password</td>
+						<td>Super</td>
 					</tr>
-					
-					<tr>
-						<th align="left" >
-							First name(*): <input type="text" name="newAdminName" style="width: 68%;">
-						</th>
-					</tr>
+					<%for (int i=0; i< adminsTable.size(); i++){%>
 					<tr>	
-						<th align="left">
-							Last name(*): <input type="text" name="newAdminLastName" style="width: 68%;">
-						</th>
-					</tr>
-					<tr>
-						<th align="left">
-							Login(*): <input type="text" name="newAdminLogin" style="width: 78%;">
-						</th>
-					</tr>
-					<tr>	
-						<th align="left">
-							Password(*): <input type="password" name="newAdminPassword" style="width: 69%;">
-						</th>
-					</tr>
-					<tr>	
-						<th align="left">
-							Super admin: <input type="checkbox" name="newSuperAdmin" value="1" style="width: 5%;">
-						</th>
-					</tr>
-					<tr>
-						<th align="left">
-							<font size="2" style="font-style: normal;"> * - Fields, that must be filled out </font>
-						</th>
-					</tr>
-											
-					<input type="hidden" name="adminForm" value="1">
-					<input type="hidden" name="newAdmin" value="2">
-											
-					<tr>
-						<td align="right">
-							<input type="submit" value="Register">
+						<td>
+						<%strAdmins = adminsTable.get(i);%>
+						<%out.print(strAdmins.adminName);%>
 						</td>
 					</tr>
-				 </form>
-				
+					<%}%>
+													
 			</table>		
 		</div>
 		<div id="foot">Copyright &copy; Klymenko Sergii</div>
@@ -335,6 +311,9 @@ String adminReg = (String)request.getAttribute("adminReg");
 					<input type="hidden" name="fieldsFilligExeption" value="">
 					<input type="hidden" name="loginIsFree" value="">
 					<input type="hidden" name="newAdmin" value="2">
+					<input type="hidden" name="modAdmin" value="">
+					<input type="hidden" name="newGood" value="">
+					<input type="hidden" name="modGood" value="">					
 											
 					<tr>
 						<td align="right">
@@ -402,6 +381,9 @@ String adminReg = (String)request.getAttribute("adminReg");
 					<input type="hidden" name="fieldsFilligExeption" value="">
 					<input type="hidden" name="loginIsFree" value="">
 					<input type="hidden" name="newAdmin" value="1">
+					<input type="hidden" name="modAdmin" value="">
+					<input type="hidden" name="newGood" value="">
+					<input type="hidden" name="modGood" value="">	
 											
 					<tr>
 						<td align="left">
@@ -469,6 +451,9 @@ String adminReg = (String)request.getAttribute("adminReg");
 					<input type="hidden" name="fieldsFilligExeption" value="">
 					<input type="hidden" name="loginIsFree" value="">
 					<input type="hidden" name="newAdmin" value="1">
+					<input type="hidden" name="modAdmin" value="">
+					<input type="hidden" name="newGood" value="">
+					<input type="hidden" name="modGood" value="">	
 											
 					<tr>
 						<td align="left">
@@ -537,6 +522,9 @@ String adminReg = (String)request.getAttribute("adminReg");
 					<input type="hidden" name="fieldsFilligExeption" value="">
 					<input type="hidden" name="loginIsFree" value="">
 					<input type="hidden" name="newAdmin" value="1">
+					<input type="hidden" name="modAdmin" value="">
+					<input type="hidden" name="newGood" value="">
+					<input type="hidden" name="modGood" value="">	
 											
 					<tr>
 						<td align="left">
