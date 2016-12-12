@@ -1,9 +1,9 @@
 package webapp;
 
 public class AdminsInfo {
-	String adminName;
-	String adminLsatName;
-	String adminLogin;
-	String adminPassword;
-	int superAdmin;
+	public String adminName;
+	public String adminLsatName;
+	public String adminLogin;
+	public String adminPassword;
+	public int superAdmin;
 }

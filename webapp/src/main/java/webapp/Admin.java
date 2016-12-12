@@ -3,6 +3,7 @@ package webapp;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.w3c.dom.ls.LSInput;
 
@@ -51,17 +52,21 @@ public class Admin extends HttpServlet {
 				String adminName = req.getParameter("adminName");
 				String adminLastName = req.getParameter("adminLastName");
 				
+				String checkAdmin = req.getParameter("checkAdmin");
+						
 							
 				String loginIsFree = "";
 				Boolean logIsFree;
 				String fieldsFilligExeption = "";
 				Boolean adminIsRegistered;
+				Integer checkAdminInt = null;
 				
-				ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>(); 
+				ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>();
+				AdminsInfo strModAdmin = new AdminsInfo();
 				
 				HttpSession session = req.getSession();
 				String superAdmin = (String)session.getAttribute("superAdmin");
-				
+				adminsTable = (ArrayList<AdminsInfo>)session.getAttribute("adminsTable");
 				
 				/*определим newAdmin если он равен 0*/
 				if (newAdmin == null){
@@ -75,6 +80,13 @@ public class Admin extends HttpServlet {
 				if (newSuperAdmin == null){
 					newSuperAdmin="0";
 				}
+				
+				if (checkAdmin!=null){
+					checkAdminInt = Integer.parseInt(checkAdmin);					
+				}	
+				
+				
+				
 				
 				
 				
@@ -107,6 +119,17 @@ public class Admin extends HttpServlet {
 					
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 				
+									
+				/*Если это выбор админа для редактирования*/
+				}else if (modAdmin.equals("2") & (checkAdmin!=null)){
+					strModAdmin = adminsTable.get(checkAdminInt.intValue());
+					
+					req.setAttribute("strModAdmin", strModAdmin);
+					req.setAttribute("modAdmin", modAdmin);	
+					req.setAttribute("adminForm", adminForm);
+					req.getRequestDispatcher("Admin.jsp").forward(req, resp);	
+					
+					
 				/*Если это выбор меню редактирвоания админов*/
 				}else if (modAdmin.equals("1")){
 					/*получим талицу с логинами админов*/

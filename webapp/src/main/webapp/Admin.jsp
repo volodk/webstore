@@ -19,8 +19,19 @@ String modGood = (String)request.getAttribute("modGood");
 String fieldsFilligExeption = (String)request.getAttribute("fieldsFilligExeption"); 
 String loginIsFree = (String)request.getAttribute("loginIsFree");
 String adminReg = (String)request.getAttribute("adminReg");
+
+AdminsInfo strModAdmin = new AdminsInfo();
+strModAdmin = (AdminsInfo)request.getAttribute("strModAdmin");
+
 ArrayList<AdminsInfo> adminsTable = (ArrayList<AdminsInfo>)session.getAttribute("adminsTable");
-   
+
+String strChecked = "0";
+
+if (strModAdmin!=null){
+	strChecked = Integer.toString(strModAdmin.superAdmin);
+}
+
+
 	if (adminForm == null) {
 		adminForm = "";
 }
@@ -160,7 +171,7 @@ ArrayList<AdminsInfo> adminsTable = (ArrayList<AdminsInfo>)session.getAttribute(
 		
 		
 		
-		/*Блок по редактированию данных админов*/
+<!-- 		Блок по редактированию данных админов -->
 		<%
 		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("1"))){			
 		%>
@@ -203,29 +214,170 @@ ArrayList<AdminsInfo> adminsTable = (ArrayList<AdminsInfo>)session.getAttribute(
 		</div>
 		
 		<div id="content">
+			<form method="post" action="Admin">
 			<table align="left" width="600" cellpadding="10" cellspacing=0 bordercolor="whitw" border="1">
 					<tr>
+						<td></td>
 						<td>Name</td>
 						<td>Last name</td>
 						<td>Login</td>
 						<td>Password</td>
 						<td>Super</td>
 					</tr>
-					<%for (int i=0; i< adminsTable.size(); i++){%>
+					
+					<%for (int i=0; i< adminsTable.size(); i++){
+					strAdmins = adminsTable.get(i);%>
 					<tr>	
-						<td>
-						<%strAdmins = adminsTable.get(i);%>
+						<td style="border-style: hidden;">
+						<input type="radio" name="checkAdmin" value=<%=i%>>
+						</td>					
+						<td style="border-style: hidden;">
 						<%out.print(strAdmins.adminName);%>
 						</td>
+						<td style="border-style: hidden;">
+						<%out.print(strAdmins.adminLsatName);%>
+						</td>
+						<td style="border-style: hidden;">
+						<%out.print(strAdmins.adminLogin);%>
+						</td>
+						<td style="border-style: hidden;">
+						<%out.print(strAdmins.adminPassword);%>
+						</td>
+						<td style="border-style: hidden;">
+						<%out.print(strAdmins.superAdmin);%>
+						</td>
+											
 					</tr>
+										
 					<%}%>
-													
-			</table>		
+				<tr>
+					<td style="border-style: hidden;">
+					</td>
+					<td style="border-style: hidden;">
+					</td>
+					<td style="border-style: hidden;">
+					</td>
+					<td style="border-style: hidden;">
+					</td>
+					<td style="border-style: hidden;">
+					</td>
+					<td style="border-style: hidden;">
+					<input align="right" type="submit" value="Edit">
+					</td>
+				</tr>																					
+			</table>
+			
+			<input type="hidden" name="adminForm" value="1">
+			<input type="hidden" name="modAdmin" value="2">
+			</form>		
 		</div>
+		
 		<div id="foot">Copyright &copy; Klymenko Sergii</div>
 		
 		
-		/* Блок работы с созданием нового админа*/
+		
+		
+		
+		<%
+		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("2"))){			
+		%>
+
+		<div id="head">
+			<table width="100%">
+				<td align="left" width="250"><font color="white"> <strong>
+							<%
+								out.print(adminName);
+							%>
+					</strong> <strong>
+							<%
+								out.print(adminLastName);
+							%>
+					</strong>
+				</font></td>
+
+				<td align="right"><a href="Main?exit=1"
+					style="text-decoration: none;"> Exit </a></td>
+			</table>
+
+		</div>
+
+		<div id="menu" align="left">
+			<%if (superAdmin.equals("1")) {%>
+			<div>
+				<a href="Admin?newAdmin=1">Create new administrator</a>
+			</div>
+			<div>
+				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+			</div>
+			<div class="line"></div>
+			<%}%>
+			<div>
+				<a href="Admin?newGood=1">Add new good</a>
+			</div>			
+			<div>
+				<a href="Admin?modGood=1">Modify goods</a>
+			</div>
+		</div>
+		
+		<div id="content">
+			<table align="left" width="400" cellpadding="10" cellspacing=0>
+				<form method="post" action="Admin">
+					<tr>
+						<th align="center">
+							<font size="4"> Modification form</font>
+						</th>
+					</tr>
+					
+					<tr>
+						<th align="left" >
+							First name: <input type="text" value=<%=strModAdmin.adminName%> name="oldAdminName" style="width: 71%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Last name: <input type="text" value=<%=strModAdmin.adminLsatName%> name="oldAdminLastName" style="width: 71%;">
+						</th>
+					</tr>
+					<tr>
+						<th align="left">
+							Login: <input type="text" value=<%=strModAdmin.adminLogin%> name="oldAdminLogin" style="width: 81%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Password: <input type="text" value=<%=strModAdmin.adminPassword%> name="oldAdminPassword" style="width: 72%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+						<%if (strChecked=="1") {%>
+							Super admin: <input type="checkbox" value = "1"  checked name="oldSuperAdmin" style="width: 11%;">
+						<%}else {%>
+							Super admin: <input type="checkbox" value = "1"  name="oldSuperAdmin" style="width: 11%;">
+						<%} %>	
+						</th>
+					</tr>
+																
+					<input type="hidden" name="adminForm" value="1">
+					<input type="hidden" name="newAdmin" value="3">
+															
+					<tr>
+						<td align="right">
+							<input type="submit" value="Modify">
+						</td>
+					</tr>
+				 </form>
+				
+			</table>		
+		</div>
+		
+		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		
+		
+		
+		
+		
+<!-- 		 Блок работы с созданием нового админа -->
 		<%
 		} else if (!adminName.equals("") & (!adminName.equals(null)) & (newAdmin.equals("1"))){			
 		%>

@@ -118,7 +118,7 @@ public class PostgreJDBC {
 		 Statement stmt = null;
 		 String quer="";
 		 ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>();
-		 AdminsInfo StrAdminInfo = new AdminsInfo();
+		 
 		 		 		
 		 try {
          stmt = connection.createStatement();
@@ -127,12 +127,14 @@ public class PostgreJDBC {
          
          ResultSet rs = stmt.executeQuery(quer);
          while ( rs.next() ) {
-        	StrAdminInfo.adminName = rs.getString("AdminName");
-        	StrAdminInfo.adminLsatName = rs.getString("AdminLastName");
-        	StrAdminInfo.adminLogin= rs.getString("AdminLogin");
-        	StrAdminInfo.adminPassword = rs.getString("AdminPassword");
-        	StrAdminInfo.superAdmin = rs.getInt("SuperAdmin");
-        	adminsTable.add(StrAdminInfo);
+        	AdminsInfo strAdminInfo = new AdminsInfo();
+        	 
+        	strAdminInfo.adminName = rs.getString("AdminName");
+        	strAdminInfo.adminLsatName = rs.getString("AdminLastName");
+        	strAdminInfo.adminLogin= rs.getString("AdminLogin");
+        	strAdminInfo.adminPassword = rs.getString("AdminPassword");
+        	strAdminInfo.superAdmin = rs.getInt("SuperAdmin");
+        	adminsTable.add(strAdminInfo);
          }
          rs.close();
          stmt.close();
