@@ -123,7 +123,7 @@ public class PostgreJDBC {
 		 try {
          stmt = connection.createStatement();
          
-         quer="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
+         quer="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", \"id_admin\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
          
          ResultSet rs = stmt.executeQuery(quer);
          while ( rs.next() ) {
@@ -134,6 +134,7 @@ public class PostgreJDBC {
         	strAdminInfo.adminLogin= rs.getString("AdminLogin");
         	strAdminInfo.adminPassword = rs.getString("AdminPassword");
         	strAdminInfo.superAdmin = rs.getInt("SuperAdmin");
+        	strAdminInfo.idAdmin = rs.getInt("id_admin");
         	adminsTable.add(strAdminInfo);
          }
          rs.close();
@@ -327,5 +328,42 @@ public class PostgreJDBC {
        return true;
      }
 	   
-}	   
 	   
+
+
+
+	public static Boolean UpdateAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, String idAdmin, Connection connection)
+	{
+		 Statement stmt = null;
+		 String quer="";
+		 
+	try{	 
+ 	  stmt = connection.createStatement();
+	 
+	 	  
+	  quer = "UPDATE \"Admins\" SET \"AdminName\"='";
+	  quer = quer.concat(adminName);
+	  quer = quer.concat("', \"AdminLastName\"='");
+	  quer = quer.concat(adminLastName);
+	  quer = quer.concat("', \"AdminLogin\"='");
+	  quer = quer.concat(adminLogin);
+	  quer = quer.concat("', \"AdminPassword\"='");
+	  quer = quer.concat(adminPassword);
+	  quer = quer.concat("', \"SuperAdmin\"='");
+	  quer = quer.concat(superAdmin);
+	  quer = quer.concat("' WHERE id_admin = '");
+	  quer = quer.concat(idAdmin);
+      quer = quer.concat("';");
+	  
+	
+	  stmt.execute(quer);
+	  stmt.close();
+	   
+	} catch ( Exception e ) {
+	  System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	  return false;
+	}
+	return true;
+	}
+
+}	   

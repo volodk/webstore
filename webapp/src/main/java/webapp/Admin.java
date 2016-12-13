@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.function.ToIntFunction;
 
 import webapp.PostgreJDBC;
 
@@ -46,6 +47,13 @@ public class Admin extends HttpServlet {
 				String newAdminPassword = req.getParameter("newAdminPassword");
 				String newSuperAdmin = req.getParameter("newSuperAdmin");
 				
+				String oldAdminName = req.getParameter("oldAdminName");
+				String oldAdminLastName = req.getParameter("oldAdminLastName");
+				String oldAdminLogin = req.getParameter("oldAdminLogin");
+				String oldAdminPassword = req.getParameter("oldAdminPassword");
+				String oldSuperAdmin = req.getParameter("oldSuperAdmin");
+				String oldIdAdmin = req.getParameter("oldIdAdmin");
+				
 				String login = req.getParameter("login");
 				String password = req.getParameter("password");
 				
@@ -59,8 +67,9 @@ public class Admin extends HttpServlet {
 				Boolean logIsFree;
 				String fieldsFilligExeption = "";
 				Boolean adminIsRegistered;
+				Boolean adminIsUpdated;
 				Integer checkAdminInt = null;
-				
+								
 				ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>();
 				AdminsInfo strModAdmin = new AdminsInfo();
 				
@@ -119,23 +128,68 @@ public class Admin extends HttpServlet {
 					
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 				
+					
+					
+				/*Если это модификация данных по админу. Данные отредактированы и передаются для записи*/
+				}else if (modAdmin.equals("3")){
+					/*проверим заполненность полей*/
+					if(oldAdminName.equals("") | oldAdminLastName.equals("") | oldAdminLogin.equals("") | oldAdminLogin.equals("")){
+						fieldsFilligExeption = "1";
+						req.setAttribute("modAdmin", "2");
+						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
+						req.setAttribute("adminForm", adminForm);
+						req.getRequestDispatcher("Admin.jsp").forward(req, resp);
+					}
+					
+					/*проверим логин*/
+					else if (conDB!=null){
+						logIsFree = false;
+						logIsFree = PostgreJDBC.CheckLoginAdmin(oldAdminLogin, conDB);
+						
+						if (logIsFree==true){
+							loginIsFree = "1";
+							if(oldSuperAdmin==null){
+								oldSuperAdmin="0";
+							}
+							adminIsUpdated = PostgreJDBC.UpdateAdmin(oldAdminName, oldAdminLastName, oldAdminLogin, oldAdminPassword, oldSuperAdmin, oldIdAdmin, conDB);
+							if(adminIsUpdated == true){
+								req.setAttribute("adminUpd", "1");}
+							else{
+								req.setAttribute("adminUpd", "");
+							}
+							
+							
+						}									
+						else{
+							loginIsFree = "2";
+							}
+						
+						req.setAttribute("modAdmin", "1");
+						req.setAttribute("loginIsFree", loginIsFree);
+						req.setAttribute("adminForm", adminForm);
+						req.getRequestDispatcher("Admin.jsp").forward(req, resp);
+					}
+				
 									
+					
+					
 				/*Если это выбор админа для редактирования*/
 				}else if (modAdmin.equals("2") & (checkAdmin!=null)){
 					strModAdmin = adminsTable.get(checkAdminInt.intValue());
 					
-					req.setAttribute("strModAdmin", strModAdmin);
+					session.setAttribute("strModAdmin", strModAdmin);
 					req.setAttribute("modAdmin", modAdmin);	
 					req.setAttribute("adminForm", adminForm);
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);	
+				
 					
-					
-				/*Если это выбор меню редактирвоания админов*/
-				}else if (modAdmin.equals("1")){
-					/*получим талицу с логинами админов*/
+									
+				/*Если это выбор меню редактирования админов*/
+				}else if (modAdmin.equals("1")| ((modAdmin.equals("2") & (checkAdmin==null)))){
+					/*получим таблицу с логинами админов*/
 					adminsTable = PostgreJDBC.GetAdminsInfo(conDB);
 					
-					req.setAttribute("modAdmin", modAdmin);
+					req.setAttribute("modAdmin", "1");
 					req.setAttribute("adminForm", adminForm);
 					session.setAttribute("adminsTable", adminsTable);
 					req.getRequestDispatcher("Admin.jsp").forward(req, resp);

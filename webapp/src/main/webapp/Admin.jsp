@@ -19,9 +19,10 @@ String modGood = (String)request.getAttribute("modGood");
 String fieldsFilligExeption = (String)request.getAttribute("fieldsFilligExeption"); 
 String loginIsFree = (String)request.getAttribute("loginIsFree");
 String adminReg = (String)request.getAttribute("adminReg");
+String adminUpd = (String)request.getAttribute("adminUpd");
 
 AdminsInfo strModAdmin = new AdminsInfo();
-strModAdmin = (AdminsInfo)request.getAttribute("strModAdmin");
+strModAdmin = (AdminsInfo)session.getAttribute("strModAdmin");
 
 ArrayList<AdminsInfo> adminsTable = (ArrayList<AdminsInfo>)session.getAttribute("adminsTable");
 
@@ -69,6 +70,9 @@ if (strModAdmin!=null){
 	if (adminReg == null) {
 		adminReg = "";
 }
+	if (adminUpd == null) {
+		adminUpd = "";
+}
 	
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,6 +86,7 @@ if (strModAdmin!=null){
     background-image: url(backgrounds/fon2.jpg);
 	background-attachment: fixed;
 	background-position: center;
+	color: white;
     font-family: Arial, Helvetica, sans-serif; /* Рубленый шрифт текста */
     margin: 0; /* Обнуляем отступы браузера */
    }
@@ -110,10 +115,7 @@ if (strModAdmin!=null){
     margin: 0; /* Убираем поля */
    }
    #content { /* Правая колонка */
-    margin: 10px 5px 20px 225px; /* Значения отступов */
-    padding: 5px; /* Поля вокруг текста */
-    color: #fff; /* Цвет текста */
-        
+    margin: 10px 5px 20px 225px; /* Значения отступов */        
    }
    .line {
     border-bottom: 1px groove #D6D6D6; /* Линия между ссылками */
@@ -126,7 +128,29 @@ if (strModAdmin!=null){
     clear: both; /* Отменяем обтекание */
     margin-top: 50%;
    }
+   
+
+#parent_popup {
+  width:100%;
+    height: 2000px;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+
+}
+#popup {
+  margin:40px auto 0px auto;
+    width:400px;
+    height: 80px;
+    color:black;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0px 0px 10px #000;
+  	
 	</style>
+	
 </head>
 
 
@@ -175,7 +199,18 @@ if (strModAdmin!=null){
 		<%
 		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("1"))){			
 		%>
-
+		
+		<%if(adminUpd.equals("1")){%>
+			
+				<div id="parent_popup">
+				  <div id="popup">
+				    <p> Admin info modificated sucessfully!</p>
+				    <p  style="cursor: pointer; font-weight: bold;" onclick="document.getElementById('parent_popup').style.display='none';">Close</p>
+				  </div>
+				</div>
+			
+		<%}%>	
+			
 		<div id="head">
 			<table width="100%">
 				<td align="left" width="250"><font color="white"> <strong>
@@ -215,14 +250,14 @@ if (strModAdmin!=null){
 		
 		<div id="content">
 			<form method="post" action="Admin">
-			<table align="left" width="600" cellpadding="10" cellspacing=0 bordercolor="whitw" border="1">
-					<tr>
+			<table align="left" width="600" cellpadding="10" cellspacing=0>
+					<tr style="text-decoration: underline;">
 						<td></td>
-						<td>Name</td>
-						<td>Last name</td>
-						<td>Login</td>
-						<td>Password</td>
-						<td>Super</td>
+						<td><strong>Name</strong></td>
+						<td><strong>Last name</strong></td>
+						<td><strong>Login</strong></td>
+						<td><strong>Password</strong></td>
+						<td><strong>Super</strong></td>
 					</tr>
 					
 					<%for (int i=0; i< adminsTable.size(); i++){
@@ -268,6 +303,7 @@ if (strModAdmin!=null){
 			</table>
 			
 			<input type="hidden" name="adminForm" value="1">
+			<input type="hidden" name="adminMod" value="">
 			<input type="hidden" name="modAdmin" value="2">
 			</form>		
 		</div>
@@ -279,9 +315,31 @@ if (strModAdmin!=null){
 		
 		
 		<%
-		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("2"))){			
+		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("2"))){	
 		%>
 
+			<%if(fieldsFilligExeption.equals("1")){%>
+			
+				<div id="parent_popup">
+				  <div id="popup">
+				    <p> All fields must be filled out!</p>
+				    <p  style="cursor: pointer; font-weight: bold;" onclick="document.getElementById('parent_popup').style.display='none';">Close</p>
+				  </div>
+				</div>
+			
+			<%}%>	
+			
+			<%if(loginIsFree.equals("2")){%>
+			
+				<div id="parent_popup">
+				  <div id="popup">
+				    <p> The login already has an account under a different administrator name!</p>
+				    <p  style="cursor: pointer; font-weight: bold;" onclick="document.getElementById('parent_popup').style.display='none';">Close</p>
+				  </div>
+				</div>
+			
+			<%}%>	
+		
 		<div id="head">
 			<table width="100%">
 				<td align="left" width="250"><font color="white"> <strong>
@@ -350,16 +408,15 @@ if (strModAdmin!=null){
 					</tr>
 					<tr>	
 						<th align="left">
-						<%if (strChecked=="1") {%>
-							Super admin: <input type="checkbox" value = "1"  checked name="oldSuperAdmin" style="width: 11%;">
-						<%}else {%>
-							Super admin: <input type="checkbox" value = "1"  name="oldSuperAdmin" style="width: 11%;">
-						<%} %>	
+							Super admin: <input type="checkbox" value = "1"  <%if (strChecked.equals("1")) {%> checked <%} %> name="oldSuperAdmin" style="width: 11%;">
 						</th>
 					</tr>
 																
+ 					<input type="hidden" name="oldIdAdmin" value=<%=Integer.toString(strModAdmin.idAdmin)%>> 
 					<input type="hidden" name="adminForm" value="1">
-					<input type="hidden" name="newAdmin" value="3">
+					<input type="hidden" name="modAdmin" value="3">
+					<input type="hidden" name="fieldsFilligExeption" value="">
+					<input type="hidden" name="loginIsFree" value="">
 															
 					<tr>
 						<td align="right">
@@ -367,7 +424,7 @@ if (strModAdmin!=null){
 						</td>
 					</tr>
 				 </form>
-				
+				 
 			</table>		
 		</div>
 		
@@ -375,6 +432,7 @@ if (strModAdmin!=null){
 		
 		
 		
+				
 		
 		
 <!-- 		 Блок работы с созданием нового админа -->
@@ -750,7 +808,7 @@ if (strModAdmin!=null){
 		<br>
 		<br>
 		
-		<table width="300" cellpadding="15"  align="center" cellspacing=0>
+		<table width="300" cellpadding="15"  align="center" cellspacing=0 style="color: black">
 		
 			
 			<form method="post" action="Admin">
