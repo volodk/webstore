@@ -20,6 +20,7 @@ String fieldsFilligExeption = (String)request.getAttribute("fieldsFilligExeption
 String loginIsFree = (String)request.getAttribute("loginIsFree");
 String adminReg = (String)request.getAttribute("adminReg");
 String adminUpd = (String)request.getAttribute("adminUpd");
+String deleteAdmin = (String)request.getAttribute("deleteAdmin");
 
 AdminsInfo strModAdmin = new AdminsInfo();
 strModAdmin = (AdminsInfo)session.getAttribute("strModAdmin");
@@ -73,6 +74,9 @@ if (strModAdmin!=null){
 	if (adminUpd == null) {
 		adminUpd = "";
 }
+	if (deleteAdmin== null) {
+		deleteAdmin = "";
+}	
 	
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -95,7 +99,7 @@ if (strModAdmin!=null){
    }
    #menu { /* Левая колонка */
     float: left; /* Обтекание справа */
-    width: 190px; /* Ширина колонки */
+    width: 200px; /* Ширина колонки */
     padding: 5px; /* Поля вокруг текста */
     margin: 10px 10px 20px 5px; /* Значения отступов */
    }
@@ -210,6 +214,28 @@ if (strModAdmin!=null){
 				</div>
 			
 		<%}%>	
+		
+		<%if(deleteAdmin.equals("sucessfull")){%>
+			
+				<div id="parent_popup">
+				  <div id="popup">
+				    <p> Admin deleted sucessfully!</p>
+				    <p  style="cursor: pointer; font-weight: bold;" onclick="document.getElementById('parent_popup').style.display='none';">Close</p>
+				  </div>
+				</div>
+			
+		<%}%>	
+		
+		<%if(deleteAdmin.equals("error")){%>
+			
+				<div id="parent_popup">
+				  <div id="popup">
+				    <p> Error deleting admin!</p>
+				    <p  style="cursor: pointer; font-weight: bold;" onclick="document.getElementById('parent_popup').style.display='none';">Close</p>
+				  </div>
+				</div>
+			
+		<%}%>	
 			
 		<div id="head">
 			<table width="100%">
@@ -236,7 +262,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
@@ -249,7 +275,7 @@ if (strModAdmin!=null){
 		</div>
 		
 		<div id="content">
-			<form method="post" action="Admin">
+			<form method="post" action="Admin" onsubmit='return confirm("Confirm?");'>
 			<table align="left" width="600" cellpadding="10" cellspacing=0>
 					<tr style="text-decoration: underline;">
 						<td></td>
@@ -295,9 +321,10 @@ if (strModAdmin!=null){
 					<td style="border-style: hidden;">
 					</td>
 					<td style="border-style: hidden;">
+					<input align="right" type="submit" value="Delete" name="deleteAdmin">
 					</td>
 					<td style="border-style: hidden;">
-					<input align="right" type="submit" value="Edit">
+					<input align="right" type="submit" value="Edit" name="editAdmin">
 					</td>
 				</tr>																					
 			</table>
@@ -305,6 +332,8 @@ if (strModAdmin!=null){
 			<input type="hidden" name="adminForm" value="1">
 			<input type="hidden" name="adminMod" value="">
 			<input type="hidden" name="modAdmin" value="2">
+			<input type="hidden" name="deleteAdmin" value="">
+			
 			</form>		
 		</div>
 		
@@ -365,7 +394,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
@@ -465,7 +494,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
@@ -566,7 +595,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
@@ -636,7 +665,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
@@ -707,7 +736,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
@@ -778,7 +807,7 @@ if (strModAdmin!=null){
 				<a href="Admin?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrator profile</a>
+				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>

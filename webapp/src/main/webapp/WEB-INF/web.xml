@@ -13,6 +13,11 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<context-param>
+    	<param-name>path_to_image</param-name>
+    	<param-value>/images</param-value>
+  	</context-param>
+	
 	<servlet>
         <servlet-name>Main</servlet-name>
         <servlet-class>webapp.Main</servlet-class>

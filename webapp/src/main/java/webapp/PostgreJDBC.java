@@ -218,6 +218,43 @@ public class PostgreJDBC {
 	   
 	   
 	   
+	   
+	   public static Boolean CheckLoginAdminForUpdate(String login, String idAdmin, Connection connection)
+	   {
+		 Statement stmt = null;
+		 int rowCount = 0;
+		 String quer="";
+		 		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"AdminName\" FROM \"Admins\" Where \"AdminLogin\" = '";
+         quer = quer.concat(login);
+         quer = quer.concat("' AND \"id_admin\" <> '");
+         quer = quer.concat(idAdmin);
+         quer = quer.concat("';");
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while (rs.next() ) {
+             rowCount++;
+          }
+          rs.close();
+          stmt.close();
+                  
+	       } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	         return null;
+	       }
+	       if (rowCount > 0){
+	    	   return false;
+	       }
+	       else {return true;	   
+	       }
+	     }
+	   
+	   
+	   
+	   
 	   public static Boolean AddNewUser(String userName, String userLastName, String mail, String userLogin, String userPassword, String userBonusCard, Connection connection)
 	   {
 		 Statement stmt = null;
@@ -365,5 +402,34 @@ public class PostgreJDBC {
 	}
 	return true;
 	}
+	
+	
+	
+	
+	 public static Boolean DeleteAdmin(int idAdmin, Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		
+		 try {
+       stmt = connection.createStatement();
+       
+             
+       quer = "DELETE FROM \"Admins\" WHERE id_admin = '";
+       quer = quer.concat(Integer.toString(idAdmin));
+       quer = quer.concat("';");
+       
+       stmt.execute(quer);
+       stmt.close();
+        
+     } catch ( Exception e ) {
+       System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+       return false;
+     }
+     return true;
+   }
+	
+	
+	
 
 }	   

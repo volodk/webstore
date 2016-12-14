@@ -41,6 +41,7 @@ public class Admin extends HttpServlet {
 				
 				String newAdmin = req.getParameter("newAdmin");
 				String modAdmin = req.getParameter("modAdmin");
+				String deleteAdmin = req.getParameter("deleteAdmin");
 				String newAdminName = req.getParameter("newAdminName");
 				String newAdminLastName = req.getParameter("newAdminLastName");
 				String newAdminLogin = req.getParameter("newAdminLogin");
@@ -53,7 +54,7 @@ public class Admin extends HttpServlet {
 				String oldAdminPassword = req.getParameter("oldAdminPassword");
 				String oldSuperAdmin = req.getParameter("oldSuperAdmin");
 				String oldIdAdmin = req.getParameter("oldIdAdmin");
-				
+								
 				String login = req.getParameter("login");
 				String password = req.getParameter("password");
 				
@@ -68,8 +69,9 @@ public class Admin extends HttpServlet {
 				String fieldsFilligExeption = "";
 				Boolean adminIsRegistered;
 				Boolean adminIsUpdated;
+				Boolean adminIsDeleted;
 				Integer checkAdminInt = null;
-								
+							
 				ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>();
 				AdminsInfo strModAdmin = new AdminsInfo();
 				
@@ -144,7 +146,7 @@ public class Admin extends HttpServlet {
 					/*проверим логин*/
 					else if (conDB!=null){
 						logIsFree = false;
-						logIsFree = PostgreJDBC.CheckLoginAdmin(oldAdminLogin, conDB);
+						logIsFree = PostgreJDBC.CheckLoginAdminForUpdate(oldAdminLogin, oldIdAdmin, conDB);
 						
 						if (logIsFree==true){
 							loginIsFree = "1";
@@ -153,7 +155,10 @@ public class Admin extends HttpServlet {
 							}
 							adminIsUpdated = PostgreJDBC.UpdateAdmin(oldAdminName, oldAdminLastName, oldAdminLogin, oldAdminPassword, oldSuperAdmin, oldIdAdmin, conDB);
 							if(adminIsUpdated == true){
-								req.setAttribute("adminUpd", "1");}
+								req.setAttribute("adminUpd", "1");
+								/*перечитаем таблицу с инфо админов админов*/
+								adminsTable = PostgreJDBC.GetAdminsInfo(conDB);
+								session.setAttribute("adminsTable", adminsTable);}
 							else{
 								req.setAttribute("adminUpd", "");
 							}
@@ -176,12 +181,30 @@ public class Admin extends HttpServlet {
 				/*Если это выбор админа для редактирования*/
 				}else if (modAdmin.equals("2") & (checkAdmin!=null)){
 					strModAdmin = adminsTable.get(checkAdminInt.intValue());
+					if (deleteAdmin!=null & !deleteAdmin.equals("")){
+						adminIsDeleted = PostgreJDBC.DeleteAdmin(strModAdmin.idAdmin, conDB);
+						if(adminIsDeleted==true){
+							req.setAttribute("modAdmin", "1");	
+							req.setAttribute("deleteAdmin", "sucessfull");
+							req.setAttribute("adminForm", adminForm);
+							/*перечитаем таблицу с инфо админов админов*/
+							adminsTable = PostgreJDBC.GetAdminsInfo(conDB);
+							session.setAttribute("adminsTable", adminsTable);
+							}else{
+								req.setAttribute("modAdmin", "1");	
+								req.setAttribute("deleteAdmin", "error");
+								req.setAttribute("adminForm", adminForm);	
+							}
+					}else{
+						
+					strModAdmin = adminsTable.get(checkAdminInt.intValue());
 					
 					session.setAttribute("strModAdmin", strModAdmin);
 					req.setAttribute("modAdmin", modAdmin);	
-					req.setAttribute("adminForm", adminForm);
-					req.getRequestDispatcher("Admin.jsp").forward(req, resp);	
-				
+					req.setAttribute("adminForm", adminForm);						
+					}
+					
+					req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 					
 									
 				/*Если это выбор меню редактирования админов*/
