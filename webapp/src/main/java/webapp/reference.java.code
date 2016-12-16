@@ -8,11 +8,11 @@ public List<AdminsInfo> GetAdminsInfo(Connection connection) {	// Good !! do not
 					AdminsInfo info = new AdminsInfo();
 					
 					info.setIdAdmin(rs.getInt("id_admin"));
-		        	info.setAdminName(rs.getString("AdminName"));
-		        	info.setAdminLsatName(rs.getString("AdminLastName"));
-		        	info.setAdminLogin(rs.getString("AdminLogin"));
-		        	info.setAdminPassword(rs.getString("AdminPassword"));
-		        	info.setSuperAdmin(rs.getInt("SuperAdmin"));
+		        		info.setAdminName(rs.getString("AdminName"));
+		        		info.setAdminLsatName(rs.getString("AdminLastName"));
+		        		info.setAdminLogin(rs.getString("AdminLogin"));
+		        		info.setAdminPassword(rs.getString("AdminPassword"));
+		        		info.setSuperAdmin(rs.getInt("SuperAdmin"));
 		        						
 					results.add(info);
 				}
