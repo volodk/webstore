@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Auth extends HttpServlet {
+public class AuthenticationPageServlet extends HttpServlet {
 			 
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,8 @@ public class Auth extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
 		 	
-			req.getRequestDispatcher("Authentication.jsp").forward(req, resp);
+			req.getRequestDispatcher("authentication.jsp").forward(req, resp);
     }
+
  
 }

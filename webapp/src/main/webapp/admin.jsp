@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="webapp.AdminsInfo" %>
+<%@ page import="java.util.ArrayList" 
+		 import="java.util.List"%>
+<%@ page import="webapp.Admin" %>
 	
 	
 <%
-AdminsInfo strAdmins = new AdminsInfo();
+Admin strAdmins = new Admin();
 
 String adminForm = (String)request.getAttribute("adminForm");
 String adminName = (String)session.getAttribute("adminName");
@@ -22,10 +23,11 @@ String adminReg = (String)request.getAttribute("adminReg");
 String adminUpd = (String)request.getAttribute("adminUpd");
 String deleteAdmin = (String)request.getAttribute("deleteAdmin");
 
-AdminsInfo strModAdmin = new AdminsInfo();
-strModAdmin = (AdminsInfo)session.getAttribute("strModAdmin");
+Admin strModAdmin = new Admin();
+strModAdmin = (Admin)session.getAttribute("strModAdmin");
 
-ArrayList<AdminsInfo> adminsTable = (ArrayList<AdminsInfo>)session.getAttribute("adminsTable");
+List<Admin> adminsTable = new ArrayList<Admin>();
+adminsTable = (List<Admin>)session.getAttribute("adminsTable");
 
 String strChecked = "0";
 
@@ -176,7 +178,7 @@ if (strModAdmin!=null){
 			<br>
 			<br>
 			<br>			
-			<form method="post" action="Admin">
+			<form method="post" action="AdminPageServlet">
 						
 				<tr bgcolor=#bfbfbf>
 					<th align="ctnter">
@@ -250,7 +252,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -259,23 +261,23 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		
 		<div id="content">
-			<form method="post" action="Admin" onsubmit='return confirm("Confirm?");'>
+			<form method="post" action="AdminPageServlet" onsubmit='return confirm("Confirm?");'>
 			<table align="left" width="600" cellpadding="10" cellspacing=0>
 					<tr style="text-decoration: underline;">
 						<td></td>
@@ -382,7 +384,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -391,24 +393,24 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		
 		<div id="content">
 			<table align="left" width="400" cellpadding="10" cellspacing=0>
-				<form method="post" action="Admin">
+				<form method="post" action="AdminPageServlet">
 					<tr>
 						<th align="center">
 							<font size="4"> Modification form</font>
@@ -482,7 +484,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -491,24 +493,24 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		
 		<div id="content">
 			<table align="left" width="400" cellpadding="10" cellspacing=0>
-				<form method="post" action="Admin">
+				<form method="post" action="AdminPageServlet">
 					<tr>
 						<th align="center">
 							<font size="4"> Registration form</font>
@@ -583,7 +585,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -592,24 +594,24 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		
 		<div id="content">
 			<table align="left" width="100%" cellpadding="10" cellspacing=0>
-				<form method="post" action="Admin">
+				<form method="post" action="AdminPageServlet">
 					<tr>
 						<th align="left">
 							<font size="4"> All fields marked with (*) must be filled out!</font>
@@ -653,7 +655,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -662,24 +664,24 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AAdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		
 		<div id="content">
 			<table align="left" width="100%" cellpadding="10" cellspacing=0>
-				<form method="post" action="Admin">
+				<form method="post" action="AdminPageServlet">
 					<tr>
 						<th align="left">
 							<font size="4"> The login already has an account under a different administrator name!</font>
@@ -724,7 +726,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -733,24 +735,24 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		
 		<div id="content">
 			<table align="left" width="100%" cellpadding="10" cellspacing=0>
-				<form method="post" action="Admin">
+				<form method="post" action="AdminPageServlet">
 					<tr>
 						<th align="left">
 							<font size="4"> Successfully registered!</font>
@@ -795,7 +797,7 @@ if (strModAdmin!=null){
 					</strong>
 				</font></td>
 
-				<td align="right"><a href="Main?exit=1"
+				<td align="right"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 			</table>
 
@@ -804,18 +806,18 @@ if (strModAdmin!=null){
 		<div id="menu" align="left">
 			<%if (superAdmin.equals("1")) {%>
 			<div>
-				<a href="Admin?newAdmin=1">Create new administrator</a>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
 			</div>
 			<div>
-				<a href="Admin?modAdmin=1">Modify administrators profiles</a>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
 			</div>
 			<div class="line"></div>
 			<%}%>
 			<div>
-				<a href="Admin?newGood=1">Add new good</a>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
 			</div>			
 			<div>
-				<a href="Admin?modGood=1">Modify goods</a>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
 			</div>
 		</div>
 		<div id="content" >
@@ -840,7 +842,7 @@ if (strModAdmin!=null){
 		<table width="300" cellpadding="15"  align="center" cellspacing=0 style="color: black">
 		
 			
-			<form method="post" action="Admin">
+			<form method="post" action="AdminPageServlet">
 				<tr bgcolor=#bfbfbf>
 					<th align="left">
 						Login: <input type="text" name="login" size=28>

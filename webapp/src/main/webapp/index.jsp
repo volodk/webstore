@@ -224,22 +224,22 @@ section {
 			<tr>
 				<td width="150" ></td>
 	
-				<td align="left" width="80" ><a href="About.jsp"
+				<td align="left" width="80" ><a href="about.jsp"
 					style="text-decoration: underline;"> About us </a></td>
-				<td align="left" width="70"><a href="Delivery.jsp"
+				<td align="left" width="70"><a href="delivery.jsp"
 					style="text-decoration: underline;"> Delivery </a></td>
-				<td align="left" width="70"><a href="Contacts.jsp"
+				<td align="left" width="70"><a href="contacts.jsp"
 					style="text-decoration: underline;"> Contacts </a></td>
 				<td></td>
 				
 				<%
 				if (userName.equals("")|(userName.equals(null))) {
 				%>
-				<td align="right" width="60"><a href="Auth"
+				<td align="right" width="60"><a href="AuthenticationPageServlet"
 					style="text-decoration: underline;"> Entry </a></td>
 				<td width="15"></td>
 				
-				<td align="right" width="60"><a href="Reg"
+				<td align="right" width="60"><a href="RegistrationPageServlet"
 					style="text-decoration: underline;"> Registration </a></td>
 				<td width="150"></td>
 				<%
@@ -254,10 +254,10 @@ section {
 					</font>
 				</td>
 								
-				<td align="right" width="60"><a href="Main?exit=1"
+				<td align="right" width="60"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 								
-				<td align="right" width="80"><a href="Reg"
+				<td align="right" width="80"><a href="RegistrationPageServlet"
 					style="text-decoration: underline;"> My profile </a></td>
 				<td width="150" ></td>										
                 <%
@@ -273,7 +273,7 @@ section {
 			<!-- Second row-->
 			<tr>
 				<td width="150" ></td>
-				<td align="left" width="131" height="135"><a href="Main"
+				<td align="left" width="131" height="135"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> <img alt=""
 						src="Logo/logo_trans.png" border="0">
 				</a></td>
@@ -289,7 +289,7 @@ section {
 					</form> 
 				</td>
 				<td></td>
-				<td align="left" width="100" ><a href="Basket.jsp"
+				<td align="left" width="100" ><a href="basket.jsp"
 					style="text-decoration: none; color:#6bc413"> <img alt=""
 						src="Images/basket_35.png" border="0"> Basket
 				</a></td>

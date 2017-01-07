@@ -52,7 +52,7 @@
 			<br>
 			<br>
 			<br>			
-			<form method="post" action="Auth">
+			<form method="post" action="AuthenticationPageServlet">
 						
 				<tr bgcolor=#dff7cd>
 					<th align="ctnter">
@@ -82,7 +82,7 @@
 			<br>
 			<br>
 			
-			<form method="post" action="Main">
+			<form method="post" action="MainPageServlet">
 				<tr bgcolor=#dff7cd>
 					<th align="left">
 						Login: <input type="text" name="login" size=28>
@@ -103,7 +103,7 @@
 					</td>
 				</tr>
 			 </form>
-			 <form method="post" action="Main">
+			 <form method="post" action="MainPageServlet">
 				<tr bgcolor=#dff7cd align="right">
 					<th align="right">
 						<input type="image" src="Images/back.png">

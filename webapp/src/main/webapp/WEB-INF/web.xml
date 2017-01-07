@@ -19,45 +19,46 @@
   	</context-param>
 	
 	<servlet>
-        <servlet-name>Main</servlet-name>
-        <servlet-class>webapp.Main</servlet-class>
+        <servlet-name>MainPageServlet</servlet-name>
+        <servlet-class>webapp.MainPageServlet</servlet-class>
     </servlet> 
    
     <servlet>    
-        <servlet-name>Auth</servlet-name>
-        <servlet-class>webapp.Auth</servlet-class>
+        <servlet-name>AuthenticationPageServlet</servlet-name>
+        <servlet-class>webapp.AuthenticationPageServlet</servlet-class>
     </servlet>
    
    <servlet>    
-        <servlet-name>Reg</servlet-name>
-        <servlet-class>webapp.Reg</servlet-class>
+        <servlet-name>RegistrationPageServlet</servlet-name>
+        <servlet-class>webapp.RegistrationPageServlet</servlet-class>
     </servlet>
     
     <servlet>    
-        <servlet-name>Admin</servlet-name>
-        <servlet-class>webapp.Admin</servlet-class>
+        <servlet-name>AdminPageServlet</servlet-name>
+        <servlet-class>webapp.AdminPageServlet</servlet-class>
+
     </servlet>
     
     
     
     <servlet-mapping>
-        <servlet-name>Main</servlet-name>
-        <url-pattern>/Main</url-pattern>
+        <servlet-name>MainPageServlet</servlet-name>
+        <url-pattern>/MainPageServlet</url-pattern>
     </servlet-mapping>
    
     <servlet-mapping>
-        <servlet-name>Auth</servlet-name>
-        <url-pattern>/Auth</url-pattern>
+        <servlet-name>AuthenticationPageServlet</servlet-name>
+        <url-pattern>/AuthenticationPageServlet</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>Reg</servlet-name>
-        <url-pattern>/Reg</url-pattern>
+        <servlet-name>RegistrationPageServlet</servlet-name>
+        <url-pattern>/RegistrationPageServlet</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>Admin</servlet-name>
-        <url-pattern>/Admin</url-pattern>
+        <servlet-name>AdminPageServlet</servlet-name>
+        <url-pattern>/AdminPageServlet</url-pattern>
     </servlet-mapping>
    
     

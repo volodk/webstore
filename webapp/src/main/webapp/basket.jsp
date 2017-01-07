@@ -56,7 +56,7 @@
 	<br>
 	<center>
 		<b>
-			<a href = "Index.jsp" > Back to home page </a>
+			<a href = "index.jsp" > Back to home page </a>
 		</b>
 	</center>
 	

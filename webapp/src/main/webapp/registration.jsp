@@ -70,7 +70,7 @@
 				<br>
 				<br>
 				
-				<form method="post" action="Reg">
+				<form method="post" action="RegistrationPageServlet">
 					
 					<tr bgcolor=#dff7cd>
 						<th align="ctnter"> 
@@ -101,7 +101,7 @@
 					<br>
 					<br>
 					
-					<form method="post" action="Reg">
+					<form method="post" action="RegistrationPageServlet">
 						
 						<tr bgcolor=#dff7cd>
 							<th align="ctnter"> 
@@ -134,7 +134,7 @@
 					<br>
 					<br>
 					
-					<form method="post" action="Main">
+					<form method="post" action="MainPageServlet">
 						
 						<tr bgcolor=#dff7cd>
 							<th align="ctnter"> 
@@ -168,7 +168,7 @@
 				<br>
 				<br>
 				
-				<form method="post" action="Main">
+				<form method="post" action="MainPageServlet">
 					<tr bgcolor=#dff7cd>
 						<th align="center">
 							<font size="4"> Registration form</font>
@@ -221,7 +221,7 @@
 						</td>
 					</tr>
 				 </form>
-				 <form method="post" action="Main">
+				 <form method="post" action="MainPageServlet">
 					<tr bgcolor=#dff7cd align="right">
 						<th align="right">
 							<input type="image" src="Images/back.png">

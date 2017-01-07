@@ -3,15 +3,20 @@ package webapp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.ArrayList;
-import webapp.AdminsInfo;
+import java.util.Collections;
+/*import com.sun.javafx.*;*/
 
-import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory;
+import webapp.Admin;
 
-public class PostgreJDBC {
+/*import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory;*/
+
+public class DataBase {
 			
-	   public static Connection getConnectionPG() {
+	   public Connection getConnectionPostgresql() {
 	      Connection c = null;
 	      try {
 	         Class.forName("org.postgresql.Driver");
@@ -27,7 +32,7 @@ public class PostgreJDBC {
 	
 
 
-	   public static String[] GetUserInfo(String login,  String password, Connection connection)
+	   public String[] getUserInfo(String login,  String password, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -69,7 +74,7 @@ public class PostgreJDBC {
 	   
 	   
 	   
-	   public static String[] GetAdminInfo(String login,  String password, Connection connection)
+	   public String[] getAdminInfo(String login,  String password, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -113,46 +118,43 @@ public class PostgreJDBC {
 	   
 	   
 	   
-	   public static ArrayList<AdminsInfo> GetAdminsInfo(Connection connection)
+	   public List<Admin> getAllAdminsInfo(Connection connection)
 	   {
-		 Statement stmt = null;
-		 String quer="";
-		 ArrayList<AdminsInfo> adminsTable = new ArrayList<AdminsInfo>();
-		 
+		 List<Admin> adminsTable = new ArrayList<>();
+		 String query="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", \"id_admin\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
 		 		 		
 		 try {
-         stmt = connection.createStatement();
+			 try (Statement stmt = connection.createStatement()){
+				 try (ResultSet rs = stmt.executeQuery(query)){
+			 	
+					 while ( rs.next()) {
+						 Admin strAdminInfo = new Admin();
+		        	 
+			        	 strAdminInfo.adminName = rs.getString("AdminName");
+			        	 strAdminInfo.adminLsatName = rs.getString("AdminLastName");
+			        	 strAdminInfo.adminLogin= rs.getString("AdminLogin");
+			        	 strAdminInfo.adminPassword = rs.getString("AdminPassword");
+			        	 strAdminInfo.superAdmin = rs.getInt("SuperAdmin");
+			        	 strAdminInfo.idAdmin = rs.getInt("id_admin");
+			        	 
+			        	 adminsTable.add(strAdminInfo);
+					 }
+				 }	 
+			 }
          
-         quer="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", \"id_admin\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
-         
-         ResultSet rs = stmt.executeQuery(quer);
-         while ( rs.next() ) {
-        	AdminsInfo strAdminInfo = new AdminsInfo();
-        	 
-        	strAdminInfo.adminName = rs.getString("AdminName");
-        	strAdminInfo.adminLsatName = rs.getString("AdminLastName");
-        	strAdminInfo.adminLogin= rs.getString("AdminLogin");
-        	strAdminInfo.adminPassword = rs.getString("AdminPassword");
-        	strAdminInfo.superAdmin = rs.getInt("SuperAdmin");
-        	strAdminInfo.idAdmin = rs.getInt("id_admin");
-        	adminsTable.add(strAdminInfo);
-         }
-         rs.close();
-         stmt.close();
-         
-       } catch ( Exception e ) {
-         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-         return null;
-       }
-       return adminsTable;
-     } 
+		 } catch ( SQLException e ) {
+			 e.printStackTrace();
+			 return Collections.emptyList();
+		 }
+		 return adminsTable;
+	   } 
 	   
 	   
 	   
 	   
 	   
 	   
-	   public static Boolean CheckLogin(String login, Connection connection)
+	   public Boolean checkLogin(String login, Connection connection)
 	   {
 		 Statement stmt = null;
 		 int rowCount = 0;
@@ -185,7 +187,7 @@ public class PostgreJDBC {
 	   
 	   
 	   
-	   public static Boolean CheckLoginAdmin(String login, Connection connection)
+	   public Boolean checkAdminLogin(String login, Connection connection)
 	   {
 		 Statement stmt = null;
 		 int rowCount = 0;
@@ -219,7 +221,7 @@ public class PostgreJDBC {
 	   
 	   
 	   
-	   public static Boolean CheckLoginAdminForUpdate(String login, String idAdmin, Connection connection)
+	   public Boolean checkAdminLoginForUpdate(String login, String idAdmin, Connection connection)
 	   {
 		 Statement stmt = null;
 		 int rowCount = 0;
@@ -255,7 +257,7 @@ public class PostgreJDBC {
 	   
 	   
 	   
-	   public static Boolean AddNewUser(String userName, String userLastName, String mail, String userLogin, String userPassword, String userBonusCard, Connection connection)
+	   public Boolean addNewUser(String userName, String userLastName, String mail, String userLogin, String userPassword, String userBonusCard, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -313,7 +315,7 @@ public class PostgreJDBC {
 	   
 	   
 	   
-	   public static Boolean AddNewAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, Connection connection)
+	   public Boolean addNewAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -369,7 +371,7 @@ public class PostgreJDBC {
 
 
 
-	public static Boolean UpdateAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, String idAdmin, Connection connection)
+	public Boolean updateAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, String idAdmin, Connection connection)
 	{
 		 Statement stmt = null;
 		 String quer="";
@@ -406,7 +408,7 @@ public class PostgreJDBC {
 	
 	
 	
-	 public static Boolean DeleteAdmin(int idAdmin, Connection connection)
+	 public Boolean deleteAdmin(int idAdmin, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";

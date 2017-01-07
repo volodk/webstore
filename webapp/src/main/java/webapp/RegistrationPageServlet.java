@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Reg extends HttpServlet {
+public class RegistrationPageServlet extends HttpServlet {
 			 
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class Reg extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
 		 	
-			req.getRequestDispatcher("Registration.jsp").forward(req, resp);
+			req.getRequestDispatcher("registration.jsp").forward(req, resp);
     }
  
 }
