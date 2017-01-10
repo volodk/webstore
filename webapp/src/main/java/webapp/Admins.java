@@ -1,6 +1,6 @@
 package webapp;
 
-public class Admin {
+public class Admins {
 	public String adminName;
 	public String adminLsatName;
 	public String adminLogin;

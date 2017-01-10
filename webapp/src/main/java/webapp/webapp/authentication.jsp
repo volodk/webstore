@@ -9,27 +9,12 @@
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<style type="text/css">
-   TABLE {
-    border: 3px solid black; /* Рамка вокруг таблицы */
-   }
- </style>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Login form</title>
-	
-	<style>
-		body {
-			background-image: url(backgrounds/texture3.jpg);
-			background-attachment: fixed;
-			background-position: center;
-				
-		}
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/authentication.css">
+		<title>Login form</title>	
 		
-		a{text-decoration: none
-		}
-	</style>
-</head>
+	</head>
 
 
 <body>

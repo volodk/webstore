@@ -3,11 +3,11 @@
 	
 <%@ page import="java.util.ArrayList" 
 		 import="java.util.List"%>
-<%@ page import="webapp.Admin" %>
+<%@ page import="webapp.Admins" %>
 	
 	
 <%
-Admin strAdmins = new Admin();
+Admins strAdmins = new Admins();
 
 String adminForm = (String)request.getAttribute("adminForm");
 String adminName = (String)session.getAttribute("adminName");
@@ -23,11 +23,11 @@ String adminReg = (String)request.getAttribute("adminReg");
 String adminUpd = (String)request.getAttribute("adminUpd");
 String deleteAdmin = (String)request.getAttribute("deleteAdmin");
 
-Admin strModAdmin = new Admin();
-strModAdmin = (Admin)session.getAttribute("strModAdmin");
+Admins strModAdmin = new Admins();
+strModAdmin = (Admins)session.getAttribute("strModAdmin");
 
-List<Admin> adminsTable = new ArrayList<Admin>();
-adminsTable = (List<Admin>)session.getAttribute("adminsTable");
+List<Admins> adminsTable = new ArrayList<Admins>();
+adminsTable = (List<Admins>)session.getAttribute("adminsTable");
 
 String strChecked = "0";
 
@@ -85,77 +85,10 @@ if (strModAdmin!=null){
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/admin.css">
+	
 	<title>Admin page</title>
 	
-	<style type="text/css">
-    body {
-    background-image: url(backgrounds/fon2.jpg);
-	background-attachment: fixed;
-	background-position: center;
-	color: white;
-    font-family: Arial, Helvetica, sans-serif; /* Рубленый шрифт текста */
-    margin: 0; /* Обнуляем отступы браузера */
-   }
-    #head { /* Верхний блок */
-     padding: 10px; /* Поля вокруг */
-   }
-   #menu { /* Левая колонка */
-    float: left; /* Обтекание справа */
-    width: 200px; /* Ширина колонки */
-    padding: 5px; /* Поля вокруг текста */
-    margin: 10px 10px 20px 5px; /* Значения отступов */
-   }
-   #menu div {
-    padding: 2px; /* Поля вокруг ссылок */
-   }
-   #menu a { 
-    display: block; /* Отображать ссылку как блок */
-    padding: 2px; /* Поля вокруг ссылок */
-    margin: 1px; /* Отступы вокруг */
-    font-size: 0.9em; /* Размер текста */
-    text-decoration: none; /* Убираем подчеркивание текста */
-   }
-   #menu a:hover { 
-    background: #636363; /* Цвет фона */
-    border: 1px dashed #636363; /* Добавление пунктирной рамки */
-    margin: 0; /* Убираем поля */
-   }
-   #content { /* Правая колонка */
-    margin: 10px 5px 20px 225px; /* Значения отступов */        
-   }
-   .line {
-    border-bottom: 1px groove #D6D6D6; /* Линия между ссылками */
-   }
-     
-   #foot { /* Нижний блок */
-    background: #333; /* Цвет фона */
-    padding: 5px; /* Поля вокруг текста */
-    color: #fff; /* Цвет текста */
-    clear: both; /* Отменяем обтекание */
-    margin-top: 50%;
-   }
-   
-
-#parent_popup {
-  width:100%;
-    height: 2000px;
-    background-color: rgba(0,0,0,0.5);
-    overflow:hidden;
-    position:fixed;
-    top:0px;
-
-}
-#popup {
-  margin:40px auto 0px auto;
-    width:400px;
-    height: 80px;
-    color:black;
-    padding:10px;
-    background-color: #c5c5c5;
-    border-radius:5px;
-    box-shadow: 0px 0px 10px #000;
-  	
-	</style>
 	
 </head>
 

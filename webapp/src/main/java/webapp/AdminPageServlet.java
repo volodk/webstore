@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ArrayList;
 /*import java.util.function.ToIntFunction;*/
 
+
 public class AdminPageServlet extends HttpServlet {
 			 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public class AdminPageServlet extends HttpServlet {
 	            throws ServletException, IOException {
 				
 				DataBase dBClass = new DataBase();
+				Admins strModAdmin = new Admins();
 				
 				String adminForm = req.getParameter("adminForm");
 				
@@ -75,12 +77,11 @@ public class AdminPageServlet extends HttpServlet {
 				Boolean adminIsDeleted;
 				Integer checkAdminInt = null;
 							
-				List<Admin> adminsTable = new ArrayList<Admin>();
-				Admin strModAdmin = new Admin();
-				
+				List<Admins> adminsTable = new ArrayList<Admins>();
+												
 				HttpSession session = req.getSession();
 				String superAdmin = (String)session.getAttribute("superAdmin");
-				adminsTable = (List<Admin>)session.getAttribute("adminsTable");
+				adminsTable = (List<Admins>)session.getAttribute("adminsTable");
 				
 				/*определим newAdmin если он равен 0*/
 				if (newAdmin == null){
@@ -180,8 +181,8 @@ public class AdminPageServlet extends HttpServlet {
 				
 									
 					
-					/*	
-				Если это выбор админа для редактирования
+						
+				/*Если это выбор админа для редактирования*/
 				}else if (modAdmin.equals("2") & (checkAdmin!=null)){
 					strModAdmin = adminsTable.get(checkAdminInt.intValue());
 					if (deleteAdmin!=null & !deleteAdmin.equals("")){
@@ -190,7 +191,7 @@ public class AdminPageServlet extends HttpServlet {
 							req.setAttribute("modAdmin", "1");	
 							req.setAttribute("deleteAdmin", "sucessfull");
 							req.setAttribute("adminForm", adminForm);
-							перечитаем таблицу с инфо админов админов
+							/*перечитаем таблицу с инфо админов админов*/
 							adminsTable =dBClass.getAllAdminsInfo(conDB);
 							session.setAttribute("adminsTable", adminsTable);
 							}else{
@@ -210,9 +211,9 @@ public class AdminPageServlet extends HttpServlet {
 					req.getRequestDispatcher("admin.jsp").forward(req, resp);
 					
 									
-				Если это выбор меню редактирования админов
+				/*Если это выбор меню редактирования админов*/
 				}else if (modAdmin.equals("1")| ((modAdmin.equals("2") & (checkAdmin==null)))){
-					получим таблицу с логинами админов
+					/*получим таблицу с логинами админов*/
 					adminsTable = dBClass.getAllAdminsInfo(conDB);
 					
 					req.setAttribute("modAdmin", "1");
@@ -221,10 +222,10 @@ public class AdminPageServlet extends HttpServlet {
 					req.getRequestDispatcher("admin.jsp").forward(req, resp);
 					
 								
-				Если это регистрация нового админа
+				/*Если это регистрация нового админа*/
 				}else if (newAdmin.equals("2")){	
 
-					проверим заполненность полей
+					/*проверим заполненность полей*/
 					if(newAdminName.equals("") | newAdminLastName.equals("") | newAdminLogin.equals("") | newAdminLogin.equals("")){
 						fieldsFilligExeption = "1";
 						req.setAttribute("newAdmin", newAdmin);
@@ -233,7 +234,7 @@ public class AdminPageServlet extends HttpServlet {
 						req.getRequestDispatcher("admin.jsp").forward(req, resp);
 					}
 					
-					проверим логин
+					/*роверим логин*/
 					else if (conDB!=null){
 						logIsFree = false;
 						logIsFree = dBClass.checkAdminLogin(newAdminLogin, conDB);
@@ -267,12 +268,12 @@ public class AdminPageServlet extends HttpServlet {
 				}
 				
 				
-				PostgreJDBC.GetUserInfo(login, password, conDB);
+				dBClass.getUserInfo(login, password, conDB);
 				
 			try{
 				conDB.close();
 			} catch ( Exception e ) {
-				System.err.println( e.getClass().getName()+": "+ e.getMessage() );*/    
+				System.err.println( e.getClass().getName()+": "+ e.getMessage() );    
 			}
 			  
    }

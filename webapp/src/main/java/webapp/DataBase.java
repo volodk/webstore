@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 /*import com.sun.javafx.*;*/
 
-import webapp.Admin;
+import webapp.Admins;
 
 /*import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory;*/
 
@@ -118,9 +118,9 @@ public class DataBase {
 	   
 	   
 	   
-	   public List<Admin> getAllAdminsInfo(Connection connection)
+	   public List<Admins> getAllAdminsInfo(Connection connection)
 	   {
-		 List<Admin> adminsTable = new ArrayList<>();
+		 List<Admins> adminsTable = new ArrayList<>();
 		 String query="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", \"id_admin\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
 		 		 		
 		 try {
@@ -128,7 +128,7 @@ public class DataBase {
 				 try (ResultSet rs = stmt.executeQuery(query)){
 			 	
 					 while ( rs.next()) {
-						 Admin strAdminInfo = new Admin();
+						 Admins strAdminInfo = new Admins();
 		        	 
 			        	 strAdminInfo.adminName = rs.getString("AdminName");
 			        	 strAdminInfo.adminLsatName = rs.getString("AdminLastName");
