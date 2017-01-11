@@ -1,13 +1,10 @@
 package webapp;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
-/*import javax.websocket.Session;*/
-
-/*import org.w3c.dom.ls.LSInput;*/
-
-/*import com.sun.corba.se.impl.ior.GenericTaggedComponent;*/
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +12,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 import java.util.ArrayList;
-/*import java.util.function.ToIntFunction;*/
 
 
 public class AdminPageServlet extends HttpServlet {
@@ -78,11 +74,13 @@ public class AdminPageServlet extends HttpServlet {
 				Integer checkAdminInt = null;
 							
 				List<Admins> adminsTable = new ArrayList<Admins>();
-												
+				
+				ServletContext sContext = getServletConfig().getServletContext();
+				
 				HttpSession session = req.getSession();
 				String superAdmin = (String)session.getAttribute("superAdmin");
-				adminsTable = (List<Admins>)session.getAttribute("adminsTable");
-				
+				adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
+											
 				/*определим newAdmin если он равен 0*/
 				if (newAdmin == null){
 					newAdmin="";
@@ -162,7 +160,7 @@ public class AdminPageServlet extends HttpServlet {
 								req.setAttribute("adminUpd", "1");
 							/*	перечитаем таблицу с инфо админов админов*/
 								adminsTable = dBClass.getAllAdminsInfo(conDB);
-								session.setAttribute("adminsTable", adminsTable);}
+								sContext.setAttribute("adminsTable", adminsTable);}
 							else{
 								req.setAttribute("adminUpd", "");
 							}
@@ -193,7 +191,7 @@ public class AdminPageServlet extends HttpServlet {
 							req.setAttribute("adminForm", adminForm);
 							/*перечитаем таблицу с инфо админов админов*/
 							adminsTable =dBClass.getAllAdminsInfo(conDB);
-							session.setAttribute("adminsTable", adminsTable);
+							sContext.setAttribute("adminsTable", adminsTable);
 							}else{
 								req.setAttribute("modAdmin", "1");	
 								req.setAttribute("deleteAdmin", "error");
@@ -203,7 +201,7 @@ public class AdminPageServlet extends HttpServlet {
 						
 					strModAdmin = adminsTable.get(checkAdminInt.intValue());
 					
-					session.setAttribute("strModAdmin", strModAdmin);
+					sContext.setAttribute("strModAdmin", strModAdmin);
 					req.setAttribute("modAdmin", modAdmin);	
 					req.setAttribute("adminForm", adminForm);						
 					}
@@ -218,7 +216,7 @@ public class AdminPageServlet extends HttpServlet {
 					
 					req.setAttribute("modAdmin", "1");
 					req.setAttribute("adminForm", adminForm);
-					session.setAttribute("adminsTable", adminsTable);
+					sContext.setAttribute("adminsTable", adminsTable);
 					req.getRequestDispatcher("admin.jsp").forward(req, resp);
 					
 								

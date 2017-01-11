@@ -24,10 +24,14 @@ String adminUpd = (String)request.getAttribute("adminUpd");
 String deleteAdmin = (String)request.getAttribute("deleteAdmin");
 
 Admins strModAdmin = new Admins();
-strModAdmin = (Admins)session.getAttribute("strModAdmin");
+ServletContext sContext = getServletConfig().getServletContext();
+/*strModAdmin = (Admins)session.getAttribute("strModAdmin");*/
+strModAdmin = (Admins)sContext.getAttribute("strModAdmin");
 
 List<Admins> adminsTable = new ArrayList<Admins>();
-adminsTable = (List<Admins>)session.getAttribute("adminsTable");
+/*adminsTable = (List<Admins>)session.getAttribute("adminsTable");*/
+adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
+
 
 String strChecked = "0";
 
