@@ -6,3 +6,4 @@ bin/
 
 # maven
 target/
+META-INF/
