@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+ body {
+    background-image: url(backgrounds/texture3.jpg);
+	background-attachment: fixed;
+	background-position: center;
+   }
+
+a{text-decoration: none
+	}
+
+TABLE {
+    border: 3px solid black; /*Рамка вокруг таблицы*/
+   }	 
