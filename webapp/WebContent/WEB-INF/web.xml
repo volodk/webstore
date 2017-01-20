@@ -20,22 +20,22 @@
 	
 	<servlet>
         <servlet-name>MainPageServlet</servlet-name>
-        <servlet-class>webapp.MainPageServlet</servlet-class>
+        <servlet-class>com.ksoft.MainPageServlet</servlet-class>
     </servlet> 
    
     <servlet>    
         <servlet-name>AuthenticationPageServlet</servlet-name>
-        <servlet-class>webapp.AuthenticationPageServlet</servlet-class>
+        <servlet-class>com.ksoft.AuthenticationPageServlet</servlet-class>
     </servlet>
    
    <servlet>    
         <servlet-name>RegistrationPageServlet</servlet-name>
-        <servlet-class>webapp.RegistrationPageServlet</servlet-class>
+        <servlet-class>com.ksoft.RegistrationPageServlet</servlet-class>
     </servlet>
     
     <servlet>    
         <servlet-name>AdminPageServlet</servlet-name>
-        <servlet-class>webapp.AdminPageServlet</servlet-class>
+        <servlet-class>com.ksoft.AdminPageServlet</servlet-class>
 
     </servlet>
     

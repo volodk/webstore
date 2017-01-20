@@ -1,4 +1,4 @@
-package webapp;
+package com.ksoft;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

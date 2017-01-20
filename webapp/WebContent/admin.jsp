@@ -3,7 +3,7 @@
 	
 <%@ page import="java.util.ArrayList" 
 		 import="java.util.List"%>
-<%@ page import="webapp.Admins" %>
+<%@ page import="com.ksoft.Admins" %>
 	
 	
 <%

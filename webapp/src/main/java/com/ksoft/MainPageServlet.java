@@ -1,4 +1,4 @@
-package webapp;
+package com.ksoft;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 /*import javax.websocket.Session;*/
 import java.io.IOException;
 import java.sql.Connection;
+
 
 public class MainPageServlet extends HttpServlet {
 			 

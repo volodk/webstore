@@ -1,4 +1,4 @@
-package webapp;
+package com.ksoft;
 
 public class Admins {
 	public String adminName;
