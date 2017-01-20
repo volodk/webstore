@@ -91,7 +91,7 @@
 			 <form method="post" action="MainPageServlet">
 				<tr bgcolor=#dff7cd align="right">
 					<th align="right">
-						<input type="image" src="Images/back.png">
+						<input type="image" src="images/back.png">
 					</th>
 				</tr>
 			</form>
