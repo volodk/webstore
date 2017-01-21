@@ -70,9 +70,7 @@
 								out.print(userName);
 							%>
 					</strong>
-				</font> <font color="gray"> (club card:<%
- 	out.print(cardNumber);
- %>)
+				</font> <font color="gray"> (club card:<%out.print(cardNumber); %>)
 				</font></td>
 
 				<td align="right" width="60"><a href="MainPageServlet?exit=1"
@@ -97,7 +95,7 @@
 				<td width="150"></td>
 				<td align="left" width="131" height="135"><a
 					href="MainPageServlet?exit=1" style="text-decoration: none;"> <img
-						alt="" src="Logo/logo_trans.png" border="0">
+						alt="" src="images/logo_trans.png" border="0">
 				</a></td>
 				<!-- <td width="20" ></td> -->
 				<td align="center">

@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-    background-image: url(WebContent/images/texture3.jpg);
+    background-image: url('../images/texture3.jpg');
 	background-attachment: fixed;
 	background-position: center;
 	margin: 0; 
