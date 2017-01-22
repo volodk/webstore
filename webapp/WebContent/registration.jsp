@@ -28,7 +28,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/registration.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css">
 	<title>Registration form</title>
 	
 </head>

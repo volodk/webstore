@@ -101,7 +101,7 @@ section {
   width:auto;
   display: none;
   padding: 15px;
-  background: url(images/orange.jpg);
+  background-image: url('../images/orange.jpg');
   border: 1px solid #ddd;
   height: 100vh;
  /*  border-radius: 15px; */
@@ -137,16 +137,16 @@ section {
   margin-right: 10px;
 }
 .tabs label[for*="1"]:before {
-  content: url(images/cat26.png);
+  content: url(../images/cat26.png);
 }
 .tabs label[for*="2"]:before {
-  content: url(images/dog26.png);
+  content: url(../images/dog26.png);
 }
 .tabs label[for*="3"]:before {
-  content: url(images/rabbit26.png);
+  content: url(../images/rabbit26.png);
 }
 .tabs label[for*="4"]:before {
-  content: url(images/fish26.png);
+  content: url(../images/fish26.png);
 }
 
 .tabs {

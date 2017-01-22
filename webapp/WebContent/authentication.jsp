@@ -11,7 +11,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="<%=request.getContextPath()%>/authentication.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/authentication.css">
 		<title>Login form</title>	
 		
 	</head>

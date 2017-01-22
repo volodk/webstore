@@ -89,7 +89,7 @@ if (strModAdmin!=null){
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/admin.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 	
 	<title>Admin page</title>
 	
