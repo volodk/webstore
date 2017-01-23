@@ -33,7 +33,42 @@ public class DataBase {
 	
 
 
-	   public String[] getUserInfo(String login,  String password, Connection connection)
+	   
+	   
+	   public String getUserId(String login,  String password, Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 String idUser ="";
+		 		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"id_user\" FROM \"Profiles\" Where \"UserLogin\" = '";
+         quer = quer.concat(login);
+         quer = quer.concat("' and \"UserPassword\" = '");
+         quer = quer.concat(password);
+         quer = quer.concat("';");
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while ( rs.next() ) {
+            idUser = rs.getString("id_User");
+         }
+         rs.close();
+         stmt.close();
+                           
+       } catch ( Exception e ) {
+         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+         return null;
+       }
+       return idUser;
+     }
+	   
+	   
+	   
+	   
+	   
+	   public String[] getUserInfo(String idUser, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -45,10 +80,8 @@ public class DataBase {
 		 try {
          stmt = connection.createStatement();
          
-         quer="SELECT \"UserName\", \"UserLastName\", \"UserBonusCard\" FROM \"Profiles\" Where \"UserLogin\" = '";
-         quer = quer.concat(login);
-         quer = quer.concat("' and \"UserPassword\" = '");
-         quer = quer.concat(password);
+         quer="SELECT \"UserName\", \"UserLastName\", \"UserBonusCard\" FROM \"Profiles\" Where \"id_user\" = '";
+         quer = quer.concat(idUser);
          quer = quer.concat("';");
          
          ResultSet rs = stmt.executeQuery(quer);

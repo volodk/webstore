@@ -4,16 +4,19 @@
 
 <%
 	String userName = "";
+	String userLastName = "";
 	String cardNumber = "";
-	userName = (String) session.getAttribute("name");
-	cardNumber = (String) session.getAttribute("card");
+	String userId = "";
+	String [] userInfo = new String[4];
+	
+	DataBase dBClass = new DataBase();
+	
+	userId = (String) session.getAttribute("userId");
 
-	if (userName == null) {
-		userName = "";
+	if (userId == null) {
+		userId = "";
 	}
-	if (cardNumber == null) {
-		cardNumber = "";
-	}
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -52,7 +55,7 @@
 				<td></td>
 
 				<%
-					if (userName.equals("") | (userName.equals(null))) {
+					if (userId.equals("") | (userId.equals(null))) {
 				%>
 				<td align="right" width="60"><a
 					href="AuthenticationPageServlet"
@@ -67,7 +70,12 @@
 				%>
 				<td align="right" width="250"><font color="white"> <strong>
 							<%
-								out.print(userName);
+								userInfo = dBClass.getUserInfo(userId, conDB);
+							    userName = userInfo[1];
+							    userLastName = userInfo[2];
+							    cardNumber = userInfo[3];
+								
+							    out.print(userName + " " + userLastName);
 							%>
 					</strong>
 				</font> <font color="gray"> (club card:<%out.print(cardNumber); %>)

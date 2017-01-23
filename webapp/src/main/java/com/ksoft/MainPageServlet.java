@@ -11,10 +11,9 @@ import java.sql.Connection;
 
 
 public class MainPageServlet extends HttpServlet {
-			 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 
-	public String[] userInfo = new String[3];
+	public String userId;
 	public boolean allowed = false;
 	private Connection conDB;
 	
@@ -63,22 +62,21 @@ public class MainPageServlet extends HttpServlet {
 				
 				/*получим инфо пользователя*/
 				if (conDB!=null & login!=null & login!="" & password!=null & password!=""){
-					userInfo = dBClass.getUserInfo(login, password, conDB);
+					userId = dBClass.getUserId(login, password, conDB);
 					allowed = false;
-					if (userInfo[1].length()>0){
-						userName = userInfo[1];
+					if (userId.length()>0){
+						allowed = true;
+						
+						/*userName = userInfo[1];
 						userName = userName.concat(" ");
 						userName = userName.concat(userInfo[2]);
-						cardNumber = userInfo[3];
-					
-					if(userName!="" & userName!=null){				
-						allowed = true;
-					}	
-										
+						cardNumber = userInfo[3];*/
+															
 					}
 				}	
 				
 								
+				
 				if ((authForm == null | authForm == "") & (regForm == null | regForm == "")){
 					
 					req.getRequestDispatcher("index.jsp").forward(req, resp);
@@ -87,8 +85,7 @@ public class MainPageServlet extends HttpServlet {
 				/*обработаем инфо пользователя*/
 				else if (authForm != null & authForm != ""){
 					if (allowed){
-						session.setAttribute("name", userName);
-						session.setAttribute("card", cardNumber);
+						session.setAttribute("userId", userId);
 						req.getRequestDispatcher("index.jsp").forward(req, resp);
 					}
 					else{
@@ -123,10 +120,14 @@ public class MainPageServlet extends HttpServlet {
 							}
 							req.setAttribute("userReg", userReg);
 							
-							userName = userName.concat(" ");
+							userId = dBClass.getUserId(login, password, conDB);
+							if (userId.length()>0){
+								session.setAttribute("userId", userId);
+							}
+							/*userName = userName.concat(" ");
 							userName = userName.concat(userLastName);
 							session.setAttribute("name", userName);
-							session.setAttribute("card", cardNumber);
+							session.setAttribute("card", cardNumber);*/
 						}									
 						else{
 							loginIsFree = null;
