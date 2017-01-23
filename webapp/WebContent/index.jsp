@@ -1,4 +1,6 @@
-<%@page import="java.io.File"%>
+<%@page import="java.io.PrintStream"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.io.File, com.ksoft.DataBase, java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -10,6 +12,7 @@
 	String [] userInfo = new String[4];
 	
 	DataBase dBClass = new DataBase();
+	Connection conDB;
 	
 	userId = (String) session.getAttribute("userId");
 
@@ -70,6 +73,8 @@
 				%>
 				<td align="right" width="250"><font color="white"> <strong>
 							<%
+								conDB = dBClass.getConnectionPostgresql();
+														
 								userInfo = dBClass.getUserInfo(userId, conDB);
 							    userName = userInfo[1];
 							    userLastName = userInfo[2];
@@ -80,7 +85,11 @@
 					</strong>
 				</font> <font color="gray"> (club card:<%out.print(cardNumber); %>)
 				</font></td>
-
+							<%try{
+								conDB.close();
+							} catch ( SQLException e ) {
+								e.printStackTrace();    
+							} %>
 				<td align="right" width="60"><a href="MainPageServlet?exit=1"
 					style="text-decoration: none;"> Exit </a></td>
 
