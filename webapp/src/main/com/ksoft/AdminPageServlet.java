@@ -18,7 +18,6 @@ public class AdminPageServlet extends HttpServlet {
 			 
 	private static final long serialVersionUID = 1L;
 
-	public String[] adminInfo = new String[3];
 	private Connection conDB;
 	public boolean allowed = false;
 	
@@ -78,7 +77,9 @@ public class AdminPageServlet extends HttpServlet {
 				ServletContext sContext = getServletConfig().getServletContext();
 				
 				HttpSession session = req.getSession();
-				String superAdmin = (String)session.getAttribute("superAdmin");
+				/*String superAdmin = (String)session.getAttribute("superAdmin");*/
+				String adminId = (String)session.getAttribute("adminId");
+				
 				adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
 											
 				/*определим newAdmin если он равен 0*/
@@ -111,23 +112,21 @@ public class AdminPageServlet extends HttpServlet {
 				allowed = false;				
 				/*получим инфо админа*/
 				if (conDB!=null & login!=null & login!="" & password!=null & password!=""){
-					adminInfo = dBClass.getAdminInfo(login, password, conDB);
-										
-					if (adminInfo[1].length()>0){
+					adminId = dBClass.getAdminId(login, password, conDB);
+															
+					if (adminId.length()>0){
 						allowed = true;
 						
-						adminName = adminInfo[1];
+						/*adminName = adminInfo[1];
 						adminLastName = adminInfo[2];
-						superAdmin = adminInfo[3];
+						superAdmin = adminInfo[3];*/
 											
 					}
 					
 				}	
 				/*Если логин и пароль входящего админа прошли проверку*/						
 				if (allowed){
-					session.setAttribute("adminName", adminName);
-					session.setAttribute("adminLastName", adminLastName);
-					session.setAttribute("superAdmin", superAdmin);
+					session.setAttribute("adminId", adminId);
 					req.setAttribute("adminForm", "");
 					
 					req.getRequestDispatcher("admin.jsp").forward(req, resp);
@@ -266,7 +265,8 @@ public class AdminPageServlet extends HttpServlet {
 				}
 				
 				
-				dBClass.getUserInfo(login, password, conDB);
+				
+				/*dBClass.getUserInfo(login, password, conDB);*/
 				
 			try{
 				conDB.close();

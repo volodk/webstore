@@ -2,17 +2,18 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%@ page import="java.util.ArrayList" 
-		 import="java.util.List"%>
-<%@ page import="com.ksoft.Admins" %>
+		 import="java.util.List"
+		 import="com.ksoft.Admins, com.ksoft.DataBase, java.sql.Connection" %>
 	
 	
 <%
 Admins strAdmins = new Admins();
 
 String adminForm = (String)request.getAttribute("adminForm");
-String adminName = (String)session.getAttribute("adminName");
-String adminLastName = (String)session.getAttribute("adminLastName");
-String superAdmin = (String)session.getAttribute("superAdmin");
+String adminName = "";
+String adminLastName = "";
+String superAdmin = "";
+
 String newAdmin = (String)request.getAttribute("newAdmin");
 String modAdmin = (String)request.getAttribute("modAdmin");
 String newGood = (String)request.getAttribute("newGood");
@@ -25,15 +26,21 @@ String deleteAdmin = (String)request.getAttribute("deleteAdmin");
 
 Admins strModAdmin = new Admins();
 ServletContext sContext = getServletConfig().getServletContext();
-/*strModAdmin = (Admins)session.getAttribute("strModAdmin");*/
+
+String adminId = (String)session.getAttribute("adminId");
+
 strModAdmin = (Admins)sContext.getAttribute("strModAdmin");
 
 List<Admins> adminsTable = new ArrayList<Admins>();
-/*adminsTable = (List<Admins>)session.getAttribute("adminsTable");*/
+
 adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
 
 
 String strChecked = "0";
+
+String [] adminInfo = new String[4];
+DataBase dBClass = new DataBase();
+Connection conDB;
 
 if (strModAdmin!=null){
 	strChecked = Integer.toString(strModAdmin.superAdmin);
@@ -44,17 +51,9 @@ if (strModAdmin!=null){
 		adminForm = "";
 }
 	
-	if (adminName == null) {
-		adminName = "";
+	if (adminId == null) {
+		adminId = "";
 }
-	if (adminLastName == null) {
-		adminLastName = "";
-}
-	
-	if (superAdmin == null) {
-		superAdmin = "0";
-}
-	
 	if (newAdmin == null) {
 		newAdmin = "";
 }	
@@ -83,6 +82,16 @@ if (strModAdmin!=null){
 	if (deleteAdmin== null) {
 		deleteAdmin = "";
 }	
+	
+	conDB = dBClass.getConnectionPostgresql();
+	
+	if (adminId!=""){
+		adminInfo = dBClass.getUserInfo(adminId, conDB);
+		
+	    adminName = adminInfo[1];
+	    adminLastName = adminInfo[2];
+	    superAdmin = adminInfo[3];
+	}
 	
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

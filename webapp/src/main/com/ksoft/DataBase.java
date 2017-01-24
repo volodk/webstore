@@ -33,7 +33,42 @@ public class DataBase {
 	
 
 
-	   public String[] getUserInfo(String login,  String password, Connection connection)
+	   
+	   
+	   public String getUserId(String login,  String password, Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 String idUser ="";
+		 		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"id_user\" FROM \"Profiles\" Where \"UserLogin\" = '";
+         quer = quer.concat(login);
+         quer = quer.concat("' and \"UserPassword\" = '");
+         quer = quer.concat(password);
+         quer = quer.concat("';");
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while ( rs.next() ) {
+            idUser = rs.getString("id_User");
+         }
+         rs.close();
+         stmt.close();
+                           
+       } catch ( Exception e ) {
+         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+         return null;
+       }
+       return idUser;
+     }
+	   
+	   
+	   
+	   
+	   
+	   public String[] getUserInfo(String idUser, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -45,10 +80,8 @@ public class DataBase {
 		 try {
          stmt = connection.createStatement();
          
-         quer="SELECT \"UserName\", \"UserLastName\", \"UserBonusCard\" FROM \"Profiles\" Where \"UserLogin\" = '";
-         quer = quer.concat(login);
-         quer = quer.concat("' and \"UserPassword\" = '");
-         quer = quer.concat(password);
+         quer="SELECT \"UserName\", \"UserLastName\", \"UserBonusCard\" FROM \"Profiles\" Where \"id_user\" = '";
+         quer = quer.concat(idUser);
          quer = quer.concat("';");
          
          ResultSet rs = stmt.executeQuery(quer);
@@ -75,7 +108,41 @@ public class DataBase {
 	   
 	   
 	   
-	   public String[] getAdminInfo(String login,  String password, Connection connection)
+	   public String getAdminId(String login,  String password, Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 String adminId ="";
+		 	 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"id_admin\" FROM \"Admins\" Where \"AdminLogin\" = '";
+         quer = quer.concat(login);
+         quer = quer.concat("' and \"AdminPassword\" = '");
+         quer = quer.concat(password);
+         quer = quer.concat("';");
+         
+         ResultSet rs = stmt.executeQuery(quer);
+         while ( rs.next() ) {
+        	adminId = rs.getString("id_admin");        	
+         }
+         rs.close();
+         stmt.close();
+                           
+       } catch ( Exception e ) {
+         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+         return null;
+       }
+       return adminId;
+     } 
+	   
+	   
+	   
+	   
+	   
+	   
+	   public String[] getAdminInfo(String adminId, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";
@@ -87,10 +154,8 @@ public class DataBase {
 		 try {
          stmt = connection.createStatement();
          
-         quer="SELECT \"AdminName\", \"AdminLastName\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\" Where \"AdminLogin\" = '";
-         quer = quer.concat(login);
-         quer = quer.concat("' and \"AdminPassword\" = '");
-         quer = quer.concat(password);
+         quer="SELECT \"AdminName\", \"AdminLastName\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\" Where \"id_admin\" = '";
+         quer = quer.concat(adminId);
          quer = quer.concat("';");
          
          ResultSet rs = stmt.executeQuery(quer);
