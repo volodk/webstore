@@ -147,16 +147,11 @@
 				<td align="left">
 
 					<div class="tabs">
-						<input id="tab1" type="radio" name="tabs" checked> 
-							<label
-								for="tab1" title="Вкладка 1">Cats</label> <input id="tab2"
-								type="radio" name="tabs"> <label for="tab2"
-								title="Вкладка 2">Dogs</label> <input id="tab3"
-								type="radio" name="tabs"> <label for="tab3"
-								title="Вкладка 3">Rodents</label> <input id="tab4"
-								type="radio" name="tabs"> <label for="tab4"
-								title="Вкладка 4">Fishes
-							</label>
+						<%for (i=0 to ) %>
+						<input id="tab1" type="radio" name="tabs" checked> <label for="tab1" title="Вкладка 1">Cats</label>
+						<input id="tab2" type="radio" name="tabs"> <label for="tab2" title="Вкладка 2">Dogs</label> 
+						<input id="tab3" type="radio" name="tabs"> <label for="tab3" title="Вкладка 3">Rodents</label> 
+						<input id="tab4" type="radio" name="tabs"> <label for="tab4" title="Вкладка 4">Fishes</label>
 
 						<section id="content1">
 						<p>tab 1....</p>

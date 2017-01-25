@@ -35,8 +35,6 @@ List<Admins> adminsTable = new ArrayList<Admins>();
 
 adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
 
-String [] topLevelCategories = new String[10];
-
 String strChecked = "0";
 
 String [] adminInfo = new String[4];
@@ -94,8 +92,7 @@ if (strModAdmin!=null){
 	    superAdmin = adminInfo[3];
 	}
 	
-	topLevelCategories = dBClass.getTopLevelCategories(conDB);
-	
+		
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
