@@ -86,7 +86,7 @@ if (strModAdmin!=null){
 	conDB = dBClass.getConnectionPostgresql();
 	
 	if (adminId!=""){
-		adminInfo = dBClass.getUserInfo(adminId, conDB);
+		adminInfo = dBClass.getAdminInfo(adminId, conDB);
 		
 	    adminName = adminInfo[1];
 	    adminLastName = adminInfo[2];
