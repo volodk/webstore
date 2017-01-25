@@ -1,7 +1,7 @@
 <%@page import="java.io.PrintStream"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.io.File, com.ksoft.DataBase, java.sql.Connection"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%
@@ -10,6 +10,7 @@
 	String cardNumber = "";
 	String userId = "";
 	String [] userInfo = new String[4];
+	String [] topLevelCategories = new String[10];
 	
 	DataBase dBClass = new DataBase();
 	Connection conDB;
@@ -20,6 +21,9 @@
 		userId = "";
 	}
 	
+	conDB = dBClass.getConnectionPostgresql();
+	
+	topLevelCategories = dBClass.getTopLevelCategories(conDB);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,9 +76,7 @@
 					} else {
 				%>
 				<td align="right" width="250"><font color="white"> <strong>
-							<%
-								conDB = dBClass.getConnectionPostgresql();
-														
+							<%																					
 								userInfo = dBClass.getUserInfo(userId, conDB);
 							    userName = userInfo[1];
 							    userLastName = userInfo[2];
@@ -145,14 +147,16 @@
 				<td align="left">
 
 					<div class="tabs">
-						<input id="tab1" type="radio" name="tabs" checked> <label
-							for="tab1" title="Вкладка 1">Cats</label> <input id="tab2"
-							type="radio" name="tabs"> <label for="tab2"
-							title="Вкладка 2">Dogs</label> <input id="tab3"
-							type="radio" name="tabs"> <label for="tab3"
-							title="Вкладка 3">Rodents</label> <input id="tab4"
-							type="radio" name="tabs"> <label for="tab4"
-							title="Вкладка 4">Fishes</label>
+						<input id="tab1" type="radio" name="tabs" checked> 
+							<label
+								for="tab1" title="Вкладка 1">Cats</label> <input id="tab2"
+								type="radio" name="tabs"> <label for="tab2"
+								title="Вкладка 2">Dogs</label> <input id="tab3"
+								type="radio" name="tabs"> <label for="tab3"
+								title="Вкладка 3">Rodents</label> <input id="tab4"
+								type="radio" name="tabs"> <label for="tab4"
+								title="Вкладка 4">Fishes
+							</label>
 
 						<section id="content1">
 						<p>tab 1....</p>

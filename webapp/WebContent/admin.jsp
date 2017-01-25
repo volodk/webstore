@@ -35,6 +35,7 @@ List<Admins> adminsTable = new ArrayList<Admins>();
 
 adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
 
+String [] topLevelCategories = new String[10];
 
 String strChecked = "0";
 
@@ -92,6 +93,8 @@ if (strModAdmin!=null){
 	    adminLastName = adminInfo[2];
 	    superAdmin = adminInfo[3];
 	}
+	
+	topLevelCategories = dBClass.getTopLevelCategories(conDB);
 	
 %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -407,6 +410,121 @@ if (strModAdmin!=null){
 		
 		<div id="foot">Copyright &copy; Klymenko Sergii</div>
 		
+	
+	
+	
+	<!-- 		 Блок работы с созданием новой номенклатуры -->
+		<%
+		} else if (!adminName.equals("") & (!adminName.equals(null)) & (newGood.equals("1"))){			
+		%>
+
+		<div id="head">
+			<table width="100%">
+				<td align="left" width="250"><font color="white"> <strong>
+							<%
+								out.print(adminName);
+							%>
+					</strong> <strong>
+							<%
+								out.print(adminLastName);
+							%>
+					</strong>
+				</font></td>
+
+				<td align="right"><a href="MainPageServlet?exit=1"
+					style="text-decoration: none;"> Exit </a></td>
+			</table>
+
+		</div>
+
+		<div id="menu" align="left">
+			<%if (superAdmin.equals("1")) {%>
+			<div>
+				<a href="AdminPageServlet?newAdmin=1">Create new administrator</a>
+			</div>
+			<div>
+				<a href="AdminPageServlet?modAdmin=1">Modify administrators profiles</a>
+			</div>
+			<div class="line"></div>
+			<%}%>
+			<div>
+				<a href="AdminPageServlet?newGood=1">Add new good</a>
+			</div>			
+			<div>
+				<a href="AdminPageServlet?modGood=1">Modify goods</a>
+			</div>
+		</div>
+		
+		<div id="content">
+			<table align="left" width="400" cellpadding="10" cellspacing=0>
+				<form method="post" action="AdminPageServlet">
+					<tr>
+						<th align="center">
+							<font size="4"> Registration form</font>
+						</th>
+					</tr>
+					
+					<tr>
+						<th align="left" >
+							First name(*): <input type="text" name="newAdminName" style="width: 68%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Last name(*): <input type="text" name="newAdminLastName" style="width: 68%;">
+						</th>
+					</tr>
+					<tr>
+						<th align="left">
+							Login(*): <input type="text" name="newAdminLogin" style="width: 78%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Password(*): <input type="password" name="newAdminPassword" style="width: 69%;">
+						</th>
+					</tr>
+					<tr>	
+						<th align="left">
+							Super admin: <input type="checkbox" name="newSuperAdmin" value="1" style="width: 5%;">
+						</th>
+					</tr>
+					<tr>
+						<th align="left">
+							<font size="2" style="font-style: normal;"> * - Fields, that must be filled out </font>
+						</th>
+					</tr>
+											
+					<input type="hidden" name="adminForm" value="1">
+					<input type="hidden" name="fieldsFilligExeption" value="">
+					<input type="hidden" name="loginIsFree" value="">
+					<input type="hidden" name="newAdmin" value="2">
+					<input type="hidden" name="modAdmin" value="">
+					<input type="hidden" name="newGood" value="">
+					<input type="hidden" name="modGood" value="">					
+											
+					<tr>
+						<td align="right">
+							<input type="submit" value="Register">
+						</td>
+					</tr>
+				 </form>
+				
+			</table>		
+		</div>
+		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		
+	<!-- 		 Блок работы с созданием новой номенклатуры -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 		
 				

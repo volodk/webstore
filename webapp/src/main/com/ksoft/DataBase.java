@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.junit.experimental.categories.Categories;
+
 import com.ksoft.Admins;
 
 import java.util.ArrayList;
@@ -32,7 +34,38 @@ public class DataBase {
 	   }
 	
 
-
+	   
+	   
+	   public String[] getTopLevelCategories(Connection connection)
+	   {
+		 Statement stmt = null;
+		 String quer="";
+		 String [] categories = new String[10];
+		 
+		 int i = 0;
+				 		 		
+		 try {
+         stmt = connection.createStatement();
+         
+         quer="SELECT \"category_name\" FROM \"Categories\" Where \"category_status\" = '1' and \"category_position\" = '1';";
+                  
+         ResultSet rs = stmt.executeQuery(quer);
+         
+         while ( rs.next() ) {
+        	 categories[i] = rs.getString("category_name");
+            i++;
+         }
+         rs.close();
+         stmt.close();
+                           
+       } catch ( Exception e ) {
+         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+         return null;
+       }
+       return categories;
+     }
+	   
+	   
 	   
 	   
 	   public String getUserId(String login,  String password, Connection connection)

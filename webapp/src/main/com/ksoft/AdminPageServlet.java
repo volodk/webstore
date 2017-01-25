@@ -42,10 +42,16 @@ public class AdminPageServlet extends HttpServlet {
 				String newAdmin = req.getParameter("newAdmin");
 				String modAdmin = req.getParameter("modAdmin");
 				String deleteAdmin = req.getParameter("deleteAdmin");
+				
+				String newGood = req.getParameter("newGood");
+				String modGood = req.getParameter("modGood");
+				String deleteGood = req.getParameter("deleteGood");
+				
 				String newAdminName = req.getParameter("newAdminName");
 				String newAdminLastName = req.getParameter("newAdminLastName");
 				String newAdminLogin = req.getParameter("newAdminLogin");
 				String newAdminPassword = req.getParameter("newAdminPassword");
+				
 				String newSuperAdmin = req.getParameter("newSuperAdmin");
 				
 				String oldAdminName = req.getParameter("oldAdminName");
@@ -98,7 +104,12 @@ public class AdminPageServlet extends HttpServlet {
 				if (checkAdmin!=null){
 					checkAdminInt = Integer.parseInt(checkAdmin);					
 				}	
-				
+				if (newGood == null){
+					newGood="";
+				}
+				if (modGood == null){
+					modGood="";
+				}
 				
 				
 				
@@ -116,14 +127,15 @@ public class AdminPageServlet extends HttpServlet {
 															
 					if (adminId.length()>0){
 						allowed = true;
-						
-						/*adminName = adminInfo[1];
-						adminLastName = adminInfo[2];
-						superAdmin = adminInfo[3];*/
-											
+																						
 					}
 					
 				}	
+				
+				
+				
+				
+				
 				/*Если логин и пароль входящего админа прошли проверку*/						
 				if (allowed){
 					session.setAttribute("adminId", adminId);
@@ -260,6 +272,7 @@ public class AdminPageServlet extends HttpServlet {
 					
 				}else{
 					req.setAttribute("newAdmin", newAdmin);
+					req.setAttribute("newGood", newGood);
 					req.setAttribute("adminForm", adminForm);
 					req.getRequestDispatcher("admin.jsp").forward(req, resp);
 				}
