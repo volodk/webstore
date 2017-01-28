@@ -24,6 +24,11 @@
 	conDB = dBClass.getConnectionPostgresql();
 	
 	topLevelCategories = dBClass.getTopLevelCategories(conDB);
+	int i;
+	String categoryName;
+	String tab;
+	String title;
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -147,13 +152,34 @@
 				<td align="left">
 
 					<div class="tabs">
-						<%for (i=0 to ) %>
-						<input id="tab1" type="radio" name="tabs" checked> <label for="tab1" title="Вкладка 1">Cats</label>
-						<input id="tab2" type="radio" name="tabs"> <label for="tab2" title="Вкладка 2">Dogs</label> 
-						<input id="tab3" type="radio" name="tabs"> <label for="tab3" title="Вкладка 3">Rodents</label> 
-						<input id="tab4" type="radio" name="tabs"> <label for="tab4" title="Вкладка 4">Fishes</label>
-
-						<section id="content1">
+											
+						<%i = 0;
+						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
+							categoryName = topLevelCategories[i];
+							tab = "tab";
+							tab = tab.concat(Integer.toString(i+1));
+						%>
+						
+							<input id=<%out.print(tab);%> type="radio" name="tabs" 
+							<% if (i==0){%>checked<%}%>> <label for=<%out.print(tab);%> 
+							title=<%out.print(tab);%>>	
+							<%out.print(categoryName);%></label>	
+							
+						<%i++;
+						}%> 
+						
+						<%i = 0;
+						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
+							tab = "content";
+							tab = tab.concat(Integer.toString(i+1));%>
+							
+							<section id=<%out.print(tab);%>>
+							<p><%out.print(tab);%></p>		
+						<%i++;
+						}%>	
+ 										
+ 						 	
+						<!-- <section id="content1">
 						<p>tab 1....</p>
 						</section>
 						<section id="content2">
@@ -164,7 +190,7 @@
 						</section>
 						<section id="content4">
 						<p>Tab 4....</p>
-						</section>
+						</section> -->
 					</div>
 
 
