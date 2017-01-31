@@ -160,10 +160,9 @@
 							tab = tab.concat(Integer.toString(i+1));
 						%>
 						
-							<input id=<%out.print(tab);%> type="radio" name="tabs" 
-							<% if (i==0){%>checked<%}%>> <label for=<%out.print(tab);%> 
-							title=<%out.print(tab);%>>	
-							<%out.print(categoryName);%></label>	
+							<input id=<%=tab%> type="radio" name="tabs" 
+							<% if (i==0){%>checked<%}%>> 
+							<label for=<%=tab%>	title=<%=tab%>><%=categoryName%></label>	
 							
 						<%i++;
 						}%> 
@@ -173,26 +172,14 @@
 							tab = "content";
 							tab = tab.concat(Integer.toString(i+1));%>
 							
-							<section id=<%out.print(tab);%>>
-							<p><%out.print(tab);%></p>		
+							<section id=<%=tab%>>
+								<p><%=tab%></p>
+							
+							</section>		
 						<%i++;
 						}%>	
- 										
- 						 	
-						<!-- <section id="content1">
-						<p>tab 1....</p>
-						</section>
-						<section id="content2">
-						<p>tab 2....</p>
-						</section>
-						<section id="content3">
-						<p>tab 3....</p>
-						</section>
-						<section id="content4">
-						<p>Tab 4....</p>
-						</section> -->
+											
 					</div>
-
 
 				</td>
 				<td width="150"></td>
