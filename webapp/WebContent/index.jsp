@@ -186,6 +186,7 @@
 							
 							<div id="categories" align="left">
 							
+							<ul class="border">
 								<%for (int j=0; j<categories.size(); j++){
 									strCategory = categories.get(j);
 										
@@ -193,13 +194,14 @@
 										if (strCategory.parentCategoryName.equals(topLevelCategories[i])){
 											categoryName = strCategory.categoryName; %>
 															
-											<div>
-												<a href="MainPageServlet?category=<%=Integer.toString(strCategory.catrgoryId)%>" style="color: black; text-decoration: none;"> <%=categoryName%> </a>																	
-											</div>
+											<li>
+												<a href="MainPageServlet?category=<%=Integer.toString(strCategory.catrgoryId)%>" style="color: black; text-decoration: none;"> <%=categoryName%> </a>																
+											</li>
 											
 									<% }
 									}
 								} %>	
+							</ul>
 							</div>
 							
 
