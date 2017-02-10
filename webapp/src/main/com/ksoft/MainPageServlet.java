@@ -1,13 +1,18 @@
 package com.ksoft;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/*import java.awt.List;*/
 /*import javax.websocket.Session;*/
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class MainPageServlet extends HttpServlet {
@@ -48,16 +53,27 @@ private static final long serialVersionUID = 1L;
 				String userLastName = req.getParameter("userLastName");
 				String cardNumber = req.getParameter("cardNumber");
 				
+				String [] topLevelCategories = new String[10];
+				List<Categories> categories = new ArrayList<Categories>();
+				
 				HttpSession session = req.getSession();
+				ServletContext sContext = getServletConfig().getServletContext();
+				
+				
+				
+				
+				
+				
+				
 				
 				if (exit != null & exit != ""){
 					session.invalidate();
 				}
 				
 				/*подключимся к БД*/
-				if ((authForm!=null & authForm!="") | (regForm!=null & regForm!="")){
+				/*if ((authForm!=null & authForm!="") | (regForm!=null & regForm!="")){*/
 				conDB = dBClass.getConnectionPostgresql();
-				}	
+				/*}*/	
 				
 				
 				/*получим инфо пользователя*/
@@ -76,8 +92,13 @@ private static final long serialVersionUID = 1L;
 				}	
 				
 								
-				
+				/*просто отображение первой страницы*/
 				if ((authForm == null | authForm == "") & (regForm == null | regForm == "")){
+					
+					topLevelCategories = dBClass.getTopLevelCategories(conDB);
+					categories = dBClass.getCategories(conDB);
+					sContext.setAttribute("topLevelCategories", topLevelCategories);
+					sContext.setAttribute("categories", categories);
 					
 					req.getRequestDispatcher("index.jsp").forward(req, resp);
 					

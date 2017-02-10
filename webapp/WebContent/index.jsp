@@ -1,6 +1,8 @@
 <%@page import="java.io.PrintStream"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="java.io.File, com.ksoft.DataBase, java.sql.Connection"%>
+<%@page import="java.util.ArrayList" 
+		 import="java.util.List"%>
+<%@page import="java.io.File, com.ksoft.DataBase, com.ksoft.Categories, java.sql.Connection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -11,6 +13,8 @@
 	String userId = "";
 	String [] userInfo = new String[4];
 	String [] topLevelCategories = new String[10];
+		
+	ServletContext sContext = getServletConfig().getServletContext();
 	
 	DataBase dBClass = new DataBase();
 	Connection conDB;
@@ -23,7 +27,12 @@
 	
 	conDB = dBClass.getConnectionPostgresql();
 	
-	topLevelCategories = dBClass.getTopLevelCategories(conDB);
+	List<Categories> categories = new ArrayList<Categories>();
+	Categories strCategory;
+	topLevelCategories = (String [])sContext.getAttribute("topLevelCategories");
+	categories = (List<Categories>)sContext.getAttribute("categories");
+	String category;
+	
 	int i;
 	String categoryName;
 	String tab;
@@ -168,15 +177,36 @@
 						}%> 
 						
 						<%i = 0;
+						  						  
 						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
-							tab = "content";
-							tab = tab.concat(Integer.toString(i+1));%>
+							categoryName = "content";
+							categoryName = categoryName.concat(Integer.toString(i+1));
+							%>
+							<section id=<%=categoryName%>>
 							
-							<section id=<%=tab%>>
-								<p><%=tab%></p>
+							<div id="categories" align="left">
 							
-							</section>		
-						<%i++;
+								<%for (int j=0; j<categories.size(); j++){
+									strCategory = categories.get(j);
+										
+									if (strCategory.parentCategoryName != null){								
+										if (strCategory.parentCategoryName.equals(topLevelCategories[i])){
+											categoryName = strCategory.categoryName; %>
+															
+											<div>
+												<a href="MainPageServlet?category=<%=Integer.toString(strCategory.catrgoryId)%>" style="color: black; text-decoration: none;"> <%=categoryName%> </a>																	
+											</div>
+											
+									<% }
+									}
+								} %>	
+							</div>
+							
+
+																							
+							</section>				
+							<%i++;
+					
 						}%>	
 											
 					</div>

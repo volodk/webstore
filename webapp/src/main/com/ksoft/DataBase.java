@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import org.junit.experimental.categories.Categories;
+/*import org.junit.experimental.categories.Categories;*/
 
-import com.ksoft.Admins;
+/*import com.ksoft.Admins;*/
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +34,42 @@ public class DataBase {
 	   }
 	
 
+	   
+	   
+	   public List<Categories> getCategories(Connection connection)
+	   {
+		 List<Categories> categories = new ArrayList<Categories>();
+		 
+		 String query="SELECT c.id_category,c.category_position,c.category_name,c.id_parent_category, cc.category_name AS parent_category_name FROM \"Categories\" c "
+         		+ "LEFT OUTER JOIN \"Categories\" cc ON (c.id_parent_category = cc.id_category) Where c.category_status = \'1\'";
+                  
+         try {
+			 try (Statement stmt = connection.createStatement()){
+				 try (ResultSet rs = stmt.executeQuery(query)){
+			 	
+					 while ( rs.next()) {
+						 Categories category = new Categories();
+		        	 
+						 category.catrgoryId = rs.getInt("id_category");
+						 category.categoryPosition = rs.getInt("category_position");
+						 category.categoryName= rs.getString("category_name");
+						 category.idParentCategory = rs.getInt("id_parent_category");
+						 category.parentCategoryName = rs.getString("parent_category_name");			        	 
+
+						 categories.add(category);
+					 }
+				 }	 
+			 }
+         
+		 } catch ( SQLException e ) {
+			 e.printStackTrace();
+			 return Collections.emptyList();
+		 }
+		 return categories;
+	   } 
+	   
+	   
+	   
 	   
 	   
 	   public String[] getTopLevelCategories(Connection connection)
