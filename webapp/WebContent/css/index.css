@@ -194,11 +194,13 @@ box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
 font-size: 20px;
 letter-spacing: 2px;
 transition: 0.3s all linear;
+
 }
 .border li:nth-child(2){border-color: #8bc63e;}
 .border li:nth-child(3){border-color: #fcba30;}
 .border li:nth-child(4){border-color: #1ccfc9;}
 .border li:nth-child(5){border-color: #493224;}
+
 .border li:hover {
 border-left: 10px solid transparent;
 }

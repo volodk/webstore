@@ -54,14 +54,15 @@ private static final long serialVersionUID = 1L;
 				String cardNumber = req.getParameter("cardNumber");
 				
 				String [] topLevelCategories = new String[10];
-				List<Categories> categories = new ArrayList<Categories>();
+				List<Category> categories = new ArrayList<Category>();
 				
 				HttpSession session = req.getSession();
 				ServletContext sContext = getServletConfig().getServletContext();
 				
-				
-				
-				
+				String selectedCategory = req.getParameter("selectedCategory");
+				int selectedCategoryId;
+								
+				List<Good> goods = new ArrayList<Good>();
 				
 				
 				
@@ -81,15 +82,24 @@ private static final long serialVersionUID = 1L;
 					userId = dBClass.getUserId(login, password, conDB);
 					allowed = false;
 					if (userId.length()>0){
-						allowed = true;
-						
-						/*userName = userInfo[1];
-						userName = userName.concat(" ");
-						userName = userName.concat(userInfo[2]);
-						cardNumber = userInfo[3];*/
-															
+						allowed = true;																				
 					}
 				}	
+				
+				
+				
+				/*получим товары по выбранной категории*/
+				if (selectedCategory !=null){
+					selectedCategoryId = Integer.parseInt(selectedCategory);
+					goods = dBClass.getGoods(conDB, selectedCategoryId);
+					sContext.setAttribute("goods", goods);
+				}
+				
+				
+				
+				
+				
+				
 				
 								
 				/*просто отображение первой страницы*/
@@ -145,10 +155,7 @@ private static final long serialVersionUID = 1L;
 							if (userId.length()>0){
 								session.setAttribute("userId", userId);
 							}
-							/*userName = userName.concat(" ");
-							userName = userName.concat(userLastName);
-							session.setAttribute("name", userName);
-							session.setAttribute("card", cardNumber);*/
+							
 						}									
 						else{
 							loginIsFree = null;

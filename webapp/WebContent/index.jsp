@@ -2,7 +2,7 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.ArrayList" 
 		 import="java.util.List"%>
-<%@page import="java.io.File, com.ksoft.DataBase, com.ksoft.Categories, java.sql.Connection"%>
+<%@page import="java.io.File, com.ksoft.DataBase, com.ksoft.Category, com.ksoft.Good, java.sql.Connection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -27,16 +27,21 @@
 	
 	conDB = dBClass.getConnectionPostgresql();
 	
-	List<Categories> categories = new ArrayList<Categories>();
-	Categories strCategory;
+	List<Category> categories = new ArrayList<Category>();
+	Category strCategory;
 	topLevelCategories = (String [])sContext.getAttribute("topLevelCategories");
-	categories = (List<Categories>)sContext.getAttribute("categories");
+	categories = (List<Category>)sContext.getAttribute("categories");
 	String category;
 	
 	int i;
 	String categoryName;
 	String tab;
 	String title;
+	
+	List<Good> goods = new ArrayList<Good>();
+	goods = (List<Good>)sContext.getAttribute("goods");
+	Good strGood;
+		
 	
 %>
 
@@ -184,9 +189,14 @@
 							%>
 							<section id=<%=categoryName%>>
 							
+							<table align="center" border="0" width=100%>
+							<tr>							
+							<td width="170"> 				
+							
+							
 							<div id="categories" align="left">
 							
-							<ul class="border">
+							<ul class="border" style="width: 160px">
 								<%for (int j=0; j<categories.size(); j++){
 									strCategory = categories.get(j);
 										
@@ -195,20 +205,35 @@
 											categoryName = strCategory.categoryName; %>
 															
 											<li>
-												<a href="MainPageServlet?category=<%=Integer.toString(strCategory.catrgoryId)%>" style="color: black; text-decoration: none;"> <%=categoryName%> </a>																
+												<a href="MainPageServlet?selectedCategory=<%=Integer.toString(strCategory.categoryId)%>" style="color: black; text-decoration: none;"> <%=categoryName%> </a>																
 											</li>
 											
 									<% }
 									}
+																		
 								} %>	
 							</ul>
 							</div>
+							</td>							
 							
-
-																							
-							</section>				
+							<td>
+							<%
+							if (goods !=null){
+								for (int m=0; m<goods.size(); m++){
+									strGood = goods.get(m);
+									%><p><%=strGood.name%></p><%	
+								}						
+							}
+							%>
+							</td>
+							
+							
+							</tr>
+							</table> 													
+							</section>							
+											
 							<%i++;
-					
+							
 						}%>	
 											
 					</div>

@@ -36,9 +36,65 @@ public class DataBase {
 
 	   
 	   
-	   public List<Categories> getCategories(Connection connection)
+	   public List<Good> getGoods(Connection connection, int categoryId)
 	   {
-		 List<Categories> categories = new ArrayList<Categories>();
+		 List<Good> goods = new ArrayList<Good>();
+		 
+		 String query="SELECT g.id_category AS categoryId, "
+		 		+ "g.id_good AS goodId,"
+		 		+ "g.id_brand AS brandId,"
+		 		+ "brnd.brand_name AS brandName,"
+		 		+ "g.is_new AS isNew,"
+		 		+ "contf.content_field AS name,"
+		 		+ "g.price AS price,"
+		 		+ "g.disount_price AS discountPrice,"
+		 		+ "g.bonus_count AS bonuses,"
+		 		+ "im.image AS image"
+		 		+ " FROM \"Goods\" g "
+		 		+ "LEFT OUTER JOIN \"Gallery\" gal ON (g.id_gallery = gal.id_gallery)"
+		 		+ "LEFT OUTER JOIN \"Images\" im ON (gal.id_image = im.id_image)"
+		 		+ "LEFT OUTER JOIN \"Contents\" cont ON (g.id_content = cont.id_content)"
+		 		+ "LEFT OUTER JOIN \"Content_fields\" contf ON (cont.id_content_field = contf.id_content_field)"
+		 		+ "LEFT OUTER JOIN \"Brands\" brnd ON (g.id_brand = brnd.id_brand)"
+		 		+ "WHERE (g.is_avalible = \'1\')"
+		 		+ "AND (contf.name_field = \'name\')";
+                 
+         try {
+			 try (Statement stmt = connection.createStatement()){
+				 try (ResultSet rs = stmt.executeQuery(query)){
+			 	
+					 while ( rs.next()) {
+						 Good good = new Good();
+		        	 
+						 good.categoryId = rs.getInt("categoryId");
+						 good.goodId = rs.getInt("goodId");
+						 good.brandId = rs.getInt("brandId");
+						 good.brandName = rs.getString("brandName");
+						 good.isNew = rs.getInt("isNew");
+						 good.name = rs.getString("name");
+						 good.price = rs.getFloat("price");
+						 good.discountPrice = rs.getFloat("discountPrice"); 
+						 good.bonuses = rs.getInt("bonuses");
+						 good.image = rs.getBytes("image");
+						 
+						 goods.add(good);
+					 }
+				 }	 
+			 }
+         
+		 } catch ( SQLException e ) {
+			 e.printStackTrace();
+			 return Collections.emptyList();
+		 }
+		 return goods;
+	   } 
+	   
+	   
+	   
+	   
+	   public List<Category> getCategories(Connection connection)
+	   {
+		 List<Category> categories = new ArrayList<Category>();
 		 
 		 String query="SELECT c.id_category,c.category_position,c.category_name,c.id_parent_category, cc.category_name AS parent_category_name FROM \"Categories\" c "
          		+ "LEFT OUTER JOIN \"Categories\" cc ON (c.id_parent_category = cc.id_category) Where c.category_status = \'1\'";
@@ -48,9 +104,9 @@ public class DataBase {
 				 try (ResultSet rs = stmt.executeQuery(query)){
 			 	
 					 while ( rs.next()) {
-						 Categories category = new Categories();
+						 Category category = new Category();
 		        	 
-						 category.catrgoryId = rs.getInt("id_category");
+						 category.categoryId = rs.getInt("id_category");
 						 category.categoryPosition = rs.getInt("category_position");
 						 category.categoryName= rs.getString("category_name");
 						 category.idParentCategory = rs.getInt("id_parent_category");
