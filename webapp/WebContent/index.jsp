@@ -221,7 +221,13 @@
 							if (goods !=null){
 								for (int m=0; m<goods.size(); m++){
 									strGood = goods.get(m);
-									%><p><%=strGood.name%></p><%	
+									%>
+									
+									<img src="ImageRetrieveServlet?id=<%=strGood.goodId%>" width="125" height ="125"  border="1">
+									<p><%=strGood.name%></p>
+									
+									
+									<%	
 								}						
 							}
 							%>

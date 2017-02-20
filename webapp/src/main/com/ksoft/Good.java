@@ -1,5 +1,6 @@
 package com.ksoft;
 
+
 public class Good	{
 	public int categoryId;
 	public int goodId;
@@ -10,6 +11,7 @@ public class Good	{
 	public float price;
 	public float discountPrice;
 	public int bonuses;
-	public byte[] image;
+	public int imageId;
+ 
 
 }

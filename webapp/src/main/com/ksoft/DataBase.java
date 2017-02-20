@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.io.InputStream;
+import java.io.IOException;
+import org.postgresql.largeobject.*;
+
+
 
 /*import org.junit.experimental.categories.Categories;*/
 
@@ -13,6 +18,7 @@ import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 /*import com.sun.javafx.*;*/
 
 /*import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory;*/
@@ -36,6 +42,75 @@ public class DataBase {
 
 	   
 	   
+	   
+	   public Image getImage(Connection connection, String ImageId) 
+			   throws IOException
+	   {
+		 Image image = new Image();
+		 String imgLen="";
+		/* LargeObjectManager lobj = null;
+		 
+		 try{
+			 lobj = ((org.postgresql.PGConnection)connection).getLargeObjectAPI();
+		 } catch ( SQLException e) {
+			 e.printStackTrace();
+		 }*/
+		 
+		 String quer ="SELECT \"image\""
+		 		+ "FROM \"Images\" "
+		 		+ "WHERE (\"id_image\" = '";
+		 
+		 quer = quer.concat(ImageId);
+	     quer = quer.concat("';");
+                 
+         try {
+			 try (Statement stmt = connection.createStatement()){
+				 try (ResultSet rs = stmt.executeQuery(quer)){
+			 	
+					 if (rs.next()) {
+						 imgLen = rs.getString("image");
+					 }
+					 
+				 }
+				 
+				 try (ResultSet rs = stmt.executeQuery(quer)){
+					 	
+					 if (rs.next()) {
+						 int len = imgLen.length();
+			                byte [] rb = new byte[len];
+			                InputStream readImg = rs.getBinaryStream("image");
+			                
+			                int index = readImg.read(rb, 0, len);
+			                
+			                image.image = rb;
+			                image.imgLen = len;
+					 /*while (rs.next()) {	    
+						 	int oid = rs.getInt("image");
+						    LargeObject obj = lobj.open(oid, LargeObjectManager.READ);
+
+						    // Read the data
+						    byte buf[] = new byte[obj.size()];
+						    obj.read(buf, 0, obj.size());
+						    obj.close();
+						    
+						    image.image = buf;
+			                image.imgLen = obj.size();*/
+					 }
+					 
+				 }
+				 
+			 }
+         
+		 } catch ( SQLException e ) {
+			 e.printStackTrace();
+			 return image = null;
+		 }
+		 return image;
+	   } 
+	   
+	   
+	   
+	   
 	   public List<Good> getGoods(Connection connection, int categoryId)
 	   {
 		 List<Good> goods = new ArrayList<Good>();
@@ -49,7 +124,8 @@ public class DataBase {
 		 		+ "g.price AS price,"
 		 		+ "g.disount_price AS discountPrice,"
 		 		+ "g.bonus_count AS bonuses,"
-		 		+ "im.image AS image"
+		 		//+ "im.image AS image"
+		 		+ "im.id_image AS imageId"
 		 		+ " FROM \"Goods\" g "
 		 		+ "LEFT OUTER JOIN \"Gallery\" gal ON (g.id_gallery = gal.id_gallery)"
 		 		+ "LEFT OUTER JOIN \"Images\" im ON (gal.id_image = im.id_image)"
@@ -75,8 +151,9 @@ public class DataBase {
 						 good.price = rs.getFloat("price");
 						 good.discountPrice = rs.getFloat("discountPrice"); 
 						 good.bonuses = rs.getInt("bonuses");
-						 good.image = rs.getBytes("image");
-						 
+						 //good.image = rs.getBytes("image");
+						 good.imageId = rs.getInt("imageId");
+						 						 
 						 goods.add(good);
 					 }
 				 }	 

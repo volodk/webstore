@@ -29,7 +29,10 @@
     <servlet-name>AdminPageServlet</servlet-name>
     <servlet-class>com.ksoft.AdminPageServlet</servlet-class>
   </servlet>
-  
+  <servlet>
+    <servlet-name>ImageRetrieveServlet</servlet-name>
+    <servlet-class>com.ksoft.ImageRetrieveServlet</servlet-class>
+  </servlet>
   
   
   
@@ -50,6 +53,11 @@
     <servlet-name>AdminPageServlet</servlet-name>
     <url-pattern>/AdminPageServlet</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>ImageRetrieveServlet</servlet-name>
+    <url-pattern>/ImageRetrieveServlet</url-pattern>
+  </servlet-mapping>
+  
   
  
 </web-app>
