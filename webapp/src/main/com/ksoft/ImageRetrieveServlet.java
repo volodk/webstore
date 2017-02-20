@@ -38,8 +38,8 @@ public class ImageRetrieveServlet extends HttpServlet {
             resp.reset();
             resp.setContentType("image/jpg");
             resp.getOutputStream().write(image.image,0,image.imgLen);
-            resp.getOutputStream().flush();   
-                 
+            resp.getOutputStream().flush();  
+                                         
             try{
 				conDB.close();
 			} catch ( Exception e ) {

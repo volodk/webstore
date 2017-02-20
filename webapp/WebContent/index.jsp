@@ -223,7 +223,7 @@
 									strGood = goods.get(m);
 									%>
 									
-									<img src="ImageRetrieveServlet?id=<%=strGood.goodId%>" width="125" height ="125"  border="1">
+									<img src="ImageRetrieveServlet?imageId=<%=strGood.goodId%>" width="125" height ="125"  border="1">
 									<p><%=strGood.name%></p>
 									
 									

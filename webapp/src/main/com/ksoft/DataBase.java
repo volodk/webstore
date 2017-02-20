@@ -56,9 +56,9 @@ public class DataBase {
 			 e.printStackTrace();
 		 }*/
 		 
-		 String quer ="SELECT \"image\""
+		 String quer ="SELECT \"image\" "
 		 		+ "FROM \"Images\" "
-		 		+ "WHERE (\"id_image\" = '";
+		 		+ "WHERE \"id_image\" = '";
 		 
 		 quer = quer.concat(ImageId);
 	     quer = quer.concat("';");
