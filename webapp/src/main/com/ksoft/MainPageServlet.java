@@ -64,8 +64,8 @@ private static final long serialVersionUID = 1L;
 								
 				List<Good> goods = new ArrayList<Good>();
 				
-				
-				
+				String checkedTab = req.getParameter("checkedTab");
+				req.setAttribute("checkedTab", checkedTab);
 				
 				if (exit != null & exit != ""){
 					session.invalidate();

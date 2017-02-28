@@ -133,7 +133,9 @@ public class DataBase {
 		 		+ "LEFT OUTER JOIN \"Content_fields\" contf ON (cont.id_content_field = contf.id_content_field)"
 		 		+ "LEFT OUTER JOIN \"Brands\" brnd ON (g.id_brand = brnd.id_brand)"
 		 		+ "WHERE (g.is_avalible = \'1\')"
-		 		+ "AND (contf.name_field = \'name\')";
+		 		+ "AND (contf.name_field = \'name\')"
+		 		+ "AND (g.id_category = \'" + categoryId + "\')";
+		 
                  
          try {
 			 try (Statement stmt = connection.createStatement()){

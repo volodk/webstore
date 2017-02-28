@@ -110,6 +110,7 @@ section {
 .tabs input {
   display: none;
   width:auto;
+ 
     
 }
 
@@ -127,6 +128,7 @@ section {
   border: 1px solid #ddd;
   background: #efc562;
   border-radius: 15px 15px 0 0;
+ 
   
     
 }

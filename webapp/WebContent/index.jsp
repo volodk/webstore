@@ -1,8 +1,8 @@
 <%@page import="java.io.PrintStream"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="java.util.ArrayList" 
-		 import="java.util.List"%>
-<%@page import="java.io.File, com.ksoft.DataBase, com.ksoft.Category, com.ksoft.Good, java.sql.Connection"%>
+<%@page import="java.util.ArrayList" import="java.util.List"%>
+<%@page
+	import="java.io.File, com.ksoft.DataBase, com.ksoft.Category, com.ksoft.Good, java.sql.Connection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -42,6 +42,16 @@
 	goods = (List<Good>)sContext.getAttribute("goods");
 	Good strGood;
 		
+	String checkedTab = (String)request.getParameter("checkedTab");
+	int checkedTabInt = 0;
+	
+	if (checkedTab != null){
+		checkedTabInt = Integer.parseInt(checkedTab);}
+	else{
+			checkedTab = "0";
+			checkedTabInt = 0;
+		}
+	
 	
 %>
 
@@ -54,7 +64,8 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/index.css">
 
 <title>Webstore</title>
 </head>
@@ -106,7 +117,7 @@
 					</strong>
 				</font> <font color="gray"> (club card:<%out.print(cardNumber); %>)
 				</font></td>
-							<%try{
+				<%try{
 								conDB.close();
 							} catch ( SQLException e ) {
 								e.printStackTrace();    
@@ -160,88 +171,122 @@
 
 	<div>
 		<table align="center" border="0" width=100%>
-			<!-- Third row-->
+
 			<tr>
 				<td width="150"></td>
 				<td align="left">
 
 					<div class="tabs">
-											
-						<%i = 0;
+
+						<% i = 0;
 						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
 							categoryName = topLevelCategories[i];
 							tab = "tab";
 							tab = tab.concat(Integer.toString(i+1));
 						%>
-						
-							<input id=<%=tab%> type="radio" name="tabs" 
-							<% if (i==0){%>checked<%}%>> 
-							<label for=<%=tab%>	title=<%=tab%>><%=categoryName%></label>	
-							
+
+						<input id=<%=tab%> type="radio" name="tabs"
+							<% if (i==checkedTabInt){%> checked <%}%>> <label
+							for=<%=tab%> title=<%=tab%>><%=categoryName%></label>
+
 						<%i++;
-						}%> 
-						
+						}%>
+
 						<%i = 0;
 						  						  
 						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
 							categoryName = "content";
 							categoryName = categoryName.concat(Integer.toString(i+1));
+																					
 							%>
-							<section id=<%=categoryName%>>
-							
-							<table align="center" border="0" width=100%>
-							<tr>							
-							<td width="170"> 				
-							
-							
-							<div id="categories" align="left">
-							
-							<ul class="border" style="width: 160px">
-								<%for (int j=0; j<categories.size(); j++){
-									strCategory = categories.get(j);
-										
-									if (strCategory.parentCategoryName != null){								
-										if (strCategory.parentCategoryName.equals(topLevelCategories[i])){
-											categoryName = strCategory.categoryName; %>
-															
-											<li>
-												<a href="MainPageServlet?selectedCategory=<%=Integer.toString(strCategory.categoryId)%>" style="color: black; text-decoration: none;"> <%=categoryName%> </a>																
-											</li>
+						<section id=<%=categoryName%>>
+
+						<table align="left" border="0" width=160px>
+							<tr>
+								<td width="170">
+
+
+									<div id="categories" align="left">
+
+										<ul class="border" style="width: 160px">
+											<%for (int j=0; j<categories.size(); j++){
+													strCategory = categories.get(j);
+														
+													if (strCategory.parentCategoryName != null){								
+														if (strCategory.parentCategoryName.equals(topLevelCategories[i])){
+															categoryName = strCategory.categoryName; %>
+
+
+											<%checkedTabInt = i;
+															checkedTab = Integer.toString(checkedTabInt);
+															%>
+
+											<li><a
+												href="MainPageServlet?selectedCategory=<%=Integer.toString(strCategory.categoryId)%>&checkedTab=<%=checkedTab%>"
+												style="color: black; text-decoration: none;"> <%=categoryName%>
+											</a></li>
+
+
+											<% }
+													}
+																						
+												} %>
+										</ul>
+									</div>
+								</td>
+						</table>
+
+						<table border=0>
+							<div id="products" align="left">
+								<%
+											int y = 1;
+											%>
+								<tr>
+									<%
 											
-									<% }
-									}
-																		
-								} %>	
-							</ul>
+											if (goods !=null){
+												for (int m=0; m<goods.size(); m++){
+													strGood = goods.get(m);
+													
+													if (y<= 5){
+													%>
+									<td width="125"
+										style="text-align: center; vertical-align: top; padding: 40px;">
+										<%}else{
+														%>
+									
+								</tr>
+								<%
+													y = 1;
+													%>
+								<tr>
+									<td width="125"
+										style="text-align: center; vertical-align: top; padding: 40px;">
+										<%} %> <b style="color: #006600"><%=strGood.brandName%></b> <img
+										src="ImageRetrieveServlet?imageId=<%=strGood.goodId%>"
+										width="125" height="170" border="0"> <b><%=strGood.name%></b>
+
+									</td>
+
+									<%
+													y++;
+												}
+												goods = null;
+											}							
+											%>
+								</tr>
 							</div>
-							</td>							
-							
-							<td>
-							<%
-							if (goods !=null){
-								for (int m=0; m<goods.size(); m++){
-									strGood = goods.get(m);
-									%>
-									
-									<img src="ImageRetrieveServlet?imageId=<%=strGood.goodId%>" width="125" height ="125"  border="1">
-									<p><%=strGood.name%></p>
-									
-									
-									<%	
-								}						
-							}
-							%>
-							</td>
-							
-							
+
+
+
 							</tr>
-							</table> 													
-							</section>							
-											
-							<%i++;
+						</table>
+						</section>
+
+						<%i++;
 							
-						}%>	
-											
+						}%>
+
 					</div>
 
 				</td>
