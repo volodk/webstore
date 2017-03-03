@@ -9,19 +9,10 @@ import java.util.List;
 import java.io.InputStream;
 import java.io.IOException;
 import org.postgresql.largeobject.*;
-
-
-
-/*import org.junit.experimental.categories.Categories;*/
-
-/*import com.ksoft.Admins;*/
-
 import java.util.ArrayList;
 import java.util.Collections;
 
-/*import com.sun.javafx.*;*/
 
-/*import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory;*/
 
 public class DataBase {
 			
@@ -47,15 +38,8 @@ public class DataBase {
 			   throws IOException
 	   {
 		 Image image = new Image();
-		 String imgLen="";
-		/* LargeObjectManager lobj = null;
-		 
-		 try{
-			 lobj = ((org.postgresql.PGConnection)connection).getLargeObjectAPI();
-		 } catch ( SQLException e) {
-			 e.printStackTrace();
-		 }*/
-		 
+		 int len = 1024;
+				 
 		 String quer ="SELECT \"image\" "
 		 		+ "FROM \"Images\" "
 		 		+ "WHERE \"id_image\" = '";
@@ -66,35 +50,17 @@ public class DataBase {
          try {
 			 try (Statement stmt = connection.createStatement()){
 				 try (ResultSet rs = stmt.executeQuery(quer)){
-			 	
-					 if (rs.next()) {
-						 imgLen = rs.getString("image");
-					 }
-					 
-				 }
-				 
-				 try (ResultSet rs = stmt.executeQuery(quer)){
 					 	
 					 if (rs.next()) {
-						 int len = imgLen.length();
-			                byte [] rb = new byte[len];
-			                InputStream readImg = rs.getBinaryStream("image");
+						    InputStream readImg = rs.getBinaryStream("image");
 			                
+						    len = readImg.available();
+				            byte [] rb = new byte[len];
+						    
 			                int index = readImg.read(rb, 0, len);
 			                
-			                image.image = rb;
-			                image.imgLen = len;
-					 /*while (rs.next()) {	    
-						 	int oid = rs.getInt("image");
-						    LargeObject obj = lobj.open(oid, LargeObjectManager.READ);
-
-						    // Read the data
-						    byte buf[] = new byte[obj.size()];
-						    obj.read(buf, 0, obj.size());
-						    obj.close();
-						    
-						    image.image = buf;
-			                image.imgLen = obj.size();*/
+			                image.setImage(rb);
+			                image.setImgLen(len);
 					 }
 					 
 				 }
@@ -124,7 +90,6 @@ public class DataBase {
 		 		+ "g.price AS price,"
 		 		+ "g.disount_price AS discountPrice,"
 		 		+ "g.bonus_count AS bonuses,"
-		 		//+ "im.image AS image"
 		 		+ "im.id_image AS imageId"
 		 		+ " FROM \"Goods\" g "
 		 		+ "LEFT OUTER JOIN \"Gallery\" gal ON (g.id_gallery = gal.id_gallery)"
@@ -144,17 +109,16 @@ public class DataBase {
 					 while ( rs.next()) {
 						 Good good = new Good();
 		        	 
-						 good.categoryId = rs.getInt("categoryId");
-						 good.goodId = rs.getInt("goodId");
-						 good.brandId = rs.getInt("brandId");
-						 good.brandName = rs.getString("brandName");
-						 good.isNew = rs.getInt("isNew");
-						 good.name = rs.getString("name");
-						 good.price = rs.getFloat("price");
-						 good.discountPrice = rs.getFloat("discountPrice"); 
-						 good.bonuses = rs.getInt("bonuses");
-						 //good.image = rs.getBytes("image");
-						 good.imageId = rs.getInt("imageId");
+						 good.setCategoryId(rs.getInt("categoryId"));
+						 good.setGoodId(rs.getInt("goodId"));
+						 good.setBrandId(rs.getInt("brandId"));
+						 good.setBrandName(rs.getString("brandName"));
+						 good.setIsNew(rs.getInt("isNew"));
+						 good.setName(rs.getString("name"));
+						 good.setPrice(rs.getFloat("price"));
+						 good.setDiscountPrice(rs.getFloat("discountPrice")); 
+						 good.setBonuses(rs.getInt("bonuses"));
+						 good.setImageId(rs.getInt("imageId"));
 						 						 
 						 goods.add(good);
 					 }
@@ -185,11 +149,11 @@ public class DataBase {
 					 while ( rs.next()) {
 						 Category category = new Category();
 		        	 
-						 category.categoryId = rs.getInt("id_category");
-						 category.categoryPosition = rs.getInt("category_position");
-						 category.categoryName= rs.getString("category_name");
-						 category.idParentCategory = rs.getInt("id_parent_category");
-						 category.parentCategoryName = rs.getString("parent_category_name");			        	 
+						 category.setCategoryId(rs.getInt("id_category"));
+						 category.setCategoryPosition(rs.getInt("category_position"));
+						 category.setCategoryName(rs.getString("category_name"));
+						 category.setIdParentCategory(rs.getInt("id_parent_category"));
+						 category.setParentCategoryName(rs.getString("parent_category_name"));			        	 
 
 						 categories.add(category);
 					 }
@@ -400,12 +364,12 @@ public class DataBase {
 					 while ( rs.next()) {
 						 Admins strAdminInfo = new Admins();
 		        	 
-			        	 strAdminInfo.adminName = rs.getString("AdminName");
-			        	 strAdminInfo.adminLsatName = rs.getString("AdminLastName");
-			        	 strAdminInfo.adminLogin= rs.getString("AdminLogin");
-			        	 strAdminInfo.adminPassword = rs.getString("AdminPassword");
-			        	 strAdminInfo.superAdmin = rs.getInt("SuperAdmin");
-			        	 strAdminInfo.idAdmin = rs.getInt("id_admin");
+			        	 strAdminInfo.setAdminName(rs.getString("AdminName"));
+			        	 strAdminInfo.setAdminLsatName(rs.getString("AdminLastName"));
+			        	 strAdminInfo.setAdminLogin(rs.getString("AdminLogin"));
+			        	 strAdminInfo.setAdminPassword(rs.getString("AdminPassword"));
+			        	 strAdminInfo.setSuperAdmin(rs.getInt("SuperAdmin"));
+			        	 strAdminInfo.setIdAdmin(rs.getInt("id_admin"));
 			        	 
 			        	 adminsTable.add(strAdminInfo);
 					 }

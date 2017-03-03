@@ -67,18 +67,18 @@ private static final long serialVersionUID = 1L;
 				String checkedTab = req.getParameter("checkedTab");
 				req.setAttribute("checkedTab", checkedTab);
 				
-				if (exit != null & exit != ""){
+				if (exit != null && exit != ""){
 					session.invalidate();
 				}
 				
 				/*подключимся к БД*/
-				/*if ((authForm!=null & authForm!="") | (regForm!=null & regForm!="")){*/
+				/*if ((authForm!=null && authForm!="") || (regForm!=null && regForm!="")){*/
 				conDB = dBClass.getConnectionPostgresql();
 				/*}*/	
 				
 				
 				/*получим инфо пользователя*/
-				if (conDB!=null & login!=null & login!="" & password!=null & password!=""){
+				if (conDB!=null && login!=null && login!="" && password!=null && password!=""){
 					userId = dBClass.getUserId(login, password, conDB);
 					allowed = false;
 					if (userId.length()>0){
@@ -103,7 +103,7 @@ private static final long serialVersionUID = 1L;
 				
 								
 				/*просто отображение первой страницы*/
-				if ((authForm == null | authForm == "") & (regForm == null | regForm == "")){
+				if ((authForm == null || authForm == "") && (regForm == null || regForm == "")){
 					
 					topLevelCategories = dBClass.getTopLevelCategories(conDB);
 					categories = dBClass.getCategories(conDB);
@@ -114,7 +114,7 @@ private static final long serialVersionUID = 1L;
 					
 				}	
 				/*обработаем инфо пользователя*/
-				else if (authForm != null & authForm != ""){
+				else if (authForm != null && authForm != ""){
 					if (allowed){
 						session.setAttribute("userId", userId);
 						req.getRequestDispatcher("index.jsp").forward(req, resp);
@@ -126,10 +126,10 @@ private static final long serialVersionUID = 1L;
 				}
 					
 				/*обработаем данные для регистратции нового пользователя*/
-				else if (regForm != null & regForm != ""){
+				else if (regForm != null && regForm != ""){
 										
 					/*проверим заполненность полей*/
-					if(userName.equals("") | userLastName.equals("") | mail.equals("") | login.equals("") | password.equals("")){
+					if(userName.equals("") || userLastName.equals("") || mail.equals("") || login.equals("") || password.equals("")){
 						fieldsFilligExeption = "1";
 						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
 						req.setAttribute("regForm", regForm);
@@ -178,7 +178,7 @@ private static final long serialVersionUID = 1L;
 								
 				
 					
-		if ((authForm!=null & authForm!="") | (regForm!=null & regForm!="")){
+		if ((authForm!=null && authForm!="") || (regForm!=null && regForm!="")){
 			  try{
 				conDB.close();
 			} catch ( Exception e ) {

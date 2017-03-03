@@ -92,7 +92,7 @@
 				<td></td>
 
 				<%
-					if (userId.equals("") | (userId.equals(null))) {
+					if (userId.equals("") || (userId.equals(null))) {
 				%>
 				<td align="right" width="60"><a
 					href="AuthenticationPageServlet"
@@ -179,7 +179,7 @@
 					<div class="tabs">
 
 						<% i = 0;
-						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
+						while (topLevelCategories[i]!="" && topLevelCategories[i]!=null) {
 							categoryName = topLevelCategories[i];
 							tab = "tab";
 							tab = tab.concat(Integer.toString(i+1));
@@ -194,7 +194,7 @@
 
 						<%i = 0;
 						  						  
-						while (topLevelCategories[i]!="" & topLevelCategories[i]!=null) {
+						while (topLevelCategories[i]!="" && topLevelCategories[i]!=null) {
 							categoryName = "content";
 							categoryName = categoryName.concat(Integer.toString(i+1));
 																					
@@ -212,9 +212,9 @@
 											<%for (int j=0; j<categories.size(); j++){
 													strCategory = categories.get(j);
 														
-													if (strCategory.parentCategoryName != null){								
-														if (strCategory.parentCategoryName.equals(topLevelCategories[i])){
-															categoryName = strCategory.categoryName; %>
+													if (strCategory.getParentCategoryName() != null){								
+														if (strCategory.getParentCategoryName().equals(topLevelCategories[i])){
+															categoryName = strCategory.getCategoryName(); %>
 
 
 											<%checkedTabInt = i;
@@ -222,7 +222,7 @@
 															%>
 
 											<li><a
-												href="MainPageServlet?selectedCategory=<%=Integer.toString(strCategory.categoryId)%>&checkedTab=<%=checkedTab%>"
+												href="MainPageServlet?selectedCategory=<%=Integer.toString(strCategory.getCategoryId())%>&&checkedTab=<%=checkedTab%>"
 												style="color: black; text-decoration: none;"> <%=categoryName%>
 											</a></li>
 
@@ -262,9 +262,10 @@
 								<tr>
 									<td width="125"
 										style="text-align: center; vertical-align: top; padding: 40px;">
-										<%} %> <b style="color: #006600"><%=strGood.brandName%></b> <img
-										src="ImageRetrieveServlet?imageId=<%=strGood.goodId%>"
-										width="125" height="170" border="0"> <b><%=strGood.name%></b>
+										<%} %> 
+										<b style="color: #006600"><%=strGood.getBrandName()%></b> <img
+										src="ImageRetrieveServlet?imageId=<%=strGood.getGoodId()%>"
+										width="125" height="170" border="0"> <b><%=strGood.getName()%></b>
 
 									</td>
 

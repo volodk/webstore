@@ -115,14 +115,14 @@ public class AdminPageServlet extends HttpServlet {
 				
 				
 				
-				if ((adminForm!=null & adminForm!="") | (modAdmin.equals("1"))){
+				if ((adminForm!=null && adminForm!="") || (modAdmin.equals("1"))){
 					conDB = dBClass.getConnectionPostgresql();
 				}
 				
 				
 				allowed = false;				
 				/*получим инфо админа*/
-				if (conDB!=null & login!=null & login!="" & password!=null & password!=""){
+				if (conDB!=null && login!=null && login!="" && password!=null && password!=""){
 					adminId = dBClass.getAdminId(login, password, conDB);
 															
 					if (adminId.length()>0){
@@ -148,7 +148,7 @@ public class AdminPageServlet extends HttpServlet {
 				/*Если это модификация данных по админу. Данные отредактированы и передаются для записи*/
 				}else if (modAdmin.equals("3")){
 					/*проверим заполненность полей*/
-					if(oldAdminName.equals("") | oldAdminLastName.equals("") | oldAdminLogin.equals("") | oldAdminLogin.equals("")){
+					if(oldAdminName.equals("") || oldAdminLastName.equals("") || oldAdminLogin.equals("") || oldAdminLogin.equals("")){
 						fieldsFilligExeption = "1";
 						req.setAttribute("modAdmin", "2");
 						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
@@ -192,9 +192,9 @@ public class AdminPageServlet extends HttpServlet {
 					
 						
 				/*Если это выбор админа для редактирования*/
-				}else if (modAdmin.equals("2") & (checkAdmin!=null)){
+				}else if (modAdmin.equals("2") && (checkAdmin!=null)){
 					strModAdmin = adminsTable.get(checkAdminInt.intValue());
-					if (deleteAdmin!=null & !deleteAdmin.equals("")){
+					if (deleteAdmin!=null && !deleteAdmin.equals("")){
 						adminIsDeleted = dBClass.deleteAdmin(strModAdmin.idAdmin, conDB);
 						if(adminIsDeleted==true){
 							req.setAttribute("modAdmin", "1");	
@@ -221,7 +221,7 @@ public class AdminPageServlet extends HttpServlet {
 					
 									
 				/*Если это выбор меню редактирования админов*/
-				}else if (modAdmin.equals("1")| ((modAdmin.equals("2") & (checkAdmin==null)))){
+				}else if (modAdmin.equals("1")|| ((modAdmin.equals("2") && (checkAdmin==null)))){
 					/*получим таблицу с логинами админов*/
 					adminsTable = dBClass.getAllAdminsInfo(conDB);
 					
@@ -235,7 +235,7 @@ public class AdminPageServlet extends HttpServlet {
 				}else if (newAdmin.equals("2")){	
 
 					/*проверим заполненность полей*/
-					if(newAdminName.equals("") | newAdminLastName.equals("") | newAdminLogin.equals("") | newAdminLogin.equals("")){
+					if(newAdminName.equals("") || newAdminLastName.equals("") || newAdminLogin.equals("") || newAdminLogin.equals("")){
 						fieldsFilligExeption = "1";
 						req.setAttribute("newAdmin", newAdmin);
 						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);

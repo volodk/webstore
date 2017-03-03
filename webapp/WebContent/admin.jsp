@@ -42,7 +42,7 @@ DataBase dBClass = new DataBase();
 Connection conDB;
 
 if (strModAdmin!=null){
-	strChecked = Integer.toString(strModAdmin.superAdmin);
+	strChecked = Integer.toString(strModAdmin.getSuperAdmin());
 }
 
 
@@ -111,10 +111,10 @@ if (strModAdmin!=null){
 	<center>
 				
 		<%
-		if (adminForm.equals("1") & (newAdmin.equals("")|newAdmin==null) 
-				& (modAdmin.equals("")|modAdmin==null)
-				& (newGood.equals("")|newGood==null)
-				& (modGood.equals("")|modGood==null)){
+		if (adminForm.equals("1") && (newAdmin.equals("")||newAdmin==null) 
+				&& (modAdmin.equals("")||modAdmin==null)
+				&& (newGood.equals("")||newGood==null)
+				&& (modGood.equals("")||modGood==null)){
 		%>
 		
 		<table width="300" cellpadding="15" align="center">
@@ -149,7 +149,7 @@ if (strModAdmin!=null){
 		
 <!-- 		Блок по редактированию данных админов -->
 		<%
-		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("1"))){			
+		} else if (!adminName.equals("") && (!adminName.equals(null)) && (modAdmin.equals("1"))){			
 		%>
 		
 		<%if(adminUpd.equals("1")){%>
@@ -241,19 +241,19 @@ if (strModAdmin!=null){
 						<input type="radio" name="checkAdmin" value=<%=i%>>
 						</td>					
 						<td style="border-style: hidden;">
-						<%out.print(strAdmins.adminName);%>
+						<%out.print(strAdmins.getAdminName());%>
 						</td>
 						<td style="border-style: hidden;">
-						<%out.print(strAdmins.adminLsatName);%>
+						<%out.print(strAdmins.getAdminLsatName());%>
 						</td>
 						<td style="border-style: hidden;">
-						<%out.print(strAdmins.adminLogin);%>
+						<%out.print(strAdmins.getAdminLogin());%>
 						</td>
 						<td style="border-style: hidden;">
-						<%out.print(strAdmins.adminPassword);%>
+						<%out.print(strAdmins.getAdminPassword());%>
 						</td>
 						<td style="border-style: hidden;">
-						<%out.print(strAdmins.superAdmin);%>
+						<%out.print(strAdmins.getSuperAdmin());%>
 						</td>
 											
 					</tr>
@@ -285,14 +285,14 @@ if (strModAdmin!=null){
 			</form>		
 		</div>
 		
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 		
 		
 		
 		
 		<%
-		} else if (!adminName.equals("") & (!adminName.equals(null)) & (modAdmin.equals("2"))){	
+		} else if (!adminName.equals("") && (!adminName.equals(null)) && (modAdmin.equals("2"))){	
 		%>
 
 			<%if(fieldsFilligExeption.equals("1")){%>
@@ -365,22 +365,22 @@ if (strModAdmin!=null){
 					
 					<tr>
 						<th align="left" >
-							First name: <input type="text" value=<%=strModAdmin.adminName%> name="oldAdminName" style="width: 71%;">
+							First name: <input type="text" value=<%=strModAdmin.getAdminName()%> name="oldAdminName" style="width: 71%;">
 						</th>
 					</tr>
 					<tr>	
 						<th align="left">
-							Last name: <input type="text" value=<%=strModAdmin.adminLsatName%> name="oldAdminLastName" style="width: 71%;">
+							Last name: <input type="text" value=<%=strModAdmin.getAdminLsatName()%> name="oldAdminLastName" style="width: 71%;">
 						</th>
 					</tr>
 					<tr>
 						<th align="left">
-							Login: <input type="text" value=<%=strModAdmin.adminLogin%> name="oldAdminLogin" style="width: 81%;">
+							Login: <input type="text" value=<%=strModAdmin.getAdminLogin()%> name="oldAdminLogin" style="width: 81%;">
 						</th>
 					</tr>
 					<tr>	
 						<th align="left">
-							Password: <input type="text" value=<%=strModAdmin.adminPassword%> name="oldAdminPassword" style="width: 72%;">
+							Password: <input type="text" value=<%=strModAdmin.getAdminPassword()%> name="oldAdminPassword" style="width: 72%;">
 						</th>
 					</tr>
 					<tr>	
@@ -389,7 +389,7 @@ if (strModAdmin!=null){
 						</th>
 					</tr>
 																
- 					<input type="hidden" name="oldIdAdmin" value=<%=Integer.toString(strModAdmin.idAdmin)%>> 
+ 					<input type="hidden" name="oldIdAdmin" value=<%=Integer.toString(strModAdmin.getIdAdmin())%>> 
 					<input type="hidden" name="adminForm" value="1">
 					<input type="hidden" name="modAdmin" value="3">
 					<input type="hidden" name="fieldsFilligExeption" value="">
@@ -405,14 +405,14 @@ if (strModAdmin!=null){
 			</table>		
 		</div>
 		
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 	
 	
 	
 	<!-- 		 Блок работы с созданием новой номенклатуры -->
 		<%
-		} else if (!adminName.equals("") & (!adminName.equals(null)) & (newGood.equals("1"))){			
+		} else if (!adminName.equals("") && (!adminName.equals(null)) && (newGood.equals("1"))){			
 		%>
 
 		<div id="head">
@@ -509,7 +509,7 @@ if (strModAdmin!=null){
 				
 			</table>		
 		</div>
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 	<!-- 		 Блок работы с созданием новой номенклатуры -->
 	
@@ -529,7 +529,7 @@ if (strModAdmin!=null){
 		
 <!-- 		 Блок работы с созданием нового админа -->
 		<%
-		} else if (!adminName.equals("") & (!adminName.equals(null)) & (newAdmin.equals("1"))){			
+		} else if (!adminName.equals("") && (!adminName.equals(null)) && (newAdmin.equals("1"))){			
 		%>
 
 		<div id="head">
@@ -626,11 +626,11 @@ if (strModAdmin!=null){
 				
 			</table>		
 		</div>
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 		
 		<%
-		} else if (!adminName.equals("") & !adminName.equals(null) & newAdmin.equals("2") & fieldsFilligExeption.equals("1")){			
+		} else if (!adminName.equals("") && !adminName.equals(null) && newAdmin.equals("2") && fieldsFilligExeption.equals("1")){			
 		%>
 		
 		<div id="head">
@@ -696,11 +696,11 @@ if (strModAdmin!=null){
 				
 			</table>		
 		</div>
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 		
 		<%
-		} else if (!adminName.equals("") & !adminName.equals(null) & newAdmin.equals("2") & !loginIsFree.equals("1")){			
+		} else if (!adminName.equals("") && !adminName.equals(null) && newAdmin.equals("2") && !loginIsFree.equals("1")){			
 		%>
 		
 		<div id="head">
@@ -766,12 +766,12 @@ if (strModAdmin!=null){
 				
 			</table>		
 		</div>
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 		
 		
 		<%
-		} else if (!adminName.equals("") & !adminName.equals(null) & newAdmin.equals("2") & adminReg.equals("1")){			
+		} else if (!adminName.equals("") && !adminName.equals(null) && newAdmin.equals("2") && adminReg.equals("1")){			
 		%>
 		
 		<div id="head">
@@ -837,12 +837,12 @@ if (strModAdmin!=null){
 				
 			</table>		
 		</div>
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 		
 		
 		
 		<%
-		} else if (!adminName.equals("") & (!adminName.equals(null))){			
+		} else if (!adminName.equals("") && (!adminName.equals(null))){			
 		%>
 
 		<div id="head">
@@ -883,7 +883,7 @@ if (strModAdmin!=null){
 		</div>
 		<div id="content" >
 		</div>
-		<div id="foot">Copyright &copy; Klymenko Sergii</div>
+		<div id="foot">Copyright &&copy; Klymenko Sergii</div>
 
 
 

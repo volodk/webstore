@@ -37,7 +37,7 @@ public class ImageRetrieveServlet extends HttpServlet {
               
             resp.reset();
             resp.setContentType("image/jpg");
-            resp.getOutputStream().write(image.image,0,image.imgLen);
+            resp.getOutputStream().write(image.getImage(),0,image.getImgLen());
             resp.getOutputStream().flush();  
                                          
             try{
