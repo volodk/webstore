@@ -1,9 +1,14 @@
-package com.ksoft;
+package com.ksoft.controllers;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
+
+import com.ksoft.Category;
+import com.ksoft.DataBase;
+import com.ksoft.Good;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
