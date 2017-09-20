@@ -2,7 +2,7 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.ArrayList" import="java.util.List"%>
 <%@page
-	import="java.io.File, com.ksoft.DataBase, com.ksoft.Category, com.ksoft.Good, java.sql.Connection"%>
+	import="java.io.File, com.ksoft.controllers.DataBase, com.ksoft.model.Category, com.ksoft.model.Good, java.sql.Connection"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 

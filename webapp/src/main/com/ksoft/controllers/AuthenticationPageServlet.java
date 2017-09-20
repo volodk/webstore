@@ -1,4 +1,4 @@
-package com.ksoft;
+package com.ksoft.controllers;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

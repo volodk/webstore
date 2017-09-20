@@ -3,7 +3,7 @@
 	
 <%@ page import="java.util.ArrayList" 
 		 import="java.util.List"
-		 import="com.ksoft.Admins, com.ksoft.DataBase, java.sql.Connection" %>
+		 import="com.ksoft.model.Admins, com.ksoft.controllers.DataBase, java.sql.Connection" %>
 	
 	
 <%

@@ -1,4 +1,5 @@
-package com.ksoft;
+package com.ksoft.controllers;
+import com.ksoft.model.*;
 
 
 import javax.servlet.ServletContext;

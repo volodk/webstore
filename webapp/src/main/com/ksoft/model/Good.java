@@ -1,4 +1,4 @@
-package com.ksoft;
+package com.ksoft.model;
 
 
 public class Good	{
