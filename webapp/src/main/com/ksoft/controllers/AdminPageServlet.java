@@ -88,6 +88,7 @@ public class AdminPageServlet extends HttpServlet {
 				String adminId = (String)session.getAttribute("adminId");
 				
 				adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
+				String [] stringAdminsTable;
 											
 				/*определим newAdmin если он равен 0*/
 				if (newAdmin == null){
@@ -172,6 +173,10 @@ public class AdminPageServlet extends HttpServlet {
 								req.setAttribute("adminUpd", "1");
 							/*	перечитаем таблицу с инфо админов админов*/
 								adminsTable = dBClass.getAllAdminsInfo(conDB);
+							
+//							/* переконвертируем adminsTable в массив строк*/	
+//								stringAdminsTable = convertAdminsTable (adminsTable);
+								
 								sContext.setAttribute("adminsTable", adminsTable);}
 							else{
 								req.setAttribute("adminUpd", "");
@@ -290,7 +295,17 @@ public class AdminPageServlet extends HttpServlet {
 			  
    }
 
-
+	
+	
+//	private String [] convertAdminsTable (List<Admins> adminsTable){
+//		Admins adminsLine = new Admins();
+//		String[] adminsStringTable;
+//		
+//		for (int i = 0; i < adminsTable.size(); i++) {
+//			adminsLine = adminsTable.get(i);
+//			adminsStringTable[i].
+//		}	
+//	}
 	
 }
 
