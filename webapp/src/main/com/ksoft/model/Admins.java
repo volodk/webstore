@@ -6,7 +6,7 @@ public class Admins {
 	private String adminLogin;
 	private String adminPassword;
 	private int superAdmin;
-	public int idAdmin;
+	private int idAdmin;
 
 
 
