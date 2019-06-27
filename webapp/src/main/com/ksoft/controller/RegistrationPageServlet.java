@@ -1,4 +1,4 @@
-package com.ksoft.controllers;
+package com.ksoft.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +23,7 @@ public class RegistrationPageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
 		 	
-			req.getRequestDispatcher("registration.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
     }
  
 }

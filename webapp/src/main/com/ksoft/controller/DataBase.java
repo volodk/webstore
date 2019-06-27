@@ -1,4 +1,4 @@
-package com.ksoft.controllers;
+package com.ksoft.controller;
 import com.ksoft.model.*;
 
 import java.sql.Connection;

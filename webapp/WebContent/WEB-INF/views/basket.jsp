@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<!-- <head>
 <style>
 		body {
 			background-image: url(backgrounds/Background.jpg);
@@ -15,7 +15,16 @@
 	</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Basket</title>
-</head>
+</head> -->
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/basket.css">
+		<title>Basket</title>	
+		
+	</head>
+
+
 <body link="yellow" alink="yellow" vlink="yellow">
 	<%-- <%@include file = "AllowLoginPas.jsp"%> --%>
 	

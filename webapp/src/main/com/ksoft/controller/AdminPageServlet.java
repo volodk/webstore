@@ -1,4 +1,4 @@
-package com.ksoft.controllers;
+package com.ksoft.controller;
 import com.ksoft.model.*;
 
 
@@ -143,7 +143,7 @@ public class AdminPageServlet extends HttpServlet {
 					session.setAttribute("adminId", adminId);
 					req.setAttribute("adminForm", "");
 					
-					req.getRequestDispatcher("admin.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 				
 					
 					
@@ -155,7 +155,7 @@ public class AdminPageServlet extends HttpServlet {
 						req.setAttribute("modAdmin", "2");
 						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
 						req.setAttribute("adminForm", adminForm);
-						req.getRequestDispatcher("admin.jsp").forward(req, resp);
+						req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 					}
 					
 					/*проверим логин*/
@@ -191,7 +191,7 @@ public class AdminPageServlet extends HttpServlet {
 						req.setAttribute("modAdmin", "1");
 						req.setAttribute("loginIsFree", loginIsFree);
 						req.setAttribute("adminForm", adminForm);
-						req.getRequestDispatcher("admin.jsp").forward(req, resp);
+						req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 					}
 				
 									
@@ -223,7 +223,7 @@ public class AdminPageServlet extends HttpServlet {
 					req.setAttribute("adminForm", adminForm);						
 					}
 					
-					req.getRequestDispatcher("admin.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 					
 									
 				/*Если это выбор меню редактирования админов*/
@@ -234,7 +234,7 @@ public class AdminPageServlet extends HttpServlet {
 					req.setAttribute("modAdmin", "1");
 					req.setAttribute("adminForm", adminForm);
 					sContext.setAttribute("adminsTable", adminsTable);
-					req.getRequestDispatcher("admin.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 					
 								
 				/*Если это регистрация нового админа*/
@@ -246,7 +246,7 @@ public class AdminPageServlet extends HttpServlet {
 						req.setAttribute("newAdmin", newAdmin);
 						req.setAttribute("fieldsFilligExeption", fieldsFilligExeption);
 						req.setAttribute("adminForm", adminForm);
-						req.getRequestDispatcher("admin.jsp").forward(req, resp);
+						req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 					}
 					
 					/*роверим логин*/
@@ -272,7 +272,7 @@ public class AdminPageServlet extends HttpServlet {
 						req.setAttribute("modAdmin", modAdmin);
 						req.setAttribute("loginIsFree", loginIsFree);
 						req.setAttribute("adminForm", adminForm);
-						req.getRequestDispatcher("admin.jsp").forward(req, resp);
+						req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 					}
 				
 					
@@ -280,7 +280,7 @@ public class AdminPageServlet extends HttpServlet {
 					req.setAttribute("newAdmin", newAdmin);
 					req.setAttribute("newGood", newGood);
 					req.setAttribute("adminForm", adminForm);
-					req.getRequestDispatcher("admin.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(req, resp);
 				}
 				
 				

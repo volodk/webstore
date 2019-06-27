@@ -4,7 +4,7 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>	index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
@@ -15,23 +15,23 @@
   </context-param>
   <servlet>
     <servlet-name>MainPageServlet</servlet-name>
-    <servlet-class>com.ksoft.MainPageServlet</servlet-class>
+    <servlet-class>com.ksoft.controller.MainPageServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AuthenticationPageServlet</servlet-name>
-    <servlet-class>com.ksoft.AuthenticationPageServlet</servlet-class>
+    <servlet-class>com.ksoft.controller.AuthenticationPageServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>RegistrationPageServlet</servlet-name>
-    <servlet-class>com.ksoft.RegistrationPageServlet</servlet-class>
+    <servlet-class>com.ksoft.controller.RegistrationPageServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AdminPageServlet</servlet-name>
-    <servlet-class>com.ksoft.AdminPageServlet</servlet-class>
+    <servlet-class>com.ksoft.controller.AdminPageServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ImageRetrieveServlet</servlet-name>
-    <servlet-class>com.ksoft.ImageRetrieveServlet</servlet-class>
+    <servlet-class>com.ksoft.controller.ImageRetrieveServlet</servlet-class>
   </servlet>
   
   

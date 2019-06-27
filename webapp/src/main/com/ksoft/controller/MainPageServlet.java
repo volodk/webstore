@@ -1,13 +1,13 @@
-package com.ksoft.controllers;
+package com.ksoft.controller;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
-import com.ksoft.Category;
-import com.ksoft.DataBase;
-import com.ksoft.Good;
+import com.ksoft.model.Category;
+import com.ksoft.controller.DataBase;
+import com.ksoft.model.Good;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -115,14 +115,14 @@ private static final long serialVersionUID = 1L;
 					sContext.setAttribute("topLevelCategories", topLevelCategories);
 					sContext.setAttribute("categories", categories);
 					
-					req.getRequestDispatcher("index.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
 					
 				}	
 				/*обработаем инфо пользователя*/
 				else if (authForm != null && authForm != ""){
 					if (allowed){
 						session.setAttribute("userId", userId);
-						req.getRequestDispatcher("index.jsp").forward(req, resp);
+						req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
 					}
 					else{
 						req.setAttribute("authForm", authForm);
