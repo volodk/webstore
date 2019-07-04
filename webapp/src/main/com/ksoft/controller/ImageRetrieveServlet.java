@@ -1,6 +1,6 @@
 package com.ksoft.controller;
 import com.ksoft.model.*;
-
+import com.ksoft.interfaces.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +29,13 @@ public class ImageRetrieveServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
           
-			DataBase dBClass = new DataBase();
+			IDataBase dBClass = new DataBase();
 		
     		String imageId = req.getParameter("imageId");
                        
             conDB = dBClass.getConnectionPostgresql();
             
-            Image image = dBClass.getImage(conDB, imageId);
+            IImage image = dBClass.getImage(conDB, imageId);
               
             resp.reset();
             resp.setContentType("image/jpg");

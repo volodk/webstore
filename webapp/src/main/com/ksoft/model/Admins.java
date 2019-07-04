@@ -1,6 +1,8 @@
 package com.ksoft.model;
 
-public class Admins {
+import com.ksoft.interfaces.IAdmins;
+
+public class Admins implements IAdmins{
 	private String adminName;
 	private String adminLsatName;
 	private String adminLogin;

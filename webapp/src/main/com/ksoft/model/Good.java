@@ -1,7 +1,8 @@
 package com.ksoft.model;
 
+import com.ksoft.interfaces.*;
 
-public class Good	{
+public class Good implements IGood	{
 	private int categoryId;
 	private int goodId;
 	private int brandId;

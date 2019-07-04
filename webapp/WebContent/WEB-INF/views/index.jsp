@@ -2,7 +2,7 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.ArrayList" import="java.util.List"%>
 <%@page
-	import="java.io.File, com.ksoft.controller.DataBase, com.ksoft.model.Category, com.ksoft.model.Good, java.sql.Connection"%>
+	import="java.io.File, com.ksoft.model.DataBase, com.ksoft.model.Category, com.ksoft.model.Good, java.sql.Connection, com.ksoft.interfaces.*"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -16,7 +16,7 @@
 		
 	ServletContext sContext = getServletConfig().getServletContext();
 	
-	DataBase dBClass = new DataBase();
+	IDataBase dBClass = new DataBase();
 	Connection conDB;
 	
 	userId = (String) session.getAttribute("userId");
@@ -27,10 +27,10 @@
 	
 	conDB = dBClass.getConnectionPostgresql();
 	
-	List<Category> categories = new ArrayList<Category>();
-	Category strCategory;
+	List<ICategory> categories = new ArrayList<ICategory>();
+	ICategory strCategory;
 	topLevelCategories = (String [])sContext.getAttribute("topLevelCategories");
-	categories = (List<Category>)sContext.getAttribute("categories");
+	categories = (List<ICategory>)sContext.getAttribute("categories");
 	String category;
 	
 	int i;
@@ -38,9 +38,9 @@
 	String tab;
 	String title;
 	
-	List<Good> goods = new ArrayList<Good>();
-	goods = (List<Good>)sContext.getAttribute("goods");
-	Good strGood;
+	List<IGood> goods = new ArrayList<IGood>();
+	goods = (List<IGood>)sContext.getAttribute("goods");
+	IGood strGood;
 		
 	String checkedTab = (String)request.getParameter("checkedTab");
 	int checkedTabInt = 0;

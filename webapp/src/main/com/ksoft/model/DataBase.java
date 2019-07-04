@@ -1,5 +1,5 @@
-package com.ksoft.controller;
-import com.ksoft.model.*;
+package com.ksoft.model;
+import com.ksoft.interfaces.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,13 +9,13 @@ import java.sql.Statement;
 import java.util.List;
 import java.io.InputStream;
 import java.io.IOException;
-import org.postgresql.largeobject.*;
+//import org.postgresql.largeobject.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
 
 
-public class DataBase {
+public class DataBase implements IDataBase{
 			
 	   public Connection getConnectionPostgresql() {
 	      Connection c = null;
@@ -32,7 +32,6 @@ public class DataBase {
 	   }
 	
 
-	   
 	   
 	   
 	   public Image getImage(Connection connection, String ImageId) 
@@ -78,9 +77,9 @@ public class DataBase {
 	   
 	   
 	   
-	   public List<Good> getGoods(Connection connection, int categoryId)
+	   public List<IGood> getGoods(Connection connection, int categoryId)
 	   {
-		 List<Good> goods = new ArrayList<Good>();
+		 List<IGood> goods = new ArrayList<IGood>();
 		 
 		 String query="SELECT g.id_category AS categoryId, "
 		 		+ "g.id_good AS goodId,"
@@ -136,9 +135,9 @@ public class DataBase {
 	   
 	   
 	   
-	   public List<Category> getCategories(Connection connection)
+	   public List<ICategory> getCategories(Connection connection)
 	   {
-		 List<Category> categories = new ArrayList<Category>();
+		 List<ICategory> categories = new ArrayList<ICategory>();
 		 
 		 String query="SELECT c.id_category,c.category_position,c.category_name,c.id_parent_category, cc.category_name AS parent_category_name FROM \"Categories\" c "
          		+ "LEFT OUTER JOIN \"Categories\" cc ON (c.id_parent_category = cc.id_category) Where c.category_status = \'1\'";
@@ -169,8 +168,7 @@ public class DataBase {
 	   } 
 	   
 	   
-	   
-	   
+	   	   
 	   
 	   public String[] getTopLevelCategories(Connection connection)
 	   {
@@ -307,8 +305,7 @@ public class DataBase {
      } 
 	   
 	   
-	   
-	   
+	   	   
 	   
 	   
 	   public String[] getAdminInfo(String adminId, Connection connection)
@@ -347,15 +344,13 @@ public class DataBase {
        return adminInfo;
      } 
 	   
+	   	     
 	   
 	   
 	   
-	   
-	   
-	   
-	   public List<Admins> getAllAdminsInfo(Connection connection)
+	   public List<IAdmins> getAllAdminsInfo(Connection connection)
 	   {
-		 List<Admins> adminsTable = new ArrayList<>();
+		 List<IAdmins> adminsTable = new ArrayList<>();
 		 String query="SELECT \"AdminName\", \"AdminLastName\", \"AdminLogin\", \"AdminPassword\", \"id_admin\", CASE WHEN \"SuperAdmin\" IS TRUE THEN '1' ELSE '0' END AS SuperAdmin FROM \"Admins\";";
 		 		 		
 		 try {
@@ -363,7 +358,7 @@ public class DataBase {
 				 try (ResultSet rs = stmt.executeQuery(query)){
 			 	
 					 while ( rs.next()) {
-						 Admins strAdminInfo = new Admins();
+						 IAdmins strAdminInfo = new Admins();
 		        	 
 			        	 strAdminInfo.setAdminName(rs.getString("AdminName"));
 			        	 strAdminInfo.setAdminLsatName(rs.getString("AdminLastName"));
@@ -384,8 +379,7 @@ public class DataBase {
 		 return adminsTable;
 	   } 
 	   
-	   
-	   
+	   	   
 	   
 	   
 	   
@@ -422,6 +416,8 @@ public class DataBase {
 	   
 	   
 	   
+	   
+	   
 	   public Boolean checkAdminLogin(String login, Connection connection)
 	   {
 		 Statement stmt = null;
@@ -454,6 +450,7 @@ public class DataBase {
 	     }
 	   
 	   
+	   	   
 	   
 	   
 	   public Boolean checkAdminLoginForUpdate(String login, String idAdmin, Connection connection)
@@ -488,6 +485,7 @@ public class DataBase {
 	       else {return true;	   
 	       }
 	     }
+	   
 	   
 	   
 	   
@@ -606,7 +604,7 @@ public class DataBase {
 
 
 
-	public Boolean updateAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, String idAdmin, Connection connection)
+	   public Boolean updateAdmin(String adminName, String adminLastName, String adminLogin, String adminPassword, String superAdmin, String idAdmin, Connection connection)
 	{
 		 Statement stmt = null;
 		 String quer="";
@@ -641,9 +639,10 @@ public class DataBase {
 	}
 	
 	
+	   
 	
 	
-	 public Boolean deleteAdmin(int idAdmin, Connection connection)
+	   public Boolean deleteAdmin(int idAdmin, Connection connection)
 	   {
 		 Statement stmt = null;
 		 String quer="";

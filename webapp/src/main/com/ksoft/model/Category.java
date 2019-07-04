@@ -1,6 +1,8 @@
 package com.ksoft.model;
 
-public class Category	{
+import com.ksoft.interfaces.*;
+
+public class Category implements ICategory	{
 	private int categoryId;
 	private int categoryPosition;
 	private String categoryName;

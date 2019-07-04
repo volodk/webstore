@@ -1,7 +1,8 @@
 package com.ksoft.model;
 
+import com.ksoft.interfaces.*;
 
-public class Image	{
+public class Image implements IImage {
 	private byte[] image;
 	private int imgLen;
 	

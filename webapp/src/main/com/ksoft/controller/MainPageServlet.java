@@ -5,9 +5,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
-import com.ksoft.model.Category;
-import com.ksoft.controller.DataBase;
-import com.ksoft.model.Good;
+//import com.ksoft.model.Category;
+import com.ksoft.model.DataBase;
+import com.ksoft.interfaces.IDataBase;
+//import com.ksoft.model.Good;
+
+import com.ksoft.interfaces.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +43,7 @@ private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
 		
-				DataBase dBClass = new DataBase();
+				IDataBase dBClass = new DataBase();
 		
 				String mail = req.getParameter("mail");
 				String login = req.getParameter("login");
@@ -59,7 +62,7 @@ private static final long serialVersionUID = 1L;
 				String cardNumber = req.getParameter("cardNumber");
 				
 				String [] topLevelCategories = new String[10];
-				List<Category> categories = new ArrayList<Category>();
+				List<ICategory> categories = new ArrayList<ICategory>();
 				
 				HttpSession session = req.getSession();
 				ServletContext sContext = getServletConfig().getServletContext();
@@ -67,7 +70,7 @@ private static final long serialVersionUID = 1L;
 				String selectedCategory = req.getParameter("selectedCategory");
 				int selectedCategoryId;
 								
-				List<Good> goods = new ArrayList<Good>();
+				List<IGood> goods = new ArrayList<IGood>();
 				
 				String checkedTab = req.getParameter("checkedTab");
 				req.setAttribute("checkedTab", checkedTab);

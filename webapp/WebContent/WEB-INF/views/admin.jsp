@@ -3,11 +3,11 @@
 	
 <%@ page import="java.util.ArrayList" 
 		 import="java.util.List"
-		 import="com.ksoft.model.Admins, com.ksoft.controllers.DataBase, java.sql.Connection" %>
+		 import="com.ksoft.model.Admins, com.ksoft.model.DataBase, java.sql.Connection, com.ksoft.interfaces.*" %>
 	
 	
 <%
-Admins strAdmins = new Admins();
+IAdmins strAdmins = new Admins();
 
 String adminForm = (String)request.getAttribute("adminForm");
 String adminName = "";
@@ -24,21 +24,21 @@ String adminReg = (String)request.getAttribute("adminReg");
 String adminUpd = (String)request.getAttribute("adminUpd");
 String deleteAdmin = (String)request.getAttribute("deleteAdmin");
 
-Admins strModAdmin = new Admins();
+IAdmins strModAdmin = new Admins();
 ServletContext sContext = getServletConfig().getServletContext();
 
 String adminId = (String)session.getAttribute("adminId");
 
-strModAdmin = (Admins)sContext.getAttribute("strModAdmin");
+strModAdmin = (IAdmins)sContext.getAttribute("strModAdmin");
 
-List<Admins> adminsTable = new ArrayList<Admins>();
+List<IAdmins> adminsTable = new ArrayList<IAdmins>();
 
-adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
+adminsTable = (List<IAdmins>)sContext.getAttribute("adminsTable");
 
 String strChecked = "0";
 
 String [] adminInfo = new String[4];
-DataBase dBClass = new DataBase();
+IDataBase dBClass = new DataBase();
 Connection conDB;
 
 if (strModAdmin!=null){

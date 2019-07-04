@@ -1,5 +1,6 @@
 package com.ksoft.controller;
 import com.ksoft.model.*;
+import com.ksoft.interfaces.*;
 
 
 import javax.servlet.ServletContext;
@@ -35,8 +36,8 @@ public class AdminPageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	            throws ServletException, IOException {
 				
-				DataBase dBClass = new DataBase();
-				Admins strModAdmin = new Admins();
+				IDataBase dBClass = new DataBase();
+				IAdmins strModAdmin = new Admins();
 				
 				String adminForm = req.getParameter("adminForm");
 				
@@ -79,7 +80,7 @@ public class AdminPageServlet extends HttpServlet {
 				Boolean adminIsDeleted;
 				Integer checkAdminInt = null;
 							
-				List<Admins> adminsTable = new ArrayList<Admins>();
+				List<IAdmins> adminsTable = new ArrayList<IAdmins>();
 				
 				ServletContext sContext = getServletConfig().getServletContext();
 				
@@ -87,7 +88,7 @@ public class AdminPageServlet extends HttpServlet {
 				/*String superAdmin = (String)session.getAttribute("superAdmin");*/
 				String adminId = (String)session.getAttribute("adminId");
 				
-				adminsTable = (List<Admins>)sContext.getAttribute("adminsTable");
+				adminsTable = (List<IAdmins>)sContext.getAttribute("adminsTable");
 				String [] stringAdminsTable;
 											
 				/*определим newAdmin если он равен 0*/
@@ -201,7 +202,7 @@ public class AdminPageServlet extends HttpServlet {
 				}else if (modAdmin.equals("2") && (checkAdmin!=null)){
 					strModAdmin = adminsTable.get(checkAdminInt.intValue());
 					if (deleteAdmin!=null && !deleteAdmin.equals("")){
-						adminIsDeleted = dBClass.deleteAdmin(strModAdmin.idAdmin, conDB);
+						adminIsDeleted = dBClass.deleteAdmin(strModAdmin.getIdAdmin(), conDB);
 						if(adminIsDeleted==true){
 							req.setAttribute("modAdmin", "1");	
 							req.setAttribute("deleteAdmin", "sucessfull");
